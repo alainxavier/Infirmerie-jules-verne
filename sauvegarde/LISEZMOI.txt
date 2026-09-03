@@ -1,0 +1,11 @@
+﻿Dossier de sauvegarde automatique du registre d'infirmerie.
+
+Dans l'application : Parametres (engrenage) -> Sauvegarde automatique
+-> Choisir le dossier... -> selectionner CE dossier.
+
+Ensuite, a chaque modification, l'application ecrira ici :
+  - registre-infirmerie-sauvegarde.json  (dernier etat du registre)
+  - sauvegarde-JJ-MM-AAAA.json           (une copie par jour)
+
+Pour restaurer : Parametres -> Restaurer depuis le dossier.
+Copiez regulierement ce dossier sur une cle USB ou le reseau de l'ecole.

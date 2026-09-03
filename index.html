@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registre d'infirmerie — École Jules Verne</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1a3a5c">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="assets/blason-jules-verne.svg">
+</head>
+<body>
+
+<header class="app-header no-print">
+  <div class="header-inner">
+    <div class="brand">
+      <img src="assets/blason-jules-verne.svg" alt="Logo École Jules Verne" class="logo-img">
+      <div>
+        <h1 id="schoolTitle">École Jules Verne</h1>
+        <p id="registerTitle">Registre d'infirmerie scolaire 2026–2027</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <span id="saveStatus" class="save-status" role="status"></span>
+      <button id="btnSettings" class="btn btn-ghost" title="Paramètres" aria-label="Paramètres">⚙️ Paramètres</button>
+    </div>
+  </div>
+</header>
+
+<header class="print-header">
+  <img src="assets/logo-jules-verne.svg" alt="Logo École Jules Verne" class="print-logo">
+  <h1 id="printSchoolTitle">École Jules Verne</h1>
+  <p id="printRegisterTitle">Registre d'infirmerie scolaire 2026–2027</p>
+  <p id="printDate" class="print-date"></p>
+</header>
+
+<main>
+  <section class="toolbar no-print">
+    <div class="toolbar-row">
+      <button id="btnAdd" class="btn btn-primary">＋ Nouvelle visite</button>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" id="btnImport" type="button">📥 Importer ▾</button>
+        <div class="dropdown-menu" id="importMenu">
+          <button type="button" data-action="import-excel">Fichier Excel (.xlsx)…</button>
+          <button type="button" data-action="import-csv">Fichier CSV…</button>
+          <button type="button" data-action="import-students">👥 Liste des élèves (Excel / CSV)…</button>
+          <button type="button" data-action="import-json">Restauration de sauvegarde (JSON)…</button>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" id="btnExport" type="button">📤 Exporter ▾</button>
+        <div class="dropdown-menu" id="exportMenu">
+          <button type="button" data-action="export-xlsx">Excel (.xlsx)</button>
+          <button type="button" data-action="export-csv">CSV (compatible Excel)</button>
+          <button type="button" data-action="export-json">Sauvegarde complète (JSON)</button>
+        </div>
+      </div>
+
+      <button id="btnPrint" class="btn btn-secondary" type="button">🖨️ Imprimer</button>
+      <button id="btnInstallApp" class="btn btn-secondary" type="button" hidden title="Installer comme application (raccourci Bureau + menu Démarrer)">📲 Installer l'application</button>
+    </div>
+
+    <div class="toolbar-row filters">
+      <input type="search" id="filterSearch" placeholder="🔍 Rechercher un nom, une observation, un traitement…" autocomplete="off">
+      <select id="filterClasse" aria-label="Filtrer par classe"><option value="">Toutes les classes</option></select>
+      <select id="filterAge" aria-label="Filtrer par âge"><option value="">Tous les âges</option></select>
+      <label class="date-range">Du <input type="date" id="filterFrom" lang="fr"></label>
+      <label class="date-range">au <input type="date" id="filterTo" lang="fr"></label>
+      <label class="checkbox-label"><input type="checkbox" id="filterArchives"> Afficher les visites archivées</label>
+    </div>
+  </section>
+<section class="stats no-print" id="statsSection" aria-label="Statistiques">
+    <div class="stat-card"><span class="stat-value" id="statTotal">0</span><span class="stat-label">Visites (année)</span></div>
+    <div class="stat-card"><span class="stat-value" id="statToday">0</span><span class="stat-label">Aujourd'hui</span></div>
+    <div class="stat-card"><span class="stat-value" id="statWeek">0</span><span class="stat-label">Cette semaine</span></div>
+    <div class="stat-card"><span class="stat-value" id="statMonth">0</span><span class="stat-label">Ce mois</span></div>
+    <div class="stat-card"><span class="stat-value" id="statStudents">0</span><span class="stat-label">Élèves différents</span></div>
+    <div class="stat-chart" aria-label="Visites par mois">
+      <span class="stat-label">Visites par mois</span>
+      <div id="chartMonths" class="chart chart-months"></div>
+    </div>
+    <div class="stat-chart" aria-label="Classes les plus fréquentes">
+      <span class="stat-label">Classes les plus fréquentes</span>
+      <div id="chartClasses" class="chart chart-classes"></div>
+    </div>
+  </section>
+
+  <section class="table-wrap">
+    <div class="table-scroll">
+      <table id="registerTable">
+        <thead>
+          <tr>
+            <th class="col-num">N°</th>
+            <th class="col-date">Date</th>
+            <th class="col-time">Arrivée</th>
+            <th class="col-nom">Nom et prénoms</th>
+            <th class="col-classe">Classe</th>
+            <th class="col-age">Âge</th>
+            <th class="col-observ">Observations</th>
+            <th class="col-trait">Traitement</th>
+            <th class="col-time">Départ classe</th>
+            <th class="col-time">Départ maison</th>
+            <th class="col-parent">Parent</th>
+            <th class="col-actions no-print">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="registerBody"></tbody>
+      </table>
+    </div>
+    <div id="emptyState" class="empty-state" hidden>
+      <p>Aucune visite enregistrée.</p>
+      <p class="empty-hint">Cliquez sur <strong>＋ Nouvelle visite</strong> pour ouvrir le registre, ou importez votre fichier Excel existant via <strong>📥 Importer</strong>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="app-footer no-print">
+  <span id="footerCount"></span>
+  <span>· Enregistré automatiquement dans ce navigateur.</span>
+  <span>· Activez la sauvegarde automatique dans un dossier : ⚙ Paramètres → « Sauvegarde automatique ».</span>
+</footer>
+
+<!-- ======================= Modal : visite ======================= -->
+<div id="modalOverlay" class="modal-overlay no-print" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-header">
+      <h2 id="modalTitle">Nouvelle visite</h2>
+      <button class="modal-close" id="btnCloseModal" type="button" aria-label="Fermer">✕</button>
+    </div>
+    <form id="visitForm" novalidate>
+      <input type="hidden" id="fId">
+      <div class="form-grid">
+        <div class="field">
+          <label for="fDate">Date *</label>
+          <input type="date" id="fDate" lang="fr" required>
+        </div>
+        <div class="field">
+          <label for="fArrivee">Heure d'arrivée *</label>
+          <div class="time-line">
+            <input type="time" id="fArrivee">
+            <button type="button" class="btn-mini" data-time-target="fArrivee">Maintenant</button>
+          </div>
+        </div>
+        <div class="field field-wide ac-host">
+          <label for="fNom">Nom et prénoms *</label>
+          <input type="text" id="fNom" required maxlength="120" placeholder="Tapez le nom de l'élève…" autocomplete="off">
+          <div id="nomAutocomplete" class="ac-list" hidden></div>
+        </div>
+        <div class="field" id="manualClasseField">
+          <label for="fClasse">Classe *</label>
+          <select id="fClasse" required></select>
+        </div>
+        <div class="field" id="manualAgeField">
+          <label for="fAge">Âge</label>
+          <select id="fAge"></select>
+        </div>
+        <div class="field field-wide auto-info" id="autoClassAge" hidden>
+          <label>Élève reconnu — classe et âge remplis automatiquement</label>
+          <div class="auto-line">
+            <span class="badge-classe" id="autoClasse"></span>
+            <span class="auto-age" id="autoAgeTxt"></span>
+            <span class="auto-meta" id="autoMeta"></span>
+            <button type="button" class="btn-mini" id="btnManualClassAge" title="Choisir la classe et l'âge manuellement">✏️ Saisie manuelle</button>
+          </div>
+        </div>
+        <div class="field field-wide">
+          <label for="fObservations">Observations</label>
+          <textarea id="fObservations" rows="2" maxlength="500" placeholder="Motif de la visite, symptômes, soins…"></textarea>
+        </div>
+        <div class="field">
+          <label for="fTraitement">Traitement</label>
+          <input type="text" id="fTraitement" maxlength="200" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="fParent">Parent</label>
+          <select id="fParent">
+            <option value=""></option>
+            <option value="Oui">Oui</option>
+            <option value="Non">Non</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fDepartClasse">Heure de départ en classe</label>
+          <div class="time-line">
+            <input type="time" id="fDepartClasse">
+            <button type="button" class="btn-mini" data-time-target="fDepartClasse">Maintenant</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fDepartMaison">Heure de départ à la maison</label>
+          <div class="time-line">
+            <input type="time" id="fDepartMaison">
+            <button type="button" class="btn-mini" data-time-target="fDepartMaison">Maintenant</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="btnCancelVisit">Annuler</button>
+        <button type="submit" class="btn btn-primary">💾 Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ======================= Modal : paramètres ======================= -->
+<div id="settingsOverlay" class="modal-overlay no-print" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="modal-header">
+      <h2 id="settingsTitle">Paramètres</h2>
+      <button class="modal-close" id="btnCloseSettings" type="button" aria-label="Fermer">✕</button>
+    </div>
+    <form id="settingsForm">
+      <div class="form-grid plain">
+        <div class="field">
+          <label for="sSchool">Nom de l'école</label>
+          <input type="text" id="sSchool" maxlength="80">
+        </div>
+        <div class="field">
+          <label for="sTitle">Titre du registre</label>
+          <input type="text" id="sTitle" maxlength="80">
+        </div>
+        <div class="field">
+          <label for="sYearStart">Début de l'année scolaire</label>
+          <input type="date" id="sYearStart" lang="fr">
+        </div>
+        <div class="field">
+          <label for="sYearEnd">Fin de l'année scolaire</label>
+          <input type="date" id="sYearEnd" lang="fr">
+        </div>
+      </div>
+      <div class="backup-box">
+        <div class="backup-box-title">👥 Liste des élèves (autocomplétion)</div>
+        <p class="backup-hint">Importez le fichier Excel / CSV des élèves (colonnes : <strong>Nom, Prénom, Né(e) le, Sexe, Classe</strong>).
+          Les noms seront ensuite proposés automatiquement dans le formulaire de visite, et la <strong>classe</strong> + l'<strong>âge</strong>
+          (calculé à partir de la date de naissance) seront remplis automatiquement dès qu'un élève est sélectionné.</p>
+        <div id="studentsStatus" class="backup-status off" aria-live="polite">Aucun élève enregistré.</div>
+        <div class="backup-actions">
+          <button type="button" class="btn btn-secondary" id="btnStudentsImport">📥 Importer la liste…</button>
+          <button type="button" class="btn btn-secondary" id="btnStudentsClear" hidden>🗑️ Vider la liste</button>
+        </div>
+      </div>
+
+      <div class="backup-box">
+        <div class="backup-box-title">📁 Sauvegarde automatique dans un dossier</div>
+        <p class="backup-hint">Choisissez <strong>une seule fois</strong> le dossier <code>sauvegarde</code> de l'application
+          (<code>D:\Web-app\Infirmerie-jules-verne\sauvegarde</code>) : chaque modification y sera ensuite
+          enregistrée automatiquement — fichier <code>registre-infirmerie-sauvegarde.json</code> (dernier état)
+          + une copie datée par jour. Fonctionne avec Microsoft Edge et Google Chrome.</p>
+        <div id="backupStatus" class="backup-status off" aria-live="polite">Sauvegarde automatique : chargement…</div>
+        <div class="backup-actions">
+          <button type="button" class="btn btn-secondary" id="btnBackupPick">📁 Choisir le dossier…</button>
+          <button type="button" class="btn btn-secondary" id="btnBackupNow">💾 Sauvegarder maintenant</button>
+          <button type="button" class="btn btn-secondary" id="btnBackupRestore">♻️ Restaurer depuis le dossier</button>
+          <button type="button" class="btn btn-secondary" id="btnBackupReactivate" hidden>🔑 Réactiver l'autorisation</button>
+          <button type="button" class="btn btn-secondary" id="btnBackupDisable" hidden>Désactiver</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="btnCancelSettings">Annuler</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<input type="file" id="fileInput" accept=".xlsx,.csv,.json" hidden>
+
+<div id="js-error" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>

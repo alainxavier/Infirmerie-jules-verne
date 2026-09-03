@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><title>Icons</title></head>
+<body>
+<pre id="out">EN ATTENTE</pre>
+<script>
+var iconImg = new Image();
+var done = false;
+iconImg.onload = function () { if (!done) { done = true; build(); } };
+iconImg.onerror = function () { if (!done) { done = true; build(); } };
+iconImg.src = 'assets/blason-jules-verne.svg';
+setTimeout(function () { if (!done) { done = true; build(); } }, 1200);
+
+function roundedPath(ctx, s, r) {
+  ctx.beginPath();
+  ctx.moveTo(r, 0);
+  ctx.lineTo(s - r, 0); ctx.arcTo(s, 0, s, r, r);
+  ctx.lineTo(s, s - r); ctx.arcTo(s, s, s - r, s, r);
+  ctx.lineTo(r, s); ctx.arcTo(0, s, 0, s - r, r);
+  ctx.lineTo(0, r); ctx.arcTo(0, 0, r, 0, r);
+  ctx.closePath();
+}
+
+function build() {
+  var out = {};
+  [192, 512].forEach(function (size) {
+    var c = document.createElement('canvas');
+    c.width = size; c.height = size;
+    var ctx = c.getContext('2d');
+
+    var g = ctx.createLinearGradient(0, 0, 0, size);
+    g.addColorStop(0, '#1f5aa8');
+    g.addColorStop(1, '#0d2c55');
+    ctx.fillStyle = g;
+    roundedPath(ctx, size, size * 0.19);
+    ctx.fill();
+
+    ctx.strokeStyle = 'rgba(218,174,68,.85)';
+    ctx.lineWidth = Math.max(2, size * 0.012);
+    roundedPath(ctx, size - ctx.lineWidth, size * 0.19);
+    ctx.stroke();
+
+    var hasImg = iconImg.complete && iconImg.naturalWidth > 0;
+    if (hasImg) {
+      var pad = size * 0.15;
+      var iw = size - pad * 2;
+      var ih = iw * (162 / 172);
+      if (ih > size - pad * 2) { ih = size - pad * 2; iw = ih * (172 / 162); }
+      try { ctx.drawImage(iconImg, (size - iw) / 2, (size - ih) / 2, iw, ih); hasImg = true; }
+      catch (e) { hasImg = false; }
+    }
+    if (!hasImg) {
+      ctx.fillStyle = '#f4dc92';
+      ctx.font = '700 ' + (size * 0.42) + 'px Georgia, serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('JV', size / 2, size / 2 + size * 0.02);
+    }
+    out['i' + size] = c.toDataURL('image/png');
+  });
+  document.getElementById('out').textContent = JSON.stringify(out);
+}
+</script>
+</body></html>

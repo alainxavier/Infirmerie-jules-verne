@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 234" role="img" aria-label="École Jules Verne — École Internationale">
+  <defs>
+    <linearGradient id="gShield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3078c2"/>
+      <stop offset=".55" stop-color="#1a4f92"/>
+      <stop offset="1" stop-color="#0d2c55"/>
+    </linearGradient>
+    <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4dc92"/>
+      <stop offset=".5" stop-color="#dcae44"/>
+      <stop offset="1" stop-color="#b8891f"/>
+    </linearGradient>
+    <linearGradient id="gBanner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f83cc"/>
+      <stop offset="1" stop-color="#21569e"/>
+    </linearGradient>
+    <g id="laurelL">
+      <path d="M106 154 C90 150 74 134 66 108" fill="none" stroke="url(#gGold)" stroke-width="3" stroke-linecap="round"/>
+      <g fill="url(#gGold)">
+        <path d="M0 0 Q 10 -9 24 -8 Q 14 6 0 0 Z" transform="translate(64 110) rotate(-118)"/>
+        <path d="M0 0 Q 10 -9 24 -8 Q 14 6 0 0 Z" transform="translate(65 126) rotate(-100)"/>
+        <path d="M0 0 Q 10 -9 24 -8 Q 14 6 0 0 Z" transform="translate(71 140) rotate(-80)"/>
+        <path d="M0 0 Q 10 -9 24 -8 Q 14 6 0 0 Z" transform="translate(82 150) rotate(-60)"/>
+        <path d="M0 0 Q 10 -9 24 -8 Q 14 6 0 0 Z" transform="translate(96 157) rotate(-35)"/>
+        <path d="M0 0 Q 10 -9 24 -8 Q 14 6 0 0 Z" transform="translate(76 142) rotate(15)"/>
+        <path d="M0 0 Q 10 -9 24 -8 Q 14 6 0 0 Z" transform="translate(90 153) rotate(30)"/>
+      </g>
+    </g>
+  </defs>
+
+  <!-- Lauriers (miroir gauche/droite) -->
+  <use href="#laurelL"/>
+  <use href="#laurelL" transform="translate(260 0) scale(-1 1)"/>
+
+  <!-- Blason -->
+  <path d="M76 16 L184 16 L184 82 C184 112 162 130 130 140 C98 130 76 112 76 82 Z" fill="#0e2240" stroke="#9cc4e4" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M83 23 L177 23 L177 82 C177 107 158 123 130 132 C102 123 83 107 83 82 Z" fill="url(#gShield)" stroke="#d9b45a" stroke-width="1.5"/>
+  <ellipse cx="130" cy="40" rx="45" ry="13" fill="#6aa9dd" opacity=".5"/>
+
+  <!-- Initiales + étoile -->
+  <text x="130" y="100" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="54" font-weight="700" fill="url(#gGold)">JV</text>
+  <path d="M0 -6 L1.8 -1.9 L6 -1.85 L2.7 .9 L3.9 5.1 L0 2.6 L-3.9 5.1 L-2.7 .9 L-6 -1.85 L-1.8 -1.9 Z" transform="translate(163 46)" fill="url(#gGold)"/>
+
+  <!-- Nom de l'école -->
+  <text x="130" y="188" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="27" font-weight="700" letter-spacing="2" fill="url(#gGold)" textLength="204" lengthAdjust="spacingAndGlyphs">JULES VERNE</text>
+
+  <!-- Bandeau -->
+  <rect x="28" y="200" width="204" height="27" rx="13.5" fill="url(#gBanner)"/>
+  <text x="130" y="218.5" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="13.5" letter-spacing="1.5" fill="#eef4fa" textLength="186" lengthAdjust="spacingAndGlyphs">ÉCOLE INTERNATIONALE</text>
+</svg>
