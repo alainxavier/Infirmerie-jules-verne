@@ -47,6 +47,8 @@ self.addEventListener('fetch', function (e) {
   if (req.method !== 'GET') return;
   var url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  // Les requêtes API ne sont jamais mises en cache
+  if (url.pathname.indexOf('/api/') === 0) return;
   e.respondWith(
     caches.open(CACHE).then(function (cache) {
       return cache.match(req, { ignoreSearch: true }).then(function (cached) {

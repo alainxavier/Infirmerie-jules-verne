@@ -11,6 +11,42 @@
 </head>
 <body>
 
+<!-- Verrouillage serveur : masque le contenu tant que non connecté -->
+<div id="serverAuthLock" class="auth-lock" hidden>
+  <div class="auth-lock-content">
+    <h2>🔒 Accès au registre partagé</h2>
+    <p>Veuillez vous connecter pour accéder aux données partagées du serveur.</p>
+    <button id="btnOpenLogin" class="btn btn-primary">Se connecter</button>
+  </div>
+</div>
+
+<!-- Contenu principal : masqué tant que non authentifié en mode serveur -->
+<div id="appContent">
+
+<!-- Modal de connexion -->
+<div id="loginOverlay" class="modal-overlay no-print" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <div class="modal-header">
+      <h2 id="loginTitle">Connexion au serveur</h2>
+    </div>
+    <form id="loginForm" autocomplete="off">
+      <div class="form-grid plain">
+        <div class="field">
+          <label for="loginUsername">Nom d'utilisateur</label>
+          <input type="text" id="loginUsername" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="loginPassword">Mot de passe</label>
+          <input type="password" id="loginPassword" autocomplete="current-password" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <header class="app-header no-print">
   <div class="header-inner">
     <div class="brand">
@@ -20,8 +56,13 @@
         <p id="registerTitle">Registre d'infirmerie scolaire 2026–2027</p>
       </div>
     </div>
-    <div class="header-actions">
+        <div class="header-actions">
       <span id="saveStatus" class="save-status" role="status"></span>
+      <span id="authStatusIndicator" class="auth-status" hidden title="Mode serveur activé">
+        <span id="authUserLabel" class="auth-user"></span>
+        <span id="adminBadge" class="admin-badge" title="Administrateur">👑</span>
+      </span>
+      <button id="btnLogout" class="btn btn-ghost" title="Déconnexion" aria-label="Déconnexion" hidden>🚪 Déconnexion</button>
       <button id="btnSettings" class="btn btn-ghost" title="Paramètres" aria-label="Paramètres">⚙️ Paramètres</button>
     </div>
   </div>
@@ -256,6 +297,13 @@
           <button type="button" class="btn btn-secondary" id="btnBackupReactivate" hidden>🔑 Réactiver l'autorisation</button>
           <button type="button" class="btn btn-secondary" id="btnBackupDisable" hidden>Désactiver</button>
         </div>
+            </div>
+      <div class="backup-box" id="changePwdBox">
+        <div class="backup-box-title">🔐 Compte utilisateur (mode serveur)</div>
+        <p class="backup-hint">Gérez votre mot de passe et déconnectez-vous lorsque vous quittez.</p>
+        <div class="backup-actions">
+          <button type="button" class="btn btn-secondary" id="btnChangePwd">Modifier mon mot de passe</button>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id="btnCancelSettings">Annuler</button>
@@ -267,7 +315,38 @@
 
 <input type="file" id="fileInput" accept=".xlsx,.csv,.json" hidden>
 
+<!-- Modal de changement de mot de passe -->
+<div id="changePwdOverlay" class="modal-overlay no-print" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="changePwdTitle">
+    <div class="modal-header">
+      <h2 id="changePwdTitle">Changer le mot de passe</h2>
+      <button class="modal-close" id="btnCloseChangePwd" type="button" aria-label="Fermer">✕</button>
+    </div>
+    <form id="changePwdForm" autocomplete="off">
+      <div class="form-grid plain">
+        <div class="field">
+          <label for="changePwdCurrent">Mot de passe actuel</label>
+          <input type="password" id="changePwdCurrent" autocomplete="current-password" required>
+        </div>
+        <div class="field">
+          <label for="changePwdPassword">Nouveau mot de passe</label>
+          <input type="password" id="changePwdPassword" autocomplete="new-password" required>
+        </div>
+        <div class="field">
+          <label for="changePwdPassword2">Confirmer le nouveau mot de passe</label>
+          <input type="password" id="changePwdPassword2" autocomplete="new-password" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="btnCancelChangePwd">Annuler</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div id="js-error" hidden></div>
 <script src="app.js"></script>
+</div> <!-- fermeture #appContent -->
 </body>
 </html>

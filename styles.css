@@ -571,3 +571,61 @@ td .badge-classe {
   border-radius: 10px;
   border: 1px solid #333;
 }
+
+/* ---------- Authentification / mode serveur ---------- */
+.auth-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, .15);
+  border-radius: 14px;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+
+.auth-user {
+  font-weight: 600;
+}
+
+.admin-badge {
+  font-size: 14px;
+}
+
+.auth-lock {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 58, 92, .9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.auth-lock-content {
+  text-align: center;
+  color: #fff;
+  max-width: 420px;
+  padding: 20px;
+}
+
+.auth-lock h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.auth-lock p {
+  margin: 0 0 20px;
+  opacity: .9;
+  font-size: 14px;
+}
+
+/* Surcharge du header quand on est connecté en mode serveur */
+.auth-status .auth-user::before {
+  content: "👤 ";
+}
+
+/* Les modaux d'authentification doivent être au-dessus du verrouillage */
+#loginOverlay, #changePwdOverlay { z-index: 2100; }

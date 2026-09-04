@@ -69,6 +69,186 @@ var settings = Object.assign({}, DEFAULT_SETTINGS);
 var pendingImportAction = '';  // 'excel' | 'csv' | 'json'
 var editingId = null;
 
+/* ---------- Mode serveur / API / Authentification ---------- */
+var SERVER_MODE = false;          // activé si le backend Node.js détecté
+var API_BASE = '/api';
+var AUTH_TOKEN_KEY = 'authToken_infirmerie_jv';
+var currentUser = null;            // { id, username, role }
+var syncPollTimer = null;
+var SYNC_POLL_MS = 30000;          // rafraîchissement toutes les 30 s
+var dataVersion = 0;               // détection de changements serveur
+var saveInProgress = false;        // debounce des sauvegardes
+var editingModalOpen = false;      // bloque le polling pendant édition
+
+function apiFetch(url, options) {
+  var opts = Object.assign({}, options || {});
+  opts.headers = Object.assign({}, opts.headers || {});
+  var token = sessionStorage.getItem(AUTH_TOKEN_KEY);
+  if (token) opts.headers['Authorization'] = 'Bearer ' + token;
+  if (opts.body && typeof opts.body === 'object' && !(opts.body instanceof FormData)) {
+    opts.headers['Content-Type'] = 'application/json';
+    opts.body = JSON.stringify(opts.body);
+  }
+  return fetch(API_BASE + url, opts);
+}
+
+function detectServerMode() {
+  return fetch(API_BASE + '/config', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (cfg) { if (cfg && cfg.serverMode) SERVER_MODE = true; })
+    .catch(function () { SERVER_MODE = false; });
+}
+
+function apiLogin(username, password) {
+  return apiFetch('/auth/login', {
+    method: 'POST',
+    body: { username: username, password: password }
+  }).then(function (r) {
+    if (!r.ok) {
+      return r.json().then(function (e) { throw new Error(e.error || 'Identifiants incorrects'); });
+    }
+    return r.json();
+  }).then(function (result) {
+    sessionStorage.setItem(AUTH_TOKEN_KEY, result.token);
+    currentUser = result.user;
+    return currentUser;
+  });
+}
+
+function apiLogout() {
+  sessionStorage.removeItem(AUTH_TOKEN_KEY);
+  currentUser = null;
+  SERVER_MODE = false;
+  // Recharger la page en mode local
+  location.reload();
+}
+
+function verifyAuthToken() {
+  var token = sessionStorage.getItem(AUTH_TOKEN_KEY);
+  if (!token) return Promise.resolve(null);
+  return apiFetch('/auth/verify')
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('Token invalide')); })
+    .then(function (data) {
+      currentUser = data.user;
+      return currentUser;
+    })
+    .catch(function () {
+      sessionStorage.removeItem(AUTH_TOKEN_KEY);
+      currentUser = null;
+      return null;
+    });
+}
+
+/* Synchronisation serveur → client */
+function syncLoadAll() {
+  return apiFetch('/data')
+    .then(function (r) { return r.json(); })
+    .then(function (all) {
+      if (Array.isArray(all.visits)) {
+        data = all.visits.map(function (v) { v.archive = !!v.archive; return v; });
+      }
+      if (all.settings) settings = Object.assign({}, DEFAULT_SETTINGS, all.settings);
+      if (Array.isArray(all.students)) studentsData = all.students;
+      migrateData();
+    });
+}
+
+/* Synchronisation client → serveur (fire-and-forget) */
+function syncSaveAll() {
+  if (!SERVER_MODE || !currentUser || saveInProgress) return;
+  saveInProgress = true;
+  apiFetch('/data', {
+    method: 'POST',
+    body: { visits: data, settings: settings, students: studentsData }
+  })
+    .then(function (r) { return r.json(); })
+    .then(function (result) {
+      saveInProgress = false;
+      if (result.success) { dataVersion++; }
+    })
+    .catch(function (e) {
+      saveInProgress = false;
+      console.error('Sync serveur impossible :', e);
+    });
+}
+
+/* Polling : détecte les changements d'autres utilisateurs */
+function startPolling() {
+  if (syncPollTimer) clearTimeout(syncPollTimer);
+  syncPollTimer = setTimeout(function () {
+    if (SERVER_MODE && currentUser && !editingModalOpen) {
+      syncLoadAll().then(function () {
+        renderFilters();
+        renderStats();
+        renderTable();
+        updateFooter();
+      }).catch(function (e) {
+        console.error('Polling error:', e);
+      });
+    }
+    startPolling();
+  }, SYNC_POLL_MS);
+}
+
+function stopPolling() {
+  if (syncPollTimer) { clearTimeout(syncPollTimer); syncPollTimer = null; }
+}
+
+/* Interface d'authentification */
+function showLogin() {
+  var ov = $('loginOverlay');
+  if (ov) { ov.hidden = false; }
+  var nameInput = $('loginUsername');
+  if (nameInput) nameInput.focus();
+}
+
+function hideLogin() {
+  var ov = $('loginOverlay');
+  if (ov) { ov.hidden = true; }
+}
+
+function onLoginSubmit(e) {
+  e.preventDefault();
+  var username = $('loginUsername').value.trim();
+  var password = $('loginPassword').value;
+  if (!username || !password) {
+    alert('Veuillez saisir le nom d\'utilisateur et le mot de passe.');
+    return;
+  }
+  apiLogin(username, password).then(function () {
+    hideLogin();
+    showAppContent();
+    loadServerDataAndRender();
+    startPolling();
+  }).catch(function (err) {
+    alert('Connexion impossible : ' + err.message);
+  });
+}
+
+function showAppContent() {
+  var lock = $('serverAuthLock');
+  var app = $('appContent');
+  if (lock) lock.hidden = true;
+  if (app) app.hidden = false;
+  // Cacher les modaux d'authentification
+  var loginOv = $('loginOverlay');
+  if (loginOv) loginOv.hidden = true;
+  var changePwdOv = $('changePwdOverlay');
+  if (changePwdOv) changePwdOv.hidden = true;
+  updateAuthStatus();
+}
+
+function updateAuthStatus() {
+  var indicator = $('authStatusIndicator');
+  var userLabel = $('authUserLabel');
+  var logoutBtn = $('btnLogout');
+  if (indicator) indicator.hidden = !SERVER_MODE;
+  if (userLabel && currentUser) userLabel.textContent = currentUser.username;
+  var adminBadge = $('adminBadge');
+  if (adminBadge) adminBadge.hidden = !(currentUser && currentUser.role === 'admin');
+  if (logoutBtn) logoutBtn.hidden = !(SERVER_MODE && currentUser);
+}
+
 /* ---------- Utilitaires ---------- */
 function $(id) { return document.getElementById(id); }
 
@@ -133,22 +313,32 @@ function normalizeKey(s) {
 
 /* ---------- Persistance ---------- */
 function saveData() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
-  catch (e) { console.error('Sauvegarde impossible :', e); }
+  if (SERVER_MODE && currentUser) {
+    syncSaveAll();
+  } else {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+    catch (e) { console.error('Sauvegarde impossible :', e); }
+  }
   scheduleBackup();
   var el = $('saveStatus');
   if (el) el.textContent = '💾 Enregistré à ' + nowTime();
 }
 
 function loadData() {
-  try {
-    var raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      var arr = JSON.parse(raw);
-      if (Array.isArray(arr)) data = arr;
-    }
-  } catch (e) { console.warn('Lecture du registre impossible :', e); }
-  migrateData();
+  if (SERVER_MODE && currentUser) {
+    return syncLoadAll();
+  }
+  return new Promise(function (resolve) {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        var arr = JSON.parse(raw);
+        if (Array.isArray(arr)) data = arr;
+      }
+    } catch (e) { console.warn('Lecture du registre impossible :', e); }
+    migrateData();
+    resolve();
+  });
 }
 
 function migrateData() {
@@ -163,7 +353,11 @@ function migrateData() {
 }
 
 function saveSettings() {
-  try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (e) { /* ignore */ }
+  if (SERVER_MODE && currentUser) {
+    syncSaveAll();
+  } else {
+    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (e) { /* ignore */ }
+  }
   applySettingsUI();
   scheduleBackup();
 }
@@ -171,11 +365,17 @@ function saveSettings() {
 var SETTINGS_MIGRATION_KEY = 'registre_infirmerie_jules_verne_settings_2026_2027';
 
 function loadSettings() {
-  try {
-    var raw = localStorage.getItem(SETTINGS_KEY);
-    if (raw) settings = Object.assign({}, DEFAULT_SETTINGS, JSON.parse(raw));
-  } catch (e) { settings = Object.assign({}, DEFAULT_SETTINGS); }
-  migrateSettings();
+  if (SERVER_MODE && currentUser) {
+    return syncLoadAll();
+  }
+  return new Promise(function (resolve) {
+    try {
+      var raw = localStorage.getItem(SETTINGS_KEY);
+      if (raw) settings = Object.assign({}, DEFAULT_SETTINGS, JSON.parse(raw));
+    } catch (e) { settings = Object.assign({}, DEFAULT_SETTINGS); }
+    migrateSettings();
+    resolve();
+  });
 }
 
 /* Une seule fois : les paramètres datant de l'année 2025–2026 passent à 2026–2027.
@@ -199,18 +399,28 @@ function migrateSettings() {
 }
 
 function loadStudents() {
-  try {
-    var raw = localStorage.getItem(STUDENTS_KEY);
-    if (raw) {
-      var arr = JSON.parse(raw);
-      if (Array.isArray(arr)) studentsData = arr;
-    }
-  } catch (e) { console.warn('Lecture de la liste des élèves impossible :', e); }
+  if (SERVER_MODE && currentUser) {
+    return syncLoadAll();
+  }
+  return new Promise(function (resolve) {
+    try {
+      var raw = localStorage.getItem(STUDENTS_KEY);
+      if (raw) {
+        var arr = JSON.parse(raw);
+        if (Array.isArray(arr)) studentsData = arr;
+      }
+    } catch (e) { console.warn('Lecture de la liste des élèves impossible :', e); }
+    resolve();
+  });
 }
 
 function saveStudents() {
-  try { localStorage.setItem(STUDENTS_KEY, JSON.stringify(studentsData)); }
-  catch (e) { console.error('Sauvegarde de la liste des élèves impossible :', e); }
+  if (SERVER_MODE && currentUser) {
+    syncSaveAll();
+  } else {
+    try { localStorage.setItem(STUDENTS_KEY, JSON.stringify(studentsData)); }
+    catch (e) { console.error('Sauvegarde de la liste des élèves impossible :', e); }
+  }
 }
 
 function maxNumero() {
@@ -523,6 +733,7 @@ function renderAll() {
    ========================================================= */
 function openModal(id) {
   editingId = id || null;
+  editingModalOpen = true;
   $('visitForm').reset();
   hideAutocomplete();
   lastSelectedStudentName = '';
@@ -559,6 +770,7 @@ function openModal(id) {
 function closeModal() {
   $('modalOverlay').hidden = true;
   editingId = null;
+  editingModalOpen = false;
   hideAutocomplete();
 }
 
@@ -1656,6 +1868,31 @@ function bindEvents() {
   $('settingsOverlay').addEventListener('click', function (e) { if (e.target === this) closeSettingsModal(); });
   $('settingsForm').addEventListener('submit', onSettingsSubmit);
 
+    /* Authentification (mode serveur) */
+    /* Authentification (mode serveur) */
+  var loginForm = $('loginForm');
+  if (loginForm) loginForm.addEventListener('submit', onLoginSubmit);
+
+  var btnOpenLogin = $('btnOpenLogin');
+  if (btnOpenLogin) btnOpenLogin.addEventListener('click', showLogin);
+
+  var btnLogout = $('btnLogout');
+  if (btnLogout) btnLogout.addEventListener('click', function () {
+    if (confirm('Déconnexion ?\n\nLes modifications non sauvegardées sur le serveur seront perdues.')) {
+      apiLogout();
+    }
+  });
+    var btnChangePwd = $('btnChangePwd');
+  if (btnChangePwd) btnChangePwd.addEventListener('click', openChangePasswordModal);
+  var changePwdForm = $('changePwdForm');
+  if (changePwdForm) changePwdForm.addEventListener('submit', onChangePasswordSubmit);
+  var btnCloseChangePwd = $('btnCloseChangePwd');
+  if (btnCloseChangePwd) btnCloseChangePwd.addEventListener('click', closeChangePasswordModal);
+  var btnCancelChangePwd = $('btnCancelChangePwd');
+  if (btnCancelChangePwd) btnCancelChangePwd.addEventListener('click', closeChangePasswordModal);
+  var changePwdOverlay = $('changePwdOverlay');
+  if (changePwdOverlay) changePwdOverlay.addEventListener('click', function (e) { if (e.target === this) closeChangePasswordModal(); });
+
   /* Sauvegarde automatique dans un dossier */
   $('btnBackupPick').addEventListener('click', chooseBackupFolder);
   $('btnBackupNow').addEventListener('click', function () {
@@ -1735,6 +1972,9 @@ function openSettingsModal() {
   $('sYearEnd').value = settings.anneeFin;
   updateBackupUI();
   updateStudentsUI();
+  // Afficher/masquer la section compte utilisateur selon le mode serveur
+  var pwdBox = $('changePwdBox');
+  if (pwdBox) pwdBox.hidden = !SERVER_MODE;
   $('settingsOverlay').hidden = false;
 }
 
@@ -1752,6 +1992,45 @@ function onSettingsSubmit(e) {
   renderAll();
   closeSettingsModal();
   toast('Paramètres enregistrés.');
+}
+
+/* ---------- Changement de mot de passe (mode serveur) ---------- */
+function openChangePasswordModal() {
+  var modal = $('changePwdOverlay');
+  if (modal) { modal.hidden = false; $('changePwdPassword').value = ''; $('changePwdPassword2').value = ''; $('changePwdCurrent').focus(); }
+}
+
+function closeChangePasswordModal() {
+  var modal = $('changePwdOverlay');
+  if (modal) { modal.hidden = true; }
+  // Si l'utilisateur n'est pas connecté, revenir à l'écran de connexion
+  if (!currentUser) {
+    var loginOv = $('loginOverlay');
+    if (loginOv) { loginOv.hidden = false; }
+  }
+}
+
+function onChangePasswordSubmit(e) {
+  e.preventDefault();
+  var current = $('changePwdCurrent').value;
+  var pwd1 = $('changePwdPassword').value;
+  var pwd2 = $('changePwdPassword2').value;
+  if (!current || !pwd1) { alert('Veuillez saisir le mot de passe actuel et le nouveau.'); return; }
+  if (pwd1 !== pwd2) { alert('Les deux mots de passe ne correspondent pas.'); return; }
+  if (pwd1.length < 4) { alert('Le mot de passe doit contenir au moins 4 caractères.'); return; }
+
+  apiFetch('/auth/change-password', {
+    method: 'POST',
+    body: { currentPassword: current, password: pwd1 }
+  }).then(function (r) {
+    if (!r.ok) return r.json().then(function (e) { throw new Error(e.error || 'Erreur'); });
+    return r.json();
+  }).then(function (result) {
+    closeChangePasswordModal();
+    toast('Mot de passe modifié avec succès.');
+  }).catch(function (err) {
+    alert('Erreur : ' + err.message);
+  });
 }
 
 /* =========================================================
@@ -2294,17 +2573,68 @@ function runSelfTest() {
    INITIALISATION
    ========================================================= */
 function init() {
+  bindEvents();
+
+  // Détection du mode serveur (backend Node.js present)
+  detectServerMode().then(function () {
+    if (SERVER_MODE) {
+      initServerMode();
+    } else {
+      initLocalMode();
+    }
+  }).catch(function () {
+    initLocalMode();
+  });
+}
+
+/* --- Mode local (PWA hors ligne) : localStorage --- */
+function initLocalMode() {
   loadSettings();
   loadData();
   loadStudents();
   renderFilters();
   populateFormSelects();
-  bindEvents();
   applySettingsUI();
   renderAll();
   initBackupSystem();
   var params = new URLSearchParams(location.search);
   if (params.get('selftest') === '1') setTimeout(runSelfTest, 200);
+}
+
+/* --- Mode serveur : authentification + synchronisation --- */
+function initServerMode() {
+  // Montrer le verrouillage (l'appContent reste dans le DOM mais est couvert)
+  var lock = $('serverAuthLock');
+  if (lock) lock.hidden = false;
+
+  verifyAuthToken().then(function (user) {
+    if (user) {
+      currentUser = user;
+      showAppContent();
+      loadServerDataAndRender();
+      startPolling();
+    } else {
+      showLogin();
+    }
+    var params = new URLSearchParams(location.search);
+    if (params.get('selftest') === '1') setTimeout(runSelfTest, 200);
+  });
+}
+
+/* Charge toutes les données depuis le serveur, puis rendu */
+function loadServerDataAndRender() {
+  syncLoadAll().then(function () {
+    renderFilters();
+    populateFormSelects();
+    applySettingsUI();
+    renderAll();
+  }).catch(function (err) {
+    console.error('Erreur de chargement serveur :', err);
+    alert('Impossible de charger les données depuis le serveur : ' + err.message);
+    // Revenir au mode local en fallback
+    SERVER_MODE = false;
+    initLocalMode();
+  });
 }
 
 if (document.readyState === 'loading') {
@@ -2322,7 +2652,16 @@ window.RegistreApp = {
   parseZipBytes: parseZipBytes,
   base64ToBytes: base64ToBytes,
   bytesToBase64: bytesToBase64,
-  getData: function () { return data; },
+    getData: function () { return data; },
+  // --- Mode serveur ---
+  apiFetch: apiFetch,
+  apiLogin: apiLogin,
+  apiLogout: apiLogout,
+  detectServerMode: detectServerMode,
+  syncLoadAll: syncLoadAll,
+  syncSaveAll: syncSaveAll,
+  getServerMode: function () { return SERVER_MODE; },
+  getCurrentUser: function () { return currentUser; },
   _backupTest: {
     setHandle: function (h) { backupDirHandle = h; },
     performBackup: performBackup,
