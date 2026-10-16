@@ -6,7 +6,7 @@
    ========================================================= */
 'use strict';
 
-var CACHE = 'infirmerie-jv-v2';
+var CACHE = 'infirmerie-jv-v9';
 
 var PRECACHE = [
   './',

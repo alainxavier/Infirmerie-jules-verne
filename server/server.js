@@ -110,7 +110,23 @@ function requireAdmin(req, res, next) {
 }
 
 function publicUser(u) {
-  return { id: u.id, username: u.username, role: u.role };
+  return { id: u.id, username: u.username, role: u.role, niveau: u.role === 'admin' ? 'all' : (u.niveau || 'primaire'), nom: u.nom || '', prenoms: u.prenoms || '' };
+}
+
+function normalizeLevel(level, classe) {
+  var classKey = String(classe || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/gi, '').toUpperCase();
+  if (['2A', '1A', 'TA'].indexOf(classKey) !== -1) return 'lycee';
+  if (['TPS', 'PSA', 'PSB', 'MSA', 'MSB', 'GSA', 'GSB', 'CPA', 'CPB', 'CPC', 'CE1A', 'CE1B', 'CE1C', 'CE2A', 'CE2B', 'CE2C', 'CM1A', 'CM1B', 'CM1C', 'CM2A', 'CM2B', 'CM2C', 'PERSONNEL'].indexOf(classKey) !== -1) return 'primaire';
+  var value = String(level || '').trim().toLowerCase();
+  if (value === 'lycee' || value === 'lycée' || value === 'secondaire') return 'lycee';
+  if (value === 'primaire' || value === 'primary') return 'primaire';
+  return 'primaire';
+}
+
+function withLevel(item) {
+  var copy = Object.assign({}, item);
+  copy.niveau = normalizeLevel(copy.niveau, copy.classe);
+  return copy;
 }
 
 /* ---------- API : détection + authentification ---------- */
@@ -123,6 +139,9 @@ app.post('/api/auth/login', function (req, res) {
   var password = String(req.body.password || '');
   if (!username || !password) {
     return res.status(400).json({ error: "Nom d'utilisateur et mot de passe requis" });
+  }
+  if (password.length < 8) {
+    return res.status(400).json({ error: 'Le mot de passe doit contenir au moins 8 caractères' });
   }
   var user = store.findUserByUsername(username);
   if (!user || !bcrypt.compareSync(password, user.password_hash)) {
@@ -157,9 +176,41 @@ app.post('/api/auth/change-password', authenticate, function (req, res) {
   res.json({ success: true });
 });
 
+app.post('/api/auth/profile', authenticate, function (req, res) {
+  var body = req.body || {};
+  var nom = String(body.nom || '').trim();
+  var prenoms = String(body.prenoms || '').trim();
+  var currentPassword = String(body.currentPassword || '');
+  var password = String(body.password || '');
+  if (nom.length > 80 || prenoms.length > 120) {
+    return res.status(400).json({ error: 'Le nom ou les prénoms sont trop longs' });
+  }
+  if (password && password.length < 8) {
+    return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 8 caractères' });
+  }
+  var user = store.findUserById(req.user.id);
+  if (!user) return res.status(404).json({ error: 'Compte introuvable' });
+  if (password && (!currentPassword || !bcrypt.compareSync(currentPassword, user.password_hash))) {
+    return res.status(401).json({ error: 'Mot de passe actuel incorrect' });
+  }
+  var hash = password ? bcrypt.hashSync(password, 10) : null;
+  var updated = store.updateUserProfile(user.id, nom, prenoms, hash);
+  res.json({ success: true, user: publicUser(updated) });
+});
+
 /* ---------- API : données partagées (visites / réglages / élèves) ---------- */
 app.get('/api/data', authenticate, function (req, res) {
-  res.json(store.loadAll());
+  var user = store.findUserById(req.user.id);
+  if (!user) return res.status(401).json({ error: 'Compte introuvable' });
+  var all = store.loadAll();
+  var visits = all.visits.map(withLevel);
+  var students = all.students.map(withLevel);
+  if (user.role !== 'admin') {
+    var level = normalizeLevel(user.niveau);
+    visits = visits.filter(function (v) { return v.niveau === level; });
+    students = students.filter(function (s) { return s.niveau === level; });
+  }
+  res.json({ visits: visits, students: students, settings: all.settings });
 });
 
 app.post('/api/data', authenticate, function (req, res) {
@@ -168,13 +219,42 @@ app.post('/api/data', authenticate, function (req, res) {
     return res.status(400).json({ error: 'Format invalide : "visits" doit être un tableau' });
   }
   try {
+    // Les paramètres restent réservés à l'administrateur. Chaque infirmier
+    // ne remplace que les visites et les élèves de son propre niveau.
+    var user = store.findUserById(req.user.id);
+    if (!user) return res.status(401).json({ error: 'Compte introuvable' });
+    var current = store.loadAll();
+    var isAdmin = user.role === 'admin';
+    var nextVisits = Array.isArray(body.visits) ? body.visits : current.visits;
+    var nextStudents = Array.isArray(body.students) ? body.students : current.students;
+    if (isAdmin) {
+      nextVisits = nextVisits.map(withLevel);
+      nextStudents = nextStudents.map(withLevel);
+    } else {
+      var level = normalizeLevel(user.niveau);
+      var otherVisits = current.visits.map(withLevel).filter(function (v) { return v.niveau !== level; });
+      var otherStudents = current.students.map(withLevel).filter(function (s) { return s.niveau !== level; });
+      var scopedVisits = nextVisits.map(function (v) {
+        if (normalizeLevel('', v.classe) !== level) throw new Error('Une visite appartient à un autre niveau.');
+        return Object.assign({}, v, { niveau: level });
+      });
+      var scopedStudents = nextStudents.map(function (s) {
+        if (s.classe && normalizeLevel('', s.classe) !== level) throw new Error('Un élève appartient à un autre niveau.');
+        return Object.assign({}, s, { niveau: level });
+      });
+      nextVisits = otherVisits.concat(scopedVisits);
+      nextStudents = otherStudents.concat(scopedStudents);
+    }
     store.saveAll({
-      visits: body.visits,
-      settings: body.settings,
-      students: body.students
+      visits: nextVisits,
+      settings: isAdmin ? body.settings : current.settings,
+      students: nextStudents
     });
     res.json({ success: true, backend: store.backend });
   } catch (e) {
+    if (e.message.indexOf('autre niveau') !== -1) {
+      return res.status(403).json({ error: e.message });
+    }
     res.status(500).json({ error: 'Erreur serveur : ' + e.message });
   }
 });
@@ -188,11 +268,12 @@ app.post('/api/users', authenticate, requireAdmin, function (req, res) {
   var username = String(req.body.username || '').trim();
   var password = String(req.body.password || '');
   var role = req.body.role === 'admin' ? 'admin' : 'user';
+  var niveau = req.body.niveau === 'lycee' ? 'lycee' : 'primaire';
   if (!username || !password) {
     return res.status(400).json({ error: "Nom d'utilisateur et mot de passe requis" });
   }
   try {
-    var u = store.createUser(username, bcrypt.hashSync(password, 10), role);
+    var u = store.createUser(username, bcrypt.hashSync(password, 10), role, niveau);
     res.status(201).json(u);
   } catch (e) {
     if (e.message === 'EXISTS') return res.status(409).json({ error: 'Cet utilisateur existe déjà' });
@@ -203,6 +284,9 @@ app.post('/api/users', authenticate, requireAdmin, function (req, res) {
 app.delete('/api/users/:id', authenticate, requireAdmin, function (req, res) {
   var u = store.findUserById(Number(req.params.id));
   if (!u) return res.status(404).json({ error: 'Utilisateur introuvable' });
+  if (Number(u.id) === Number(req.user.id)) {
+    return res.status(400).json({ error: 'Vous ne pouvez pas supprimer votre propre compte' });
+  }
   if (u.username === 'admin' && u.role === 'admin') {
     return res.status(400).json({ error: "Impossible de supprimer l'administrateur principal" });
   }

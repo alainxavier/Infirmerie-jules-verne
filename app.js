@@ -7,8 +7,10 @@
    ========================================================= */
 
 /* ---------- Constantes ---------- */
-var CLASSES = ['TPS','PSA','PSB','MSA','MSB','GSA','GSB','CPA','CPB','CPC','CE1A','CE1B','CE1C','CE2A','CE2B','CE2C','CM1A','CM1B','CM1C','CM2A','CM2B','CM2C','Personnel'];
-var AGES = ['2 ans','3 ans','4 ans','5 ans','6 ans','7 ans','8 ans','9 ans','10 ans','11 ans','12 ans','Personnel'];
+var CLASSES = ['TPS','PSA','PSB','MSA','MSB','GSA','GSB','CPA','CPB','CPC','CE1A','CE1B','CE1C','CE2A','CE2B','CE2C','CM1A','CM1B','CM1C','CM2A','CM2B','CM2C','2A','1A','TA','Personnel'];
+var PRIMARY_CLASSES = ['TPS','PSA','PSB','MSA','MSB','GSA','GSB','CPA','CPB','CPC','CE1A','CE1B','CE1C','CE2A','CE2B','CE2C','CM1A','CM1B','CM1C','CM2A','CM2B','CM2C','Personnel'];
+var LYCEE_CLASSES = ['2A','1A','TA'];
+var AGES = ['2 ans','3 ans','4 ans','5 ans','6 ans','7 ans','8 ans','9 ans','10 ans','11 ans','12 ans','13 ans','14 ans','15 ans','16 ans','17 ans','18 ans','19 ans','Personnel'];
 var MOIS_NOMS = ['Janv','Févr','Mars','Avril','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
 
 var STORAGE_KEY = 'registre_infirmerie_jules_verne_v1';
@@ -50,6 +52,9 @@ var FIELD_ALIASES = {
 /* Colonnes du fichier « liste des élèves » (base d'autocomplétion) */
 var STUDENTS_KEY = 'registre_infirmerie_jules_verne_eleves_v1';
 var STUDENT_ALIASES = {
+  'niveau': 'niveau',
+  'niveau scolaire': 'niveau',
+  'cycle': 'niveau',
   'nom': 'nom',
   'prenom': 'prenom',
   'prenoms': 'prenom',
@@ -246,6 +251,14 @@ function updateAuthStatus() {
   if (userLabel && currentUser) userLabel.textContent = currentUser.username;
   var adminBadge = $('adminBadge');
   if (adminBadge) adminBadge.hidden = !(currentUser && currentUser.role === 'admin');
+  var settingsButton = $('btnSettings');
+  if (settingsButton) {
+    var isAdmin = !SERVER_MODE || (currentUser && currentUser.role === 'admin');
+    settingsButton.hidden = !isAdmin;
+    settingsButton.textContent = $('settingsPage') && !$('settingsPage').hidden ? '← Retour au registre' : '⚙️ Paramètres';
+  }
+  var profileButton = $('btnProfile');
+  if (profileButton) profileButton.hidden = !(SERVER_MODE && currentUser);
   if (logoutBtn) logoutBtn.hidden = !(SERVER_MODE && currentUser);
 }
 
@@ -555,7 +568,11 @@ function renderFilters() {
 function populateFormSelects() {
   var sc = $('fClasse');
   sc.innerHTML = '<option value="">— Choisir —</option>';
-  CLASSES.forEach(function (c) {
+  var allowedClasses = CLASSES;
+  if (SERVER_MODE && currentUser && currentUser.role !== 'admin') {
+    allowedClasses = currentUser.niveau === 'lycee' ? LYCEE_CLASSES : PRIMARY_CLASSES;
+  }
+  allowedClasses.forEach(function (c) {
     var o = document.createElement('option');
     o.value = c; o.textContent = c;
     sc.appendChild(o);
@@ -790,6 +807,7 @@ function onVisitSubmit(e) {
     arrivee: normalizeTime($('fArrivee').value),
     nom: nom,
     classe: classe,
+    niveau: currentUser && currentUser.role !== 'admin' ? currentUser.niveau : (['2A', '1A', 'TA'].indexOf(String(classe).replace(/\s+/g, '').toUpperCase()) !== -1 ? 'lycee' : 'primaire'),
     age: $('fAge').value,
     observations: $('fObservations').value.trim(),
     traitement: $('fTraitement').value.trim(),
@@ -1214,8 +1232,11 @@ function getRowVal(row, idx) {
 
 function appendImportedRecords(recs) {
   var added = 0;
+  var skipped = 0;
   recs.forEach(function (r) {
     if (!r.nom) return;
+    var niveau = inferNiveau('', r.classe);
+    if (SERVER_MODE && currentUser && currentUser.role !== 'admin' && niveau !== currentUser.niveau) { skipped++; return; }
     data.push({
       id: genId(),
       numero: maxNumero() + 1,
@@ -1223,6 +1244,7 @@ function appendImportedRecords(recs) {
       arrivee: normalizeTime(r.arrivee),
       nom: String(r.nom).trim(),
       classe: r.classe || '',
+      niveau: currentUser && currentUser.role !== 'admin' ? currentUser.niveau : niveau,
       age: r.age || '',
       observations: r.observations || '',
       traitement: r.traitement || '',
@@ -1235,6 +1257,7 @@ function appendImportedRecords(recs) {
     added++;
   });
   if (added) { saveData(); renderAll(); }
+  if (skipped) toast(skipped + ' visite(s) ignorée(s), car elles appartiennent à l’autre niveau.');
   return added;
 }
 
@@ -1281,9 +1304,21 @@ function importJsonText(text) {
   if (!obj || !Array.isArray(obj.data)) throw new Error('Fichier de sauvegarde invalide.');
   var arr = obj.data.filter(function (v) { return v && v.nom; });
   data = arr;
+  if (SERVER_MODE && currentUser && currentUser.role !== 'admin') {
+    var accountLevel = currentUser.niveau || 'primaire';
+    data = data.filter(function (v) { return inferNiveau('', v.classe) === accountLevel; });
+  }
   if (obj.settings) settings = Object.assign({}, DEFAULT_SETTINGS, obj.settings);
   if (obj.eleves && Array.isArray(obj.eleves)) {
     studentsData = obj.eleves.filter(function (s) { return s && (s.nom || s.prenom); });
+    if (SERVER_MODE && currentUser && currentUser.role !== 'admin') {
+      var accountLevelForStudents = currentUser.niveau || 'primaire';
+      studentsData = studentsData.filter(function (s) { return inferNiveau('', s.classe) === accountLevelForStudents; });
+    }
+    studentsData = studentsData.map(function (s) {
+      var assigned = SERVER_MODE && currentUser && currentUser.role !== 'admin' ? currentUser.niveau : inferNiveau(s.niveau, s.classe);
+      return Object.assign({}, s, { niveau: assigned || 'primaire' });
+    });
   }
   migrateData();
   saveData();
@@ -1297,7 +1332,7 @@ function importJsonText(text) {
 
 /* =========================================================
    LISTE DES ÉLÈVES (autocomplétion du formulaire)
-   Colonnes attendues : Nom, Prénom, Né(e) le, Sexe, Classe
+   Colonnes attendues : Niveau (facultatif), Nom, Prénom, Né(e) le, Sexe, Classe
    ========================================================= */
 function normalizeSexe(raw) {
   var k = normalizeKey(raw);
@@ -1305,6 +1340,16 @@ function normalizeSexe(raw) {
   if (k.charAt(0) === 'm') return 'Masculin';
   if (k.charAt(0) === 'f') return 'Féminin';
   return raw;
+}
+
+function inferNiveau(niveau, classe) {
+  var classKey = String(classe || '').replace(/\s+/g, '').toUpperCase();
+  if (LYCEE_CLASSES.indexOf(classKey) !== -1) return 'lycee';
+  if (PRIMARY_CLASSES.indexOf(classKey) !== -1) return 'primaire';
+  var levelKey = normalizeKey(niveau || '');
+  if (levelKey.indexOf('lyc') === 0 || levelKey === 'secondaire') return 'lycee';
+  if (levelKey) return 'primaire';
+  return 'primaire';
 }
 
 function studentDisplayName(s) {
@@ -1366,6 +1411,7 @@ function studentsFromRows(rows) {
     out.push({
       nom: nom,
       prenom: prenom,
+      niveau: getRowVal(row, idxOf.niveau).trim(),
       naissance: parseAnyDate(getRowVal(row, idxOf.naissance)),
       sexe: normalizeSexe(getRowVal(row, idxOf.sexe).trim()),
       classe: getRowVal(row, idxOf.classe).replace(/\s+/g, ' ').trim()
@@ -1403,7 +1449,22 @@ function importStudentsXlsxBytes(bytes) {
 
 /* Remplace la liste actuelle et rafraîchit l'interface */
 function applyStudentsList(list) {
-  studentsData = list;
+  var forcedLevel = SERVER_MODE && currentUser && currentUser.role !== 'admin' ? currentUser.niveau : '';
+  var importedStudents = list.filter(function (s) {
+    return !forcedLevel || !s.classe || inferNiveau('', s.classe) === forcedLevel;
+  }).map(function (s) {
+    return Object.assign({}, s, { niveau: forcedLevel || inferNiveau(s.niveau, s.classe) });
+  });
+  if (SERVER_MODE && currentUser && currentUser.role === 'admin' && studentsData.length) {
+    var importedLevels = {};
+    importedStudents.forEach(function (s) { importedLevels[s.niveau] = true; });
+    var existingOtherLevels = studentsData.filter(function (s) {
+      return !importedLevels[inferNiveau(s.niveau, s.classe)];
+    });
+    studentsData = existingOtherLevels.concat(importedStudents);
+  } else {
+    studentsData = importedStudents;
+  }
   saveStudents();
   updateStudentsUI();
   renderFilters();
@@ -1441,11 +1502,20 @@ function hideAutocomplete() {
 function findStudents(q) {
   var k = normalizeKey(q);
   if (!k || !studentsData.length) return [];
-  var out = [];
-  for (var i = 0; i < studentsData.length && out.length < 8; i++) {
-    if (studentSearchKey(studentsData[i]).indexOf(k) !== -1) out.push(studentsData[i]);
+  var matches = [];
+  for (var i = 0; i < studentsData.length; i++) {
+    if (studentSearchKey(studentsData[i]).indexOf(k) !== -1) matches.push(studentsData[i]);
   }
-  return out;
+  if (!(SERVER_MODE && currentUser && currentUser.role === 'admin')) return matches.slice(0, 8);
+
+  var primary = matches.filter(function (s) { return inferNiveau(s.niveau, s.classe) === 'primaire'; });
+  var lycee = matches.filter(function (s) { return inferNiveau(s.niveau, s.classe) === 'lycee'; });
+  var balanced = [];
+  while (balanced.length < 8 && (primary.length || lycee.length)) {
+    if (primary.length && balanced.length < 8) balanced.push(primary.shift());
+    if (lycee.length && balanced.length < 8) balanced.push(lycee.shift());
+  }
+  return balanced;
 }
 
 function renderAutocomplete() {
@@ -1480,6 +1550,7 @@ function renderAutocomplete() {
     meta.className = 'ac-meta';
     var bits = [];
     if (s.classe) bits.push(s.classe);
+    if (SERVER_MODE && currentUser && currentUser.role === 'admin') bits.push(s.niveau === 'lycee' ? 'Lycée' : 'Primaire');
     var age = ageFromBirth(s.naissance);
     if (age) bits.push(age);
     if (s.sexe) bits.push(s.sexe);
@@ -1862,11 +1933,16 @@ function bindEvents() {
   });
 
   /* Paramètres */
-  $('btnSettings').addEventListener('click', openSettingsModal);
-  $('btnCloseSettings').addEventListener('click', closeSettingsModal);
-  $('btnCancelSettings').addEventListener('click', closeSettingsModal);
-  $('settingsOverlay').addEventListener('click', function (e) { if (e.target === this) closeSettingsModal(); });
+  $('btnSettings').addEventListener('click', function () {
+    if ($('settingsPage').hidden) openSettingsModal();
+    else closeSettingsModal();
+  });
+  $('btnSettingsBack').addEventListener('click', closeSettingsModal);
   $('settingsForm').addEventListener('submit', onSettingsSubmit);
+  $('createUserForm').addEventListener('submit', onCreateUserSubmit);
+  $('usersBody').addEventListener('click', onUsersTableClick);
+  $('newUserRole').addEventListener('change', updateNewUserLevelControl);
+  updateNewUserLevelControl();
 
     /* Authentification (mode serveur) */
     /* Authentification (mode serveur) */
@@ -1878,12 +1954,14 @@ function bindEvents() {
 
   var btnLogout = $('btnLogout');
   if (btnLogout) btnLogout.addEventListener('click', function () {
-    if (confirm('Déconnexion ?\n\nLes modifications non sauvegardées sur le serveur seront perdues.')) {
+    if (confirm('Voulez-vous vous déconnecter ?')) {
       apiLogout();
     }
   });
     var btnChangePwd = $('btnChangePwd');
   if (btnChangePwd) btnChangePwd.addEventListener('click', openChangePasswordModal);
+  var btnProfile = $('btnProfile');
+  if (btnProfile) btnProfile.addEventListener('click', openChangePasswordModal);
   var changePwdForm = $('changePwdForm');
   if (changePwdForm) changePwdForm.addEventListener('submit', onChangePasswordSubmit);
   var btnCloseChangePwd = $('btnCloseChangePwd');
@@ -1966,24 +2044,38 @@ function bindEvents() {
 }
 
 function openSettingsModal() {
+  if (SERVER_MODE && (!currentUser || currentUser.role !== 'admin')) {
+    toast('Accès réservé à l’administrateur.');
+    return;
+  }
   $('sSchool').value = settings.ecole;
   $('sTitle').value = settings.titre;
   $('sYearStart').value = settings.anneeDebut;
   $('sYearEnd').value = settings.anneeFin;
   updateBackupUI();
   updateStudentsUI();
-  // Afficher/masquer la section compte utilisateur selon le mode serveur
-  var pwdBox = $('changePwdBox');
-  if (pwdBox) pwdBox.hidden = !SERVER_MODE;
-  $('settingsOverlay').hidden = false;
+  $('mainContent').hidden = true;
+  $('appFooter').hidden = true;
+  $('settingsPage').hidden = false;
+  $('usersPanel').hidden = !SERVER_MODE;
+  $('btnSettings').textContent = '← Retour au registre';
+  if (SERVER_MODE) loadUsers();
 }
 
 function closeSettingsModal() {
-  $('settingsOverlay').hidden = true;
+  $('settingsPage').hidden = true;
+  $('mainContent').hidden = false;
+  $('appFooter').hidden = false;
+  $('btnSettings').textContent = '⚙️ Paramètres';
 }
 
 function onSettingsSubmit(e) {
   e.preventDefault();
+  if (SERVER_MODE && (!currentUser || currentUser.role !== 'admin')) {
+    closeSettingsModal();
+    toast('Accès réservé à l’administrateur.');
+    return;
+  }
   settings.ecole = $('sSchool').value.trim() || DEFAULT_SETTINGS.ecole;
   settings.titre = $('sTitle').value.trim() || DEFAULT_SETTINGS.titre;
   settings.anneeDebut = $('sYearStart').value || DEFAULT_SETTINGS.anneeDebut;
@@ -1994,10 +2086,89 @@ function onSettingsSubmit(e) {
   toast('Paramètres enregistrés.');
 }
 
+function loadUsers() {
+  var status = $('usersStatus');
+  if (!SERVER_MODE || !currentUser || currentUser.role !== 'admin') return;
+  if (status) { status.textContent = 'Chargement des comptes…'; status.className = 'backup-status off'; }
+  apiFetch('/users').then(function (r) {
+    if (!r.ok) return r.json().then(function (e) { throw new Error(e.error || 'Erreur de chargement'); });
+    return r.json();
+  }).then(function (users) {
+    var body = $('usersBody');
+    body.textContent = '';
+    users.forEach(function (user) {
+      var tr = document.createElement('tr');
+      var username = document.createElement('td'); username.textContent = user.username;
+      var name = document.createElement('td'); name.textContent = [user.nom, user.prenoms].filter(Boolean).join(' ') || '—';
+      var role = document.createElement('td'); role.textContent = user.role === 'admin' ? 'Administrateur' : 'Utilisateur';
+      var level = document.createElement('td'); level.textContent = user.role === 'admin' || user.niveau === 'all' ? 'Tous' : (user.niveau === 'lycee' ? 'Lycée' : 'Primaire');
+      var action = document.createElement('td');
+      if (Number(user.id) !== Number(currentUser.id)) {
+        var remove = document.createElement('button');
+        remove.type = 'button'; remove.className = 'btn btn-secondary btn-user-delete';
+        remove.textContent = 'Supprimer'; remove.setAttribute('data-user-id', user.id);
+        action.appendChild(remove);
+      } else { action.textContent = 'Compte actuel'; }
+      tr.appendChild(username); tr.appendChild(name); tr.appendChild(role); tr.appendChild(level); tr.appendChild(action);
+      body.appendChild(tr);
+    });
+    if (status) { status.textContent = users.length + ' compte' + (users.length > 1 ? 's' : '') + ' enregistré' + (users.length > 1 ? 's' : '') + '.'; status.className = 'backup-status on'; }
+  }).catch(function (err) {
+    if (status) { status.textContent = err.message; status.className = 'backup-status error'; }
+  });
+}
+
+function onCreateUserSubmit(e) {
+  e.preventDefault();
+  if (!SERVER_MODE || !currentUser || currentUser.role !== 'admin') return;
+  var username = $('newUsername').value.trim();
+  var password = $('newUserPassword').value;
+  var role = $('newUserRole').value;
+  var niveau = $('newUserLevel').value;
+  if (password.length < 8) { alert('Le mot de passe doit contenir au moins 8 caractères.'); return; }
+  apiFetch('/users', { method: 'POST', body: { username: username, password: password, role: role, niveau: niveau } })
+    .then(function (r) {
+      if (!r.ok) return r.json().then(function (e) { throw new Error(e.error || 'Création impossible'); });
+      return r.json();
+    }).then(function () {
+      $('createUserForm').reset();
+      updateNewUserLevelControl();
+      loadUsers();
+      toast('Utilisateur créé.');
+    }).catch(function (err) { alert('Erreur : ' + err.message); });
+}
+
+function updateNewUserLevelControl() {
+  var role = $('newUserRole');
+  var level = $('newUserLevel');
+  if (role && level) level.disabled = role.value === 'admin';
+}
+
+function onUsersTableClick(e) {
+  var button = e.target.closest ? e.target.closest('button[data-user-id]') : null;
+  if (!button || !currentUser || currentUser.role !== 'admin') return;
+  var id = button.getAttribute('data-user-id');
+  if (!confirm('Supprimer ce compte utilisateur ?')) return;
+  apiFetch('/users/' + encodeURIComponent(id), { method: 'DELETE' }).then(function (r) {
+    if (!r.ok) return r.json().then(function (err) { throw new Error(err.error || 'Suppression impossible'); });
+    loadUsers();
+    toast('Utilisateur supprimé.');
+  }).catch(function (err) { alert('Erreur : ' + err.message); });
+}
+
 /* ---------- Changement de mot de passe (mode serveur) ---------- */
 function openChangePasswordModal() {
   var modal = $('changePwdOverlay');
-  if (modal) { modal.hidden = false; $('changePwdPassword').value = ''; $('changePwdPassword2').value = ''; $('changePwdCurrent').focus(); }
+  if (!SERVER_MODE || !currentUser) return;
+  if (modal) {
+    $('profileNom').value = currentUser.nom || '';
+    $('profilePrenoms').value = currentUser.prenoms || '';
+    $('changePwdCurrent').value = '';
+    $('changePwdPassword').value = '';
+    $('changePwdPassword2').value = '';
+    modal.hidden = false;
+    $('profileNom').focus();
+  }
 }
 
 function closeChangePasswordModal() {
@@ -2015,19 +2186,23 @@ function onChangePasswordSubmit(e) {
   var current = $('changePwdCurrent').value;
   var pwd1 = $('changePwdPassword').value;
   var pwd2 = $('changePwdPassword2').value;
-  if (!current || !pwd1) { alert('Veuillez saisir le mot de passe actuel et le nouveau.'); return; }
-  if (pwd1 !== pwd2) { alert('Les deux mots de passe ne correspondent pas.'); return; }
-  if (pwd1.length < 4) { alert('Le mot de passe doit contenir au moins 4 caractères.'); return; }
+  if (pwd1 || pwd2) {
+    if (!current) { alert('Saisissez votre mot de passe actuel pour le modifier.'); return; }
+    if (pwd1 !== pwd2) { alert('Les deux mots de passe ne correspondent pas.'); return; }
+    if (pwd1.length < 8) { alert('Le nouveau mot de passe doit contenir au moins 8 caractères.'); return; }
+  }
 
-  apiFetch('/auth/change-password', {
+  apiFetch('/auth/profile', {
     method: 'POST',
-    body: { currentPassword: current, password: pwd1 }
+    body: { nom: $('profileNom').value.trim(), prenoms: $('profilePrenoms').value.trim(), currentPassword: current, password: pwd1 }
   }).then(function (r) {
     if (!r.ok) return r.json().then(function (e) { throw new Error(e.error || 'Erreur'); });
     return r.json();
   }).then(function (result) {
+    currentUser = result.user;
+    updateAuthStatus();
     closeChangePasswordModal();
-    toast('Mot de passe modifié avec succès.');
+    toast('Profil enregistré.');
   }).catch(function (err) {
     alert('Erreur : ' + err.message);
   });

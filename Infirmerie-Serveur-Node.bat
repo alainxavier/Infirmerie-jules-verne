@@ -46,11 +46,15 @@ if not exist "node_modules\express" (
 
 echo.
 echo Demarrage du serveur sur le port 8461...
+echo Le navigateur s'ouvrira une fois le serveur pret.
 echo.
-timeout /t 2 >nul
-start "" "http://localhost:8461/"
+rem Ne pas ouvrir le navigateur apres un delai fixe : le serveur peut mettre
+rem plus de deux secondes a initialiser SQLite. Un processus PowerShell attend
+rem que l'API reponde avant d'ouvrir la page (30 secondes maximum).
+start "" powershell -NoProfile -WindowStyle Hidden -Command "$limite=(Get-Date).AddSeconds(30); do { try { $reponse=Invoke-WebRequest -UseBasicParsing 'http://127.0.0.1:8461/api/config' -TimeoutSec 1; if ($reponse.StatusCode -eq 200) { Start-Process 'http://localhost:8461/'; exit 0 } } catch { }; Start-Sleep -Milliseconds 500 } while ((Get-Date) -lt $limite)"
 "%NODE_EXE%" server.js
 echo.
-echo Le serveur s'est arrete.
+echo Le serveur s'est arrete (code %ERRORLEVEL%).
+echo Si le port 8461 est deja utilise, fermez l'autre serveur ou choisissez un autre port.
 pause
 

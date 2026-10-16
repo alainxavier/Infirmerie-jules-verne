@@ -23,26 +23,30 @@
 <!-- Contenu principal : masqué tant que non authentifié en mode serveur -->
 <div id="appContent">
 
-<!-- Modal de connexion -->
+<!-- Écran de connexion au serveur -->
 <div id="loginOverlay" class="modal-overlay no-print" hidden>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-    <div class="modal-header">
-      <h2 id="loginTitle">Connexion au serveur</h2>
+  <div class="modal login-card" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <div class="login-card-header">
+      <img src="assets/blason-jules-verne.svg" alt="" class="login-logo">
+      <p class="login-kicker">École Jules Verne · Infirmerie</p>
+      <h2 id="loginTitle">Bienvenue</h2>
+      <p class="login-subtitle">Connectez-vous pour accéder au registre partagé.</p>
     </div>
     <form id="loginForm" autocomplete="off">
       <div class="form-grid plain">
         <div class="field">
-          <label for="loginUsername">Nom d'utilisateur</label>
-          <input type="text" id="loginUsername" autocomplete="username" required>
+          <label for="loginUsername">Nom d’utilisateur</label>
+          <input type="text" id="loginUsername" autocomplete="username" placeholder="Saisissez votre nom d’utilisateur" required>
         </div>
         <div class="field">
           <label for="loginPassword">Mot de passe</label>
-          <input type="password" id="loginPassword" autocomplete="current-password" required>
+          <input type="password" id="loginPassword" autocomplete="current-password" placeholder="Saisissez votre mot de passe" required>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Se connecter</button>
+        <button type="submit" class="btn btn-primary login-submit">Se connecter <span aria-hidden="true">→</span></button>
       </div>
+      <p class="login-footnote"><span aria-hidden="true">🔒</span> Accès réservé au personnel autorisé</p>
     </form>
   </div>
 </div>
@@ -62,6 +66,7 @@
         <span id="authUserLabel" class="auth-user"></span>
         <span id="adminBadge" class="admin-badge" title="Administrateur">👑</span>
       </span>
+      <button id="btnProfile" class="btn btn-ghost" title="Mon profil" aria-label="Mon profil" hidden>👤 Mon profil</button>
       <button id="btnLogout" class="btn btn-ghost" title="Déconnexion" aria-label="Déconnexion" hidden>🚪 Déconnexion</button>
       <button id="btnSettings" class="btn btn-ghost" title="Paramètres" aria-label="Paramètres">⚙️ Paramètres</button>
     </div>
@@ -75,7 +80,7 @@
   <p id="printDate" class="print-date"></p>
 </header>
 
-<main>
+<main id="mainContent">
   <section class="toolbar no-print">
     <div class="toolbar-row">
       <button id="btnAdd" class="btn btn-primary">＋ Nouvelle visite</button>
@@ -157,7 +162,7 @@
   </section>
 </main>
 
-<footer class="app-footer no-print">
+<footer id="appFooter" class="app-footer no-print">
   <span id="footerCount"></span>
   <span>· Enregistré automatiquement dans ce navigateur.</span>
   <span>· Activez la sauvegarde automatique dans un dossier : ⚙ Paramètres → « Sauvegarde automatique ».</span>
@@ -245,14 +250,16 @@
   </div>
 </div>
 
-<!-- ======================= Modal : paramètres ======================= -->
-<div id="settingsOverlay" class="modal-overlay no-print" hidden>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
-    <div class="modal-header">
-      <h2 id="settingsTitle">Paramètres</h2>
-      <button class="modal-close" id="btnCloseSettings" type="button" aria-label="Fermer">✕</button>
+<!-- Page paramètres, réservée à l'administrateur -->
+<main id="settingsPage" class="settings-page no-print" hidden>
+  <div class="settings-page-inner">
+    <div class="settings-page-header">
+      <div><p class="settings-eyebrow">Administration</p><h2 id="settingsTitle">Paramètres</h2></div>
+      <button class="btn btn-secondary" id="btnSettingsBack" type="button">← Retour au registre</button>
     </div>
     <form id="settingsForm">
+      <section class="settings-card">
+        <div class="settings-card-heading"><h3>Paramètres du registre</h3><p>Personnalisez l'en-tête et l'année scolaire.</p></div>
       <div class="form-grid plain">
         <div class="field">
           <label for="sSchool">Nom de l'école</label>
@@ -273,7 +280,7 @@
       </div>
       <div class="backup-box">
         <div class="backup-box-title">👥 Liste des élèves (autocomplétion)</div>
-        <p class="backup-hint">Importez le fichier Excel / CSV des élèves (colonnes : <strong>Nom, Prénom, Né(e) le, Sexe, Classe</strong>).
+        <p class="backup-hint">Importez le fichier Excel / CSV des élèves (colonnes : <strong>Nom, Prénom, Né(e) le, Sexe, Classe</strong> et, si besoin, <strong>Niveau</strong> : Primaire ou Lycée).
           Les noms seront ensuite proposés automatiquement dans le formulaire de visite, et la <strong>classe</strong> + l'<strong>âge</strong>
           (calculé à partir de la date de naissance) seront remplis automatiquement dès qu'un élève est sélectionné.</p>
         <div id="studentsStatus" class="backup-status off" aria-live="polite">Aucun élève enregistré.</div>
@@ -298,43 +305,56 @@
           <button type="button" class="btn btn-secondary" id="btnBackupDisable" hidden>Désactiver</button>
         </div>
             </div>
-      <div class="backup-box" id="changePwdBox">
-        <div class="backup-box-title">🔐 Compte utilisateur (mode serveur)</div>
-        <p class="backup-hint">Gérez votre mot de passe et déconnectez-vous lorsque vous quittez.</p>
-        <div class="backup-actions">
-          <button type="button" class="btn btn-secondary" id="btnChangePwd">Modifier mon mot de passe</button>
-        </div>
-      </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="btnCancelSettings">Annuler</button>
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <button type="submit" class="btn btn-primary">Enregistrer les paramètres</button>
       </div>
+      </section>
     </form>
+    <section id="usersPanel" class="settings-card users-panel">
+      <div class="settings-card-heading"><h3>Gestion des utilisateurs</h3><p>Chaque compte infirmier est limité aux données du niveau attribué (élèves, visites et statistiques). L’administrateur conserve la vue d’ensemble.</p></div>
+      <form id="createUserForm" class="create-user-form" autocomplete="off">
+        <div class="field"><label for="newUsername">Nom d'utilisateur</label><input type="text" id="newUsername" maxlength="40" autocomplete="off" required></div>
+        <div class="field"><label for="newUserPassword">Mot de passe initial (8 caractères minimum)</label><input type="password" id="newUserPassword" minlength="8" autocomplete="new-password" required></div>
+        <div class="field"><label for="newUserRole">Rôle</label><select id="newUserRole"><option value="user">Utilisateur</option><option value="admin">Administrateur</option></select></div>
+        <div class="field"><label for="newUserLevel">Niveau de l’établissement</label><select id="newUserLevel"><option value="primaire">Primaire</option><option value="lycee">Lycée</option></select></div>
+        <button type="submit" class="btn btn-primary">＋ Créer l'utilisateur</button>
+      </form>
+      <div id="usersStatus" class="backup-status off" aria-live="polite"></div>
+      <div class="users-table-wrap"><table class="users-table"><thead><tr><th>Nom d'utilisateur</th><th>Nom et prénoms</th><th>Rôle</th><th>Niveau</th><th>Action</th></tr></thead><tbody id="usersBody"></tbody></table></div>
+    </section>
   </div>
-</div>
+</main>
 
 <input type="file" id="fileInput" accept=".xlsx,.csv,.json" hidden>
 
-<!-- Modal de changement de mot de passe -->
+<!-- Modal du profil utilisateur -->
 <div id="changePwdOverlay" class="modal-overlay no-print" hidden>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="changePwdTitle">
     <div class="modal-header">
-      <h2 id="changePwdTitle">Changer le mot de passe</h2>
+      <h2 id="changePwdTitle">Mon profil</h2>
       <button class="modal-close" id="btnCloseChangePwd" type="button" aria-label="Fermer">✕</button>
     </div>
     <form id="changePwdForm" autocomplete="off">
       <div class="form-grid plain">
         <div class="field">
-          <label for="changePwdCurrent">Mot de passe actuel</label>
-          <input type="password" id="changePwdCurrent" autocomplete="current-password" required>
+          <label for="profileNom">Nom</label>
+          <input type="text" id="profileNom" maxlength="80" autocomplete="family-name">
         </div>
         <div class="field">
-          <label for="changePwdPassword">Nouveau mot de passe</label>
-          <input type="password" id="changePwdPassword" autocomplete="new-password" required>
+          <label for="profilePrenoms">Prénoms</label>
+          <input type="text" id="profilePrenoms" maxlength="120" autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label for="changePwdCurrent">Mot de passe actuel <span class="backup-hint">(requis pour le changer)</span></label>
+          <input type="password" id="changePwdCurrent" autocomplete="current-password">
+        </div>
+        <div class="field">
+          <label for="changePwdPassword">Nouveau mot de passe <span class="backup-hint">(facultatif)</span></label>
+          <input type="password" id="changePwdPassword" autocomplete="new-password">
         </div>
         <div class="field">
           <label for="changePwdPassword2">Confirmer le nouveau mot de passe</label>
-          <input type="password" id="changePwdPassword2" autocomplete="new-password" required>
+          <input type="password" id="changePwdPassword2" autocomplete="new-password">
         </div>
       </div>
       <div class="modal-footer">

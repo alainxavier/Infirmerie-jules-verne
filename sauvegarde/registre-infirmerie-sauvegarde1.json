@@ -1,0 +1,6590 @@
+{
+  "application": "Registre d'infirmerie — École Jules Verne",
+  "version": 2,
+  "exportedAt": "2026-09-02T13:51:10.814Z",
+  "settings": {
+    "ecole": "École Jules Verne",
+    "titre": "Registre d'infirmerie scolaire 2026–2027",
+    "anneeDebut": "2026-09-01",
+    "anneeFin": "2027-06-30"
+  },
+  "data": [
+    {
+      "id": "mtk5miaz-v19fxh",
+      "numero": 1,
+      "date": "2026-09-02",
+      "arrivee": "13:50",
+      "nom": "ACHI Axel Arifidy Kyriel",
+      "classe": "6B: Les céruléens",
+      "age": "11 ans",
+      "observations": "mmmmmmmmmmmmmmmmmm",
+      "traitement": "kkkkkkkkkkkkkkkkk",
+      "departClasse": "13:51",
+      "departMaison": "13:51",
+      "parent": "Oui",
+      "archive": false,
+      "createdAt": 1788357069611
+    }
+  ],
+  "eleves": [
+    {
+      "nom": "ABISSE",
+      "prenom": "Christ Ivan",
+      "naissance": "2009-04-09",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "ABOUA ADJOBY",
+      "prenom": "Ilyana Marie-Edwige Acouba",
+      "naissance": "2015-12-14",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "ABOUGNAN",
+      "prenom": "Alvarez Henri Bradley",
+      "naissance": "2012-09-01",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "ABOUYA",
+      "prenom": "AMON JANET-RITA MALIKA",
+      "naissance": "2010-07-23",
+      "sexe": "Féminin",
+      "classe": "1B"
+    },
+    {
+      "nom": "ACHI",
+      "prenom": "Axel Arifidy Kyriel",
+      "naissance": "2015-05-11",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "ACHI",
+      "prenom": "CHRIS HANNIEL GEDEON",
+      "naissance": "2011-08-17",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "ACHI",
+      "prenom": "Mégane Annelyse Amba Grace-Henriette",
+      "naissance": "2012-05-16",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "ACHI",
+      "prenom": "Nathanael Paulkuan Andriambahoaka",
+      "naissance": "2011-09-27",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "ACHI",
+      "prenom": "Primael",
+      "naissance": "2014-09-29",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "ACKAH",
+      "prenom": "Kyria Marie-Noam Abran",
+      "naissance": "2009-06-26",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "ACKO",
+      "prenom": "Ubrich Océane Eunice-Chloé",
+      "naissance": "2009-08-20",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "ACKO",
+      "prenom": "UBRICH PRUNELLE KANELLE",
+      "naissance": "2011-03-18",
+      "sexe": "Féminin",
+      "classe": "1A"
+    },
+    {
+      "nom": "ADEBAYO",
+      "prenom": "Malika Arikê",
+      "naissance": "2012-02-18",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "ADISSA",
+      "prenom": "AYMANE ALDEN",
+      "naissance": "2010-08-06",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "ADJATAN",
+      "prenom": "Vicky",
+      "naissance": "2009-07-21",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "ADJIIE",
+      "prenom": "Fofié Marie-Edna Horeb",
+      "naissance": "2014-03-22",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "ADJIMOTI",
+      "prenom": "Moréwa Harlande Humelle",
+      "naissance": "2012-07-08",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "ADJO LESSING",
+      "prenom": "Marwan Nagnimin",
+      "naissance": "2013-01-19",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "ADJOUA",
+      "prenom": "Lysa Marie Eloheeka",
+      "naissance": "2010-06-28",
+      "sexe": "Féminin",
+      "classe": "1A"
+    },
+    {
+      "nom": "ADOU",
+      "prenom": "Marie-Eliana Astrid Siar-Lou",
+      "naissance": "2014-07-09",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "ADOU",
+      "prenom": "Mikel-Ange Marie",
+      "naissance": "2015-10-31",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "AGBETIAFAN",
+      "prenom": "Komi Kely",
+      "naissance": "2014-04-05",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "AGNERO",
+      "prenom": "Yelena Marie-Kathryn",
+      "naissance": "2011-11-17",
+      "sexe": "Féminin",
+      "classe": "2C"
+    },
+    {
+      "nom": "AGUIE",
+      "prenom": "Sewa Eunice Grace Emmanuella",
+      "naissance": "2009-03-10",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "AHIMOU",
+      "prenom": "Akoua Hanna Lirane",
+      "naissance": "2011-03-23",
+      "sexe": "Féminin",
+      "classe": "2A"
+    },
+    {
+      "nom": "AHIMOU",
+      "prenom": "Carl-Emmanuel",
+      "naissance": "2010-10-21",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "AHIN",
+      "prenom": "Emmanuel Assémian",
+      "naissance": "2009-03-16",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "AHOGNY",
+      "prenom": "Solène",
+      "naissance": "2009-09-09",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "AHOUSSOU KOUADIO",
+      "prenom": "Henri-Emmanuel Timy J-C",
+      "naissance": "2008-07-07",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "AIE",
+      "prenom": "YVANN DESIRE",
+      "naissance": "2010-07-22",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "AKA",
+      "prenom": "Addi Ethan Cédric",
+      "naissance": "2012-02-09",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "AKA",
+      "prenom": "Assoma Loïc Stephen",
+      "naissance": "2008-10-14",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "AKA",
+      "prenom": "Aydan Jean-Kylian",
+      "naissance": "2009-03-24",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "AKA",
+      "prenom": "Moayé Keren Marie",
+      "naissance": "2011-05-12",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "AKA",
+      "prenom": "Noah Jacques Aitey",
+      "naissance": "2012-01-04",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "AKA",
+      "prenom": "Soma Marie Gloria Ornella",
+      "naissance": "2010-05-23",
+      "sexe": "Féminin",
+      "classe": "1A"
+    },
+    {
+      "nom": "AKA-BILE",
+      "prenom": "Nadia Anais",
+      "naissance": "2013-12-04",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "AKENAN",
+      "prenom": "Ethan Alexandre Joseph Hébi",
+      "naissance": "2011-09-12",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "AKOLLY",
+      "prenom": "Nutépé Marie-Immaculée Remember",
+      "naissance": "2011-05-27",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "AKOWANOU",
+      "prenom": "Liam Enzo Fèmi",
+      "naissance": "2015-10-06",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "AKRE LOBA",
+      "prenom": "Kim-Jacky",
+      "naissance": "2012-12-19",
+      "sexe": "Féminin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "AKRE LOBA",
+      "prenom": "Noa",
+      "naissance": "2011-05-12",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "ALBERT",
+      "prenom": "Dylan-Gael Jayden-Dresen",
+      "naissance": "2013-01-03",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "ALBERT",
+      "prenom": "URIELLE TAVANYA DREESEN",
+      "naissance": "2010-03-13",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "ALIDJE",
+      "prenom": "Ange-Gabriel Tsipora",
+      "naissance": "2011-12-16",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "ALLOU",
+      "prenom": "Bekloh Anaia Shannah",
+      "naissance": "2013-05-19",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "ALLOU",
+      "prenom": "Elamiansey Lévi Adams",
+      "naissance": "2010-06-06",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "AMAN",
+      "prenom": "Chayim Johan Neriah",
+      "naissance": "2014-04-23",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "AMAN",
+      "prenom": "Eliana Océane Meira Assia",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "AMAN",
+      "prenom": "Jane Shamira Monique Aliza",
+      "naissance": "2009-08-01",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "AMAN",
+      "prenom": "Myles Asher Israel",
+      "naissance": "2012-07-10",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "AMANI",
+      "prenom": "Jean Ariel",
+      "naissance": "2009-04-01",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "AMANI",
+      "prenom": "Yannh-Olivier",
+      "naissance": "2012-02-20",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "AMIEN",
+      "prenom": "Nioupin Akouba Orlia",
+      "naissance": "2015-11-20",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "AMOAKON",
+      "prenom": "Akoua Myriam Elvir Bancouly",
+      "naissance": "2012-05-24",
+      "sexe": "Féminin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "AMOAKON",
+      "prenom": "Tiémélé Marcel",
+      "naissance": "2010-07-02",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "AMOIKON",
+      "prenom": "Yann Kévin Prince Eponon",
+      "naissance": "2013-08-24",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "AMOUZOU",
+      "prenom": "Edoh Urbaine",
+      "naissance": "2009-12-19",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "ANDRIANAVALONIRINA",
+      "prenom": "Zary Scott",
+      "naissance": "2011-04-27",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "ANDRIANAVONY",
+      "prenom": "RANTSA MANANKAJA",
+      "naissance": "2009-12-06",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "ANDRIANTSEHENO",
+      "prenom": "Miotisoa Keysha",
+      "naissance": "2013-01-31",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "ANET",
+      "prenom": "Kelani Eliakim Nolan",
+      "naissance": "2015-02-12",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "ANET",
+      "prenom": "Kouakou Yvann",
+      "naissance": "2012-12-16",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "ANGAMAN",
+      "prenom": "Jean-Baptiste Emmanuel N'Guessan",
+      "naissance": "2009-07-08",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "ANGO",
+      "prenom": "PIERRE-IBRAHIM",
+      "naissance": "2010-10-22",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "ANGORAN",
+      "prenom": "Lirane",
+      "naissance": "2013-11-10",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "ANGORAN",
+      "prenom": "Noelian Pierre Hiyel",
+      "naissance": "2015-07-25",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "ANOH",
+      "prenom": "Ahouyah Ange Esther",
+      "naissance": "2015-04-02",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "ANONGBA",
+      "prenom": "Kouassibié Marie-Thérèse Aurore",
+      "naissance": "2009-06-17",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "APPAGNI",
+      "prenom": "SERGINA MARIE - KYRIELLE GNIMA",
+      "naissance": "2010-06-16",
+      "sexe": "Féminin",
+      "classe": "1A"
+    },
+    {
+      "nom": "ASSALE",
+      "prenom": "Ange Daniel",
+      "naissance": "2014-12-07",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "ASSAMOI",
+      "prenom": "Pierre Maxence Milane",
+      "naissance": "2006-06-14",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "ASSE",
+      "prenom": "Jean Philip",
+      "naissance": "2010-07-05",
+      "sexe": "Masculin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "ASSOUAN",
+      "prenom": "Akassi Marie Emmanuella Ketsia",
+      "naissance": "2015-07-25",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "ATCHE",
+      "prenom": "Ekponon Kilian Salomon",
+      "naissance": "2011-11-12",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "ATCHE",
+      "prenom": "Kablan Marc-Emmanuel",
+      "naissance": "2014-11-20",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "ATSE",
+      "prenom": "Dodo Ellyn Yanna Chi-Yapo",
+      "naissance": "2010-02-11",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "ATSE",
+      "prenom": "N'Chot Anaïs Marie-Prunelle",
+      "naissance": "2015-08-27",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "ATSE",
+      "prenom": "N'Chot Jean-Dayan",
+      "naissance": "2013-02-02",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "ATTA",
+      "prenom": "Kouakou Yann Christophe",
+      "naissance": "2009-04-26",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "ATTOH",
+      "prenom": "Anaïs Mary",
+      "naissance": "2015-05-26",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "ATTOH",
+      "prenom": "Karl-Emmanuel",
+      "naissance": "2009-03-10",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "AVODAGBE",
+      "prenom": "Ehoussoua Marie-Clara Estrella",
+      "naissance": "2013-11-30",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "AZAGOH-KOUADIO",
+      "prenom": "GuillaumenMathis",
+      "naissance": "2015-08-01",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "BADIANE",
+      "prenom": "Madina Kimberly Wendyam",
+      "naissance": "2011-12-26",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "BAH",
+      "prenom": "Aïssata",
+      "naissance": "2009-08-12",
+      "sexe": "Féminin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "BAH",
+      "prenom": "Marie Rehanne Emmanuella",
+      "naissance": "2009-03-12",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "BAH",
+      "prenom": "Safiatou",
+      "naissance": "2015-08-19",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "BAKAYOKO",
+      "prenom": "About Junior Salem",
+      "naissance": "2014-05-15",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "BAKAYOKO",
+      "prenom": "Assietou Fadhila",
+      "naissance": "2015-04-04",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "BAKAYOKO",
+      "prenom": "Korotoum Noura",
+      "naissance": "2010-04-28",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "BAKAYOKO",
+      "prenom": "Mohamed Sayid",
+      "naissance": "2010-03-15",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "BALLO",
+      "prenom": "Khalifa",
+      "naissance": "2012-11-17",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "BAMBA",
+      "prenom": "Ariana Mabadi",
+      "naissance": "2009-10-03",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "BAMBA",
+      "prenom": "Inayah Konnie Astrid Maélya",
+      "naissance": "2016-01-02",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "BAMBA",
+      "prenom": "Kiyala Sramy Rania",
+      "naissance": "2009-02-02",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "BAMBA",
+      "prenom": "Leyla Amita",
+      "naissance": "2011-02-26",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "BAMBA",
+      "prenom": "Macoura Islam Malicka",
+      "naissance": "2009-11-19",
+      "sexe": "Féminin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "BAMBA",
+      "prenom": "Nabila Rayana Mounira",
+      "naissance": "2010-01-12",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "BAMBA",
+      "prenom": "Rania Waelle Marie Manuela",
+      "naissance": "2010-09-28",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "BAMBA",
+      "prenom": "Sehidou Ackim",
+      "naissance": "2014-02-25",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "BANGA",
+      "prenom": "Kemyla Maelye-Elyora",
+      "naissance": "2013-04-16",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "BANGA",
+      "prenom": "MARC URIEL-KYLYAN",
+      "naissance": "2011-04-12",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "BANI",
+      "prenom": "Israel David",
+      "naissance": "2009-10-28",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "BARA",
+      "prenom": "Isaac Heyri Nolan Lékan",
+      "naissance": "2009-12-05",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "BAROAN",
+      "prenom": "Guédé Aaron Evan Samuel",
+      "naissance": "2014-03-08",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "BARRY",
+      "prenom": "Alpha Oumar",
+      "naissance": "2013-06-18",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "BARRY",
+      "prenom": "Boubakar Malal Mohameda",
+      "naissance": "2015-09-28",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "BARRY",
+      "prenom": "Mamadou Samba",
+      "naissance": "2011-05-06",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "BASSAM",
+      "prenom": "Chérif Ilan Traoré",
+      "naissance": "2012-12-16",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "BASSAM",
+      "prenom": "Mikaël Vadjiba Traoré",
+      "naissance": "2013-08-25",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "BAYARD",
+      "prenom": "EHOUMAN JASON PATRICK",
+      "naissance": "2010-09-18",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "BEAUSEIGNEUR",
+      "prenom": "Deline Geneviève",
+      "naissance": "2015-09-08",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "BEAUSEIGNEUR",
+      "prenom": "Nathan Alain Karim",
+      "naissance": "2015-09-08",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "BEBEY",
+      "prenom": "Trisha Anne-Sophie",
+      "naissance": "2011-03-24",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "BECHER",
+      "prenom": "Atsé Djibril Yohann",
+      "naissance": "2011-07-02",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "BECHER",
+      "prenom": "Atsé Mael Lamine",
+      "naissance": "2009-07-27",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "BEDIE",
+      "prenom": "Juliana",
+      "naissance": "2015-03-01",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "BEHIRI",
+      "prenom": "DADYE STEVE Y",
+      "naissance": "2010-09-25",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "BEN BALY",
+      "prenom": "Adnan Omar",
+      "naissance": "2012-11-20",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "BENE",
+      "prenom": "ABENAN FRIEDA MARIE-REINE",
+      "naissance": "2010-05-18",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "BENIE",
+      "prenom": "Yaba Coralie Kenza",
+      "naissance": "2014-06-23",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "BERTE",
+      "prenom": "Ouassa Gnellé",
+      "naissance": "2011-06-07",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "BERTHE",
+      "prenom": "Nabagné Prince Hassim Elie",
+      "naissance": "2014-04-28",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "BERTHE",
+      "prenom": "Pierre Marie",
+      "naissance": "2010-02-27",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "BESSE",
+      "prenom": "Laurinda Gloria-Marie",
+      "naissance": "2013-10-26",
+      "sexe": "Féminin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "BESSE",
+      "prenom": "Meira Cindy-Marie",
+      "naissance": "2010-05-13",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "BESSET",
+      "prenom": "Loan Mathéo",
+      "naissance": "2015-02-26",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "BESSET",
+      "prenom": "Sofiane Kyrill",
+      "naissance": "2010-02-10",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "BEUGRE",
+      "prenom": "Hemlysse Gaby Khira",
+      "naissance": "2016-06-10",
+      "sexe": "Féminin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "BEUGRE",
+      "prenom": "Méliane Oriane Shelsy",
+      "naissance": "2012-03-17",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "BICTOGO",
+      "prenom": "Eliora Hope Maëlys Sarah",
+      "naissance": "2011-04-21",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "BIEKE",
+      "prenom": "Gbadan Yorann Jean-Eliel",
+      "naissance": "2010-05-03",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "BINDE",
+      "prenom": "Ablan Almira Marie-Iliana Luciole",
+      "naissance": "2013-01-15",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "BINDE",
+      "prenom": "AMIAN AYRTON JEAN DERIC",
+      "naissance": "2010-09-13",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "BINDE",
+      "prenom": "Koutoua Yohann David",
+      "naissance": "2012-10-08",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "BINDE",
+      "prenom": "Maelys Marie Sarah Yah",
+      "naissance": "2010-02-10",
+      "sexe": "Féminin",
+      "classe": "1E"
+    },
+    {
+      "nom": "BINI",
+      "prenom": "Chloé Joy Abiba",
+      "naissance": "2014-11-02",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "BINI",
+      "prenom": "Maelle Alisha Mariam",
+      "naissance": "2011-07-07",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "BLAHOUA",
+      "prenom": "Marc-Antoine Kiliann",
+      "naissance": "2009-03-08",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "BLEU VOUA",
+      "prenom": "ALEXANDRE TRIGNAN",
+      "naissance": "2010-06-03",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "BLEU VOUA",
+      "prenom": "Elsa Mélalie Manzia",
+      "naissance": "2013-11-23",
+      "sexe": "Féminin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "BOA",
+      "prenom": "Denzel Christ Yael Tiémélé",
+      "naissance": "2012-11-08",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "BOBLAI",
+      "prenom": "Ahaley Emrys Raphael",
+      "naissance": "2012-06-23",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "BOCOUM",
+      "prenom": "Alpha",
+      "naissance": "2008-07-21",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "BODERE",
+      "prenom": "Norah Lina",
+      "naissance": "2011-05-26",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "BODO",
+      "prenom": "Evan Jacques-Emmanuel",
+      "naissance": "2009-08-26",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "BOHOUMAN",
+      "prenom": "Sèna Elohim David Neri",
+      "naissance": "2011-03-24",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "BOHUI",
+      "prenom": "Diby Marie Carmel",
+      "naissance": "2009-02-04",
+      "sexe": "Féminin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "BOLOU",
+      "prenom": "Anaëlle Tiera",
+      "naissance": "2014-06-27",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "BOLOU",
+      "prenom": "Lou Léana Ahoua Eve-Yvonne",
+      "naissance": "2013-02-19",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "BONAVENTURE",
+      "prenom": "Ethan Andritsara",
+      "naissance": "2015-07-28",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "BOSSO",
+      "prenom": "Paul-Marie",
+      "naissance": "2010-04-07",
+      "sexe": "Masculin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "BOUE",
+      "prenom": "Moahé Marie Michelle Pascale",
+      "naissance": "2010-04-05",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "BOUR",
+      "prenom": "Lucas",
+      "naissance": "2015-07-28",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "BRISSET",
+      "prenom": "Ilyana Marie-Nolwenn",
+      "naissance": "2011-05-30",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "BROU",
+      "prenom": "Ni Wabô Mounira Maelys",
+      "naissance": "2016-04-16",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "BROU",
+      "prenom": "Ogou Ethan Jean-Landry",
+      "naissance": "2011-11-01",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "BROU",
+      "prenom": "Ogou Nathan Ange-Uriel",
+      "naissance": "2014-12-15",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "CAMARA",
+      "prenom": "Abdourahmane",
+      "naissance": "2014-11-28",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "CAMARA",
+      "prenom": "Mohamed",
+      "naissance": "2014-04-21",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "CAMARA",
+      "prenom": "Ndeye Bamby",
+      "naissance": "2008-12-28",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "CASSOU",
+      "prenom": "Gloria Yeboue Fred",
+      "naissance": "2015-10-10",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "CASSOU",
+      "prenom": "Yéboué N'Dri Fred Loic Emmanuel",
+      "naissance": "2013-07-07",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "CHAPOUTOT",
+      "prenom": "Yolan Milor",
+      "naissance": "2015-12-08",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "CISSE",
+      "prenom": "Akassi Sarah Assta Rokia",
+      "naissance": "2014-08-05",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "CISSE",
+      "prenom": "Boubacar Mamoudou",
+      "naissance": "2012-04-09",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "CISSE",
+      "prenom": "Ibrahim",
+      "naissance": "2008-11-10",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "CISSE",
+      "prenom": "Ibrahima Seyni",
+      "naissance": "2015-04-14",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "CISSE",
+      "prenom": "Kaïs Idriss Hakym",
+      "naissance": "2014-06-02",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "CISSE",
+      "prenom": "Karl-Sy Aïssata Malika Bacongo",
+      "naissance": "2011-02-19",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "CISSE",
+      "prenom": "Massaran Noura Imane",
+      "naissance": "2010-10-06",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "CISSE",
+      "prenom": "Ousmane",
+      "naissance": "2014-12-24",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "CISSE",
+      "prenom": "Soumaila Seyni",
+      "naissance": "2011-11-11",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "CISSE",
+      "prenom": "Yaniss Abdouramane",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "CISSOKO",
+      "prenom": "Chalvi Eliram Idy",
+      "naissance": "2015-05-23",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "COMARA",
+      "prenom": "Kenza Alliya Albatha",
+      "naissance": "2010-05-09",
+      "sexe": "Féminin",
+      "classe": "1E"
+    },
+    {
+      "nom": "COMARA",
+      "prenom": "Mamadi Youssef",
+      "naissance": "2012-11-20",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "CONDE",
+      "prenom": "Malick-Evan Asséna",
+      "naissance": "2013-12-12",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "CONDE",
+      "prenom": "Naël-Hyran Amin",
+      "naissance": "2015-09-27",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "CORREA",
+      "prenom": "Elias Julien Outan",
+      "naissance": "2015-08-01",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Aliya Hawa",
+      "naissance": "2016-02-05",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Aubin Malicka Marie Yelena",
+      "naissance": "2015-08-16",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Dognimin Yacoub Farid",
+      "naissance": "2013-02-08",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Elijah Karim Tiaffé",
+      "naissance": "2013-10-24",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Fansigué Imane Yasmine",
+      "naissance": "2012-05-11",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Fatima Gon",
+      "naissance": "2013-06-30",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Fatimah Nina Amine",
+      "naissance": "2012-02-07",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Fatimata-Zahara Kagnon Gon",
+      "naissance": "2015-07-10",
+      "sexe": "Féminin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Houria Fatim Katana Mademba",
+      "naissance": "2009-08-06",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Kadognon Kolo Malika",
+      "naissance": "2014-08-05",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Kamel Naklan",
+      "naissance": "2011-10-20",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Kandanan Léïla",
+      "naissance": "2012-06-07",
+      "sexe": "Féminin",
+      "classe": "2C"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Kassoho Leila Samira",
+      "naissance": "2011-05-31",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Katcho Marie Celia",
+      "naissance": "2015-11-26",
+      "sexe": "Féminin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Kenza Aissata Kigneldan",
+      "naissance": "2009-03-16",
+      "sexe": "Féminin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Lamfi Melvira Kaélie",
+      "naissance": "2013-05-06",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Mohammed Abdoul",
+      "naissance": "2015-08-26",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Nanga Dona-Sihi Ange Habib",
+      "naissance": "2008-11-03",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Nanlevolo Idriss",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Nougnon Keren Serena",
+      "naissance": "2014-03-01",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Raniah Iman Fawziah",
+      "naissance": "2014-03-29",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Ryad Marc-Koren",
+      "naissance": "2013-02-25",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Sabira Sherine Yah",
+      "naissance": "2009-11-12",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Siguefolo Abdoul Madjid",
+      "naissance": "2011-02-27",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Sita Gon",
+      "naissance": "2011-04-24",
+      "sexe": "Féminin",
+      "classe": "2A"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Solène Josée-Milana Bintou",
+      "naissance": "2009-06-12",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Tahnan Malick Yassine",
+      "naissance": "2009-09-16",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Tiéfontia Fatim",
+      "naissance": "2015-07-24",
+      "sexe": "Féminin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "COULIBALY",
+      "prenom": "Tiénégnon Imane Nour-Samirah",
+      "naissance": "2012-05-27",
+      "sexe": "Féminin",
+      "classe": "2A"
+    },
+    {
+      "nom": "DADJE",
+      "prenom": "Aynao Marie Yonah",
+      "naissance": "2013-05-11",
+      "sexe": "Féminin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "DADJE",
+      "prenom": "BABO YVAN CHRIST KYLIAN",
+      "naissance": "2010-10-22",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "DADJEU",
+      "prenom": "GUEJOU PRINCESSE EMERAUDE PRISCA",
+      "naissance": "2010-04-16",
+      "sexe": "Féminin",
+      "classe": "1B"
+    },
+    {
+      "nom": "DADJEU",
+      "prenom": "Kengne Kevin Owen Ngapi",
+      "naissance": "2012-03-15",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "DADJEU DJOUKOUO",
+      "prenom": "Joyce Hillary",
+      "naissance": "2014-09-12",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "DAGNOGO",
+      "prenom": "Hana Medina",
+      "naissance": "2014-10-31",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "DAGNOGO",
+      "prenom": "Rania Nedeha Affou",
+      "naissance": "2008-09-27",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "DAGO",
+      "prenom": "Paul Henry",
+      "naissance": "2014-04-25",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "DAHOUET",
+      "prenom": "Noah Matheo Nathan-Marie",
+      "naissance": "2011-05-09",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "DAHOUINDJI",
+      "prenom": "Kafui Marie Ivrynn",
+      "naissance": "2015-01-15",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "DAMA",
+      "prenom": "DJETE CHRIS-ROGER SELAVEN",
+      "naissance": "2010-04-19",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "DANGNI",
+      "prenom": "Mockey Jean-Maelic",
+      "naissance": "2014-06-18",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "DANGNI",
+      "prenom": "Mockey Paul Ilann",
+      "naissance": "2013-02-08",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "DARANKOUM",
+      "prenom": "Jessica",
+      "naissance": "2012-10-15",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "DATCHA",
+      "prenom": "Anne-Yedidia Iman",
+      "naissance": "2015-03-19",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "DEGNY",
+      "prenom": "Nevry Paul-Yanel Evanns",
+      "naissance": "2014-06-27",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "DEHI",
+      "prenom": "Séa Guileroux Razak",
+      "naissance": "2008-04-15",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "DEHI",
+      "prenom": "Sea Kehann Folashadé",
+      "naissance": "2010-09-14",
+      "sexe": "Masculin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "DEMBELE",
+      "prenom": "Agapé Love Céleste",
+      "naissance": "2009-10-10",
+      "sexe": "Féminin",
+      "classe": "2B"
+    },
+    {
+      "nom": "DEMBELE",
+      "prenom": "Fangninrih Ali-Rayane",
+      "naissance": "2013-06-14",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "DEMBELE",
+      "prenom": "Khadidja Soumeya",
+      "naissance": "2010-04-13",
+      "sexe": "Féminin",
+      "classe": "1E"
+    },
+    {
+      "nom": "DEMONCEAUX",
+      "prenom": "Max Christian Florent",
+      "naissance": "2014-01-17",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "DEPRI",
+      "prenom": "Gapko Meryl Eunice H.",
+      "naissance": "2007-04-20",
+      "sexe": "Féminin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "DEPRI",
+      "prenom": "Soukéhina Irina",
+      "naissance": "2015-07-15",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "DERBE",
+      "prenom": "Yvan Louis-Michel",
+      "naissance": "2014-07-11",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "DERGAM",
+      "prenom": "CHRISTIAN-NADIM PITTE YOHAN",
+      "naissance": "2010-09-19",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "DEVISME",
+      "prenom": "Illyan Emile Koffi-Blé",
+      "naissance": "2011-05-10",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "DEZA",
+      "prenom": "NANA RUTH SAFIA",
+      "naissance": "2011-02-01",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "DIABATE",
+      "prenom": "Chelsea Tata Noame",
+      "naissance": "2014-06-06",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "DIABATE",
+      "prenom": "Eliram David",
+      "naissance": "2010-08-06",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "DIABATE",
+      "prenom": "Inaya Oria-Bintou",
+      "naissance": "2013-11-13",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "DIABATE",
+      "prenom": "Kélémassa Abdoul-Kader",
+      "naissance": "2012-10-22",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "DIABATE",
+      "prenom": "Sanata Latifath",
+      "naissance": "2011-06-15",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "DIABATE",
+      "prenom": "yanis Claude",
+      "naissance": "2012-03-20",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "DIABY",
+      "prenom": "Karam Merwan",
+      "naissance": "2009-05-23",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "DIABY",
+      "prenom": "Leila Bintou Marie-Laurène",
+      "naissance": "2012-09-21",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "DIABY",
+      "prenom": "Maryam Imane",
+      "naissance": "2014-05-30",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "DIACK",
+      "prenom": "Halima Nafissa",
+      "naissance": "2011-09-14",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "DIAGOU",
+      "prenom": "Wilhelm Loan Mathieu Yanis",
+      "naissance": "2010-01-15",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "DIAKITE",
+      "prenom": "Altinet Assyatoun-Sory",
+      "naissance": "2014-07-02",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "DIAKITE",
+      "prenom": "Ibrahima Elias Hamed",
+      "naissance": "2014-02-14",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "DIAKITE",
+      "prenom": "Mariame Samia",
+      "naissance": "2014-02-04",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "DIAKITE",
+      "prenom": "Sékou Soan",
+      "naissance": "2009-08-30",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "DIALLO",
+      "prenom": "Ahmad Saib",
+      "naissance": "2014-08-26",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "DIALLO",
+      "prenom": "Fatim Binta",
+      "naissance": "2014-10-19",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "DIALLO",
+      "prenom": "Fousseyni",
+      "naissance": "2010-01-04",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "DIALLO",
+      "prenom": "Ismail Yacine",
+      "naissance": "2014-10-19",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "DIALLO",
+      "prenom": "Mohamed Hassim Moutaleb",
+      "naissance": "2012-07-16",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "DIANE",
+      "prenom": "M'BALOU",
+      "naissance": "2010-07-25",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "DIARISSO",
+      "prenom": "Isaak",
+      "naissance": "2008-02-19",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "DIARISSO",
+      "prenom": "Ismael",
+      "naissance": "2008-02-12",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "DIARRA",
+      "prenom": "Ayman Amir Abdul Latif",
+      "naissance": "2012-09-11",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "DIARRA",
+      "prenom": "Hamed-Kalid Kylann",
+      "naissance": "2012-01-14",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "DIARRA",
+      "prenom": "MAYA DJAMILA",
+      "naissance": "2010-11-08",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "DIARRASSOUBA",
+      "prenom": "Aalia Fatim Kinindène Tendo",
+      "naissance": "2013-05-03",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "DIARRASSOUBA",
+      "prenom": "Foungnigué Rahima",
+      "naissance": "2012-06-25",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "DIARRASSOUBA",
+      "prenom": "Imrane Alpha Omar",
+      "naissance": "2010-05-20",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "DIARRASSOUBA",
+      "prenom": "Issiaka",
+      "naissance": "2011-02-09",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "DIARRASSOUBA",
+      "prenom": "Kenza Hassana Mylène",
+      "naissance": "2015-03-13",
+      "sexe": "Féminin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "DIARRASSOUBA",
+      "prenom": "Nanga Abdou-Malick Ibrahim",
+      "naissance": "2009-01-18",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "DIARRASSOUBA",
+      "prenom": "Tiagniplê Zeinab Karidja",
+      "naissance": "2009-03-20",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "DIATE",
+      "prenom": "Kérane",
+      "naissance": "2009-05-28",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "DIAWARA",
+      "prenom": "Mamadou Oumar",
+      "naissance": "2014-11-05",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "DIE",
+      "prenom": "Noam Joseph Harry",
+      "naissance": "2009-07-03",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "DIE",
+      "prenom": "Paul-Emmanuel Melvyn Koffi",
+      "naissance": "2013-01-23",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "DIE",
+      "prenom": "Zoé Marie Eliana",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "DINDANE",
+      "prenom": "Maimouna Noura Sylvie",
+      "naissance": "2012-02-25",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "DIOLORI",
+      "prenom": "JAÏRUS-NELSON ADE",
+      "naissance": "2010-05-23",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "DIOLORI",
+      "prenom": "Louis Joshua Adé",
+      "naissance": "2013-06-15",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "DIOMANDE",
+      "prenom": "ABDEL-AZIZ KHALIL",
+      "naissance": "2010-06-28",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "DIOMANDE",
+      "prenom": "Cheick-Oumar Famouss",
+      "naissance": "2014-03-01",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "DIOMANDE",
+      "prenom": "Nour kamelia Maika",
+      "naissance": "2013-11-29",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "DJAMA",
+      "prenom": "Aboussou Narcisse Malick Tiémoko",
+      "naissance": "2014-11-02",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "DJANGONE",
+      "prenom": "Gloire Yanis",
+      "naissance": "2011-05-25",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "DJANGONE",
+      "prenom": "Yanna Thabita Miracle",
+      "naissance": "2012-07-04",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "DJE",
+      "prenom": "N'guessan Marie-Arielle Maelys",
+      "naissance": "2015-05-16",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "DJEDJE",
+      "prenom": "Maelys",
+      "naissance": "2010-10-03",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "DJETE",
+      "prenom": "Philippe Vila Nolan",
+      "naissance": "2015-12-16",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "DJIGBENOU",
+      "prenom": "Jesussede Crougbin Nouria Marie-Esther",
+      "naissance": "2015-12-20",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "Djobenou",
+      "prenom": "Marie Angela Celeste M.",
+      "naissance": "2015-08-31",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "DJOGBENOU",
+      "prenom": "Houéssi Ange-Myriam Georgette",
+      "naissance": "2009-09-01",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "DJOMAN",
+      "prenom": "Brayann Medeiros Yvann",
+      "naissance": "2014-01-14",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "DO",
+      "prenom": "Kouamé Christ David Elliot",
+      "naissance": "2012-06-12",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "DOGNOGO",
+      "prenom": "Abdul-Majil",
+      "naissance": "2015-09-13",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "DOH",
+      "prenom": "Josée Aimonse",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "DOH",
+      "prenom": "Josée Marie-Pascale",
+      "naissance": "2008-02-23",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "DOLO",
+      "prenom": "Djeneba Somine",
+      "naissance": "2014-01-27",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "DOLO",
+      "prenom": "Mamadou Sominé",
+      "naissance": "2010-04-11",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "DOMORAUD",
+      "prenom": "Hadiatou Marceline",
+      "naissance": "2013-06-13",
+      "sexe": "Féminin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "DONGO",
+      "prenom": "Abran Tehua Marie Florence Ghislaine",
+      "naissance": "2014-09-30",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "DONGO",
+      "prenom": "Affoua Téya Océane Colombe",
+      "naissance": "2015-06-05",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "DOSSO",
+      "prenom": "Abdallah",
+      "naissance": "2009-08-11",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "DOSSO",
+      "prenom": "Gossé Ephraïm Ange-EMMANUELLE",
+      "naissance": "2010-09-04",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "DOSSO",
+      "prenom": "Mohamed Kader Jean",
+      "naissance": "2013-05-17",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "DOSSO",
+      "prenom": "Nguiagni Esther Bérénice",
+      "naissance": "2012-06-02",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "DOSSO YONDA",
+      "prenom": "Maeva Laurie",
+      "naissance": "2015-08-18",
+      "sexe": "Féminin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "DOUBOUYOU",
+      "prenom": "Léah",
+      "naissance": "2012-02-28",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "DOUKOURE",
+      "prenom": "Marc-Elie Ismael",
+      "naissance": "2011-01-06",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "DOUKOURE",
+      "prenom": "NeÏla Fatiha Régina",
+      "naissance": "2009-03-12",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "DOUMBIA",
+      "prenom": "ABOUBAKR-SEDIK",
+      "naissance": "2010-02-20",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "DOUMBIA",
+      "prenom": "Al-Hassan Christ Aurel",
+      "naissance": "2012-07-03",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "DOUMBIA",
+      "prenom": "Amina Waliya Inaya",
+      "naissance": "2014-04-03",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "DOUMBIA",
+      "prenom": "Ayat Khadidjia",
+      "naissance": "2015-11-26",
+      "sexe": "Féminin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "DOUMBIA",
+      "prenom": "Dariya Hawa",
+      "naissance": "2015-11-26",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "DOUMBIA",
+      "prenom": "Habibatou",
+      "naissance": "2013-01-20",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "DOUMBIA",
+      "prenom": "Mariko Salimata GNIRE",
+      "naissance": "2011-10-09",
+      "sexe": "Féminin",
+      "classe": "2B"
+    },
+    {
+      "nom": "DOUMBIA",
+      "prenom": "Medhi Moustapha Maëlly",
+      "naissance": "2015-11-26",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "DOUMBIA",
+      "prenom": "Yani Malicka",
+      "naissance": "2009-09-27",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "DRO",
+      "prenom": "Mylane Ange Danyela",
+      "naissance": "2015-12-14",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "EBA",
+      "prenom": "Assanvo Assamala Grace Ornella",
+      "naissance": "2010-08-06",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "EBA",
+      "prenom": "Ayana Ayodele A.",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "EBA",
+      "prenom": "Marie-Lumena Analla",
+      "naissance": "2012-03-01",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "EHIVET",
+      "prenom": "AKOUBA YOELA DANIELE RAPHAELA",
+      "naissance": "2009-12-16",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "EKOE Ndzana",
+      "prenom": "Arsene Thierry",
+      "naissance": "2010-04-13",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "EKOE NNANGA",
+      "prenom": "Iris Verane",
+      "naissance": "2014-04-23",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "El MOCTAR",
+      "prenom": "Mohamed",
+      "naissance": "2009-09-02",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "ESMEL",
+      "prenom": "Ly Emmanuel Ange",
+      "naissance": "2009-08-14",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "ESSI",
+      "prenom": "Marylie Marc Enola",
+      "naissance": "2013-09-04",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "ESSI",
+      "prenom": "Yohann Marc-Olivier",
+      "naissance": "2010-07-11",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "ETTIEN",
+      "prenom": "AHICIA KETSIA MAGNIFIKA",
+      "naissance": "2011-11-23",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "FADIGA",
+      "prenom": "Lamine Kounandi",
+      "naissance": "2011-02-08",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "FADIGA",
+      "prenom": "Safoura Sira",
+      "naissance": "2014-04-25",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "FADIKA",
+      "prenom": "Ismahil Cheikh Oumar",
+      "naissance": "2012-01-03",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "FAKIH",
+      "prenom": "Anilya Suzanne",
+      "naissance": "2009-06-18",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "FAKIH",
+      "prenom": "Inaya Chloé",
+      "naissance": "2015-12-09",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "FANNY",
+      "prenom": "Kadidia Jeanne Maeva",
+      "naissance": "2010-10-03",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "FELIX-TCHICAYA",
+      "prenom": "MAEL JONATHAN MATHIAS",
+      "naissance": "2010-04-28",
+      "sexe": "Masculin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "FOFANA",
+      "prenom": "Aboubakar Sidick",
+      "naissance": "2009-11-01",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "FOFANA",
+      "prenom": "Ibrahim Abdoul Fataho Aziz",
+      "naissance": "2013-11-28",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "FOFANA",
+      "prenom": "Ibrahim Zémogo",
+      "naissance": "2012-03-14",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "FOFANA",
+      "prenom": "KHADIJA NADIRA",
+      "naissance": "2011-06-09",
+      "sexe": "Féminin",
+      "classe": "1A"
+    },
+    {
+      "nom": "FOFANA",
+      "prenom": "MAYAMA ZEINAB DALIA",
+      "naissance": "2011-05-04",
+      "sexe": "Féminin",
+      "classe": "2B"
+    },
+    {
+      "nom": "FOFANA",
+      "prenom": "Nogossiami Afssah Imane",
+      "naissance": "2009-07-18",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "FOFANA",
+      "prenom": "Noura Sarah Isabelle",
+      "naissance": "2011-08-16",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "FOFANA",
+      "prenom": "Prince Aboutaliby Rayan",
+      "naissance": "2012-11-16",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "FOFANA",
+      "prenom": "Sarah Yasmine",
+      "naissance": "2014-12-19",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "FOFANA",
+      "prenom": "Sira Marie Chancelle",
+      "naissance": "2011-07-06",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "FOLY",
+      "prenom": "Eva Hawa Akpé",
+      "naissance": "2012-11-23",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "FUHRMANN",
+      "prenom": "Amalia Katharina",
+      "naissance": "2011-12-09",
+      "sexe": "Féminin",
+      "classe": "2A"
+    },
+    {
+      "nom": "GADEGBEKU",
+      "prenom": "Elisha Marie Audrey",
+      "naissance": "2015-01-27",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "GAILLARD MICHET DE CHAMPRIS",
+      "prenom": "Cléménce Véronique Luce",
+      "naissance": "2013-09-29",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "GBA",
+      "prenom": "Eunice Marie-Bénédicte",
+      "naissance": "2009-08-20",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "GBAGBI",
+      "prenom": "Marc Olivier Kssim",
+      "naissance": "2011-02-16",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "GBAGBI",
+      "prenom": "Samia Aure Coralie",
+      "naissance": "2009-07-29",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "GBEDAHI",
+      "prenom": "Jaen-Eude Daniel Ayitonde",
+      "naissance": "2015-12-20",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "GBEDAHI",
+      "prenom": "thierno olivier",
+      "naissance": "2015-09-29",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "GBEDJO",
+      "prenom": "Charles-Elie Davy Yédidia Anoma",
+      "naissance": "2013-01-29",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "GBOHI",
+      "prenom": "Jean Marvin Koffi",
+      "naissance": "2012-10-20",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "GBOLO",
+      "prenom": "Etchin Luce Kyriane Bandama",
+      "naissance": "2011-09-26",
+      "sexe": "Féminin",
+      "classe": "2B"
+    },
+    {
+      "nom": "GBOLO",
+      "prenom": "Niansou Auren Bandama",
+      "naissance": "2014-01-02",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "GBOMENE",
+      "prenom": "Djoro Elisée Meshac",
+      "naissance": "2015-02-04",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "GHOULA",
+      "prenom": "Riad Cherif",
+      "naissance": "2015-12-04",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "GIRAULT",
+      "prenom": "Camille Joseline Yaya",
+      "naissance": "2015-02-18",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "GNAKOUA",
+      "prenom": "Yohann Yvan Aimé Yacoub",
+      "naissance": "2011-01-27",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "GNAMBA",
+      "prenom": "Amlan Eunice Ornela-D'Amour",
+      "naissance": "2009-08-19",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "GNAMIEN",
+      "prenom": "Nataneli Ochra",
+      "naissance": "2014-12-16",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "GNAMOU",
+      "prenom": "Fatogoma Abdoul Kader",
+      "naissance": "2015-05-11",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "GNAMOU",
+      "prenom": "Naël Rayan",
+      "naissance": "2015-06-09",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "GNANGRA",
+      "prenom": "Aka Edmond Othiniel",
+      "naissance": "2012-05-12",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "GNAORE",
+      "prenom": "Ozi Michel Nathan",
+      "naissance": "2012-02-12",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "GNONKA",
+      "prenom": "MARC MERVEILLE PENUEL RAOUL",
+      "naissance": "2011-07-30",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "GNONKA",
+      "prenom": "Nathan Conor Ryan",
+      "naissance": "2014-11-21",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "GODO",
+      "prenom": "Ryan Gamon",
+      "naissance": "2010-11-25",
+      "sexe": "Masculin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "GOE",
+      "prenom": "BOLOU LOU MOUNA",
+      "naissance": "2010-12-05",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "GOGO",
+      "prenom": "Dibo Grace Chrismaelle Rosa",
+      "naissance": "2010-10-31",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "GOMA LOAMBO",
+      "prenom": "Elikia Kamana Kinkela",
+      "naissance": "2012-03-22",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "GOMA LOAMBO",
+      "prenom": "Jameka Philomène Odile",
+      "naissance": "2013-12-05",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "GOMA-TATY",
+      "prenom": "Hezekiah",
+      "naissance": "2015-09-07",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "GON COULIBALY",
+      "prenom": "Fatoumata Noor-Hachem Maelys Kadohognon",
+      "naissance": "2012-02-05",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "GON-COULIBALY",
+      "prenom": "Samia Willys",
+      "naissance": "2015-10-26",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "GORAN",
+      "prenom": "Koffi Anael Johan",
+      "naissance": "2015-12-05",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "GORAN KOFFI",
+      "prenom": "AXEL-JOSHUA TIGORI",
+      "naissance": "2010-02-12",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "GOUENE",
+      "prenom": "EDMEE MARIE ROLANDE WASSE",
+      "naissance": "2011-03-01",
+      "sexe": "Féminin",
+      "classe": "1B"
+    },
+    {
+      "nom": "GOUNONGBE",
+      "prenom": "Alyssa Marie",
+      "naissance": "2015-07-21",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "GRAHOUAN",
+      "prenom": "Corinne Noya",
+      "naissance": "2011-03-30",
+      "sexe": "Féminin",
+      "classe": "2C"
+    },
+    {
+      "nom": "GRAHOUAN",
+      "prenom": "Marc-Benny",
+      "naissance": "2013-04-28",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "GREKI",
+      "prenom": "Edna Lynn Marie-Dominique",
+      "naissance": "2011-09-28",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "GUEDOU",
+      "prenom": "Cheick-Oumar",
+      "naissance": "2009-01-07",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "GUEI",
+      "prenom": "Bléka Denise Marie Loanne",
+      "naissance": "2012-08-15",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "GUEI",
+      "prenom": "Honsey Noélia Marie-Elyne",
+      "naissance": "2011-05-11",
+      "sexe": "Féminin",
+      "classe": "2A"
+    },
+    {
+      "nom": "GUEYE",
+      "prenom": "Abdoul Lamine",
+      "naissance": "2013-06-07",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "GUISSE",
+      "prenom": "Macky Fares",
+      "naissance": "2010-03-09",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "GUY",
+      "prenom": "Doh Gnoubléhi Elie",
+      "naissance": "2008-08-17",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "GUY",
+      "prenom": "Doh N'Gouan Paul-Ariel",
+      "naissance": "2009-12-12",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "HAIDARA",
+      "prenom": "Mariama",
+      "naissance": "2009-11-11",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "HAIDARA",
+      "prenom": "Seydinan Ousmane",
+      "naissance": "2012-10-01",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "HAIDARA",
+      "prenom": "Tata",
+      "naissance": "2011-05-30",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "HAMELIN",
+      "prenom": "Zoé Mila",
+      "naissance": "2013-12-02",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "HASSANE",
+      "prenom": "Abdourahmane",
+      "naissance": "2015-12-20",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "HAZOUME",
+      "prenom": "Sourou Efrayim Emmanuel-Marie",
+      "naissance": "2013-01-18",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "HESS",
+      "prenom": "Nathan Benjamin Pierre",
+      "naissance": "2012-12-23",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "HIEN",
+      "prenom": "Astrid Soraya Livni",
+      "naissance": "2009-04-10",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "HIEN",
+      "prenom": "Wendy Mimini Elischa",
+      "naissance": "2015-01-14",
+      "sexe": "Féminin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "HOBA",
+      "prenom": "JORDANE MARIE-LAURENNE APHALA",
+      "naissance": "2010-09-28",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "HOBA",
+      "prenom": "Naya Eurielle Romane Aka",
+      "naissance": "2013-03-14",
+      "sexe": "Féminin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "HOIMIAN",
+      "prenom": "Agénor Aicha Gilles Emeraude",
+      "naissance": "2015-08-01",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "HOUPHOUET",
+      "prenom": "Ange Christian Ilan",
+      "naissance": "2009-04-18",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "HOUPHOUET",
+      "prenom": "ANGE KIERON ACKO",
+      "naissance": "2010-10-28",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "HOVI",
+      "prenom": "Sécongo Chris Aurel-Samuel",
+      "naissance": "2011-08-17",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "IRIE",
+      "prenom": "Lou Marie-Andréa YolandeAkoua Cassandra",
+      "naissance": "2010-04-22",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "JABER",
+      "prenom": "Hussein Keliane",
+      "naissance": "2009-09-06",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "JABER",
+      "prenom": "Zeynab",
+      "naissance": "2015-05-07",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "JOMAA",
+      "prenom": "Hoda Zahraa",
+      "naissance": "2015-08-11",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "KABRAN",
+      "prenom": "Emmanuel Amian",
+      "naissance": "2011-05-12",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "KABWE-NTAMBUE",
+      "prenom": "Jean-Bosco",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "KACOU",
+      "prenom": "Coquot Liorah-Ekhloé",
+      "naissance": "2013-05-20",
+      "sexe": "Féminin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "KACOU",
+      "prenom": "Kassi Evanah Marcelle Orianne",
+      "naissance": "2011-07-05",
+      "sexe": "Féminin",
+      "classe": "2B"
+    },
+    {
+      "nom": "KACOU",
+      "prenom": "Laetitia Leslie Olivia",
+      "naissance": "2009-07-29",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "KACOU",
+      "prenom": "Meryll Chauncey Graziella Assiba",
+      "naissance": "2009-03-25",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "KACOU",
+      "prenom": "Paul-Rayan Kassi",
+      "naissance": "2015-01-22",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "KADIO",
+      "prenom": "Koua Yannis Alexandre",
+      "naissance": "2012-10-09",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "KADIO-MOROKRO",
+      "prenom": "Jeryna Ama-Rose",
+      "naissance": "2013-02-02",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "KAKOU",
+      "prenom": "Ouahon Matiya Yoéla",
+      "naissance": "2011-06-17",
+      "sexe": "Féminin",
+      "classe": "2A"
+    },
+    {
+      "nom": "KAKOU",
+      "prenom": "Yannis Karl-Elie",
+      "naissance": "2009-06-15",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "KAKOU",
+      "prenom": "YAO KENNETH-EMMANUEL PAUL",
+      "naissance": "2010-11-07",
+      "sexe": "Masculin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "KALOU",
+      "prenom": "DIARRA DIAGONE",
+      "naissance": "2011-01-17",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "KAM",
+      "prenom": "Yelli Michelle Jamila",
+      "naissance": "2011-06-16",
+      "sexe": "Féminin",
+      "classe": "2A"
+    },
+    {
+      "nom": "KAMAGATE",
+      "prenom": "Fatim Noura Marie Germaine",
+      "naissance": "2009-11-14",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "KAMAGATE",
+      "prenom": "Hisham Abdoul-Latif",
+      "naissance": "2013-12-04",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "KAMARA",
+      "prenom": "Cheick -Ethan Mathieu",
+      "naissance": "2010-02-27",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "KAMBOU",
+      "prenom": "Ery Nissi Eden-Emmanuelle",
+      "naissance": "2014-05-09",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "KAMBOU",
+      "prenom": "Ethan Emmanuel",
+      "naissance": "2014-10-18",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "KAMBOU",
+      "prenom": "Nathan Emmanuel",
+      "naissance": "2009-03-01",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "KAMBOU",
+      "prenom": "SANSAN SIBINAN CHRIS-EVAN",
+      "naissance": "2011-01-01",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "KAMDEM",
+      "prenom": "YOUMBI JULIA CLAUDINA VIOLETTE",
+      "naissance": "2009-04-09",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "KASSE",
+      "prenom": "Gnyla Elicheva Theresa Dvora",
+      "naissance": "2009-09-23",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "KASSI",
+      "prenom": "N'Guetta Ryan Olivier",
+      "naissance": "2010-02-16",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "KATTIE",
+      "prenom": "Marvin David-Rayan",
+      "naissance": "2012-02-07",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "KATTIE",
+      "prenom": "Rhania Marley",
+      "naissance": "2014-08-05",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "KATTIE",
+      "prenom": "Vouly Marie-Kellya",
+      "naissance": "2014-12-31",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "KEBE",
+      "prenom": "Houriya Yakharé",
+      "naissance": "2011-08-19",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "KEHIN",
+      "prenom": "GNOMBLEHI GILLES-ARNAUD EMMANUEL",
+      "naissance": "2010-09-13",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "KEITA",
+      "prenom": "Aly Al-Ahmine",
+      "naissance": "2013-11-22",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "KEITA",
+      "prenom": "Khadija Fatma Al-Hamza",
+      "naissance": "2010-04-30",
+      "sexe": "Féminin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "KEITA",
+      "prenom": "MAMADOU OURY",
+      "naissance": "2010-01-11",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "KEITA",
+      "prenom": "N'Ganifo Cheick",
+      "naissance": "2012-04-06",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "KEITA",
+      "prenom": "Noga Mohamed K.",
+      "naissance": "2010-07-22",
+      "sexe": "Masculin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "KEKE",
+      "prenom": "Joelle Eliora Miensiessa",
+      "naissance": "2013-11-04",
+      "sexe": "Féminin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "KHOUADIANI",
+      "prenom": "Angora Kylian Christ-Nathan Moihié",
+      "naissance": "2011-05-19",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "KHOUADIANI",
+      "prenom": "IyanaThaïs Mienwa",
+      "naissance": "2015-08-06",
+      "sexe": "Féminin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "KIGNAMAN-SORO",
+      "prenom": "Hamid Yessam Imad",
+      "naissance": "2012-09-14",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "KINANE",
+      "prenom": "Jessica Lawali",
+      "naissance": "2013-12-30",
+      "sexe": "Féminin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "KINANE",
+      "prenom": "Lawazi Naomi",
+      "naissance": "2011-02-06",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "KOBEHI",
+      "prenom": "Mahié Audélia Chloé",
+      "naissance": "2013-07-02",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "KOBENAN",
+      "prenom": "Dasso Affoua Grâce-Marie Emmanuelle Raphaèl",
+      "naissance": "2009-03-27",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "KODJO",
+      "prenom": "Aissa Hadassa Sarina",
+      "naissance": "2009-08-15",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "KODJO",
+      "prenom": "Gneprou Ange Aaron",
+      "naissance": "2009-05-10",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "KODJO",
+      "prenom": "Yahniv Dan Eliott",
+      "naissance": "2013-10-11",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "Ehounou Marie-Grâce Danielle",
+      "naissance": "2009-09-16",
+      "sexe": "Féminin",
+      "classe": "TC"
+    },
+    {
+      "nom": "Koffi",
+      "prenom": "Famien Aurele Christ-Lohann",
+      "naissance": "2010-05-21",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "ISMAEL YVANN TRESOR",
+      "naissance": "2009-07-07",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "Kangah Norah-Lynn",
+      "naissance": "2012-03-10",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "KENITHA",
+      "naissance": "2010-10-20",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "Kouassi Abou Noe",
+      "naissance": "2015-10-04",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "Marc-André Saint Emmanuel",
+      "naissance": "2012-06-10",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "Koffi",
+      "prenom": "Marie Anna",
+      "naissance": "2010-07-17",
+      "sexe": "Féminin",
+      "classe": "1E"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "Marie Elsa",
+      "naissance": "2015-02-27",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "Miensah Ethan Maël Isaac",
+      "naissance": "2014-09-06",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "Miny Manuella Anne-Kathryn",
+      "naissance": "2012-02-12",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "Paul-Ethan Jefferson",
+      "naissance": "2014-01-05",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "Rahin wylson Orhyan",
+      "naissance": "2013-11-04",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "KOFFI",
+      "prenom": "Teuja Ecua Angela Emmanuela",
+      "naissance": "2011-07-06",
+      "sexe": "Féminin",
+      "classe": "2C"
+    },
+    {
+      "nom": "KOFFI GNALEY",
+      "prenom": "KEVIN MORIEL",
+      "naissance": "2010-11-21",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "KOIDOU",
+      "prenom": "Amichia Mickel-Ange Emmanuel",
+      "naissance": "2009-04-28",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KOKOUME",
+      "prenom": "Marco Benigno",
+      "naissance": "2011-06-08",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "KONAN",
+      "prenom": "Allany Anaïa Cecilia Daisy-Josephine",
+      "naissance": "2014-07-22",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "KONAN",
+      "prenom": "Asma Leïla",
+      "naissance": "2015-05-09",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "KONAN",
+      "prenom": "Assiyah Sophia-Louise Saida",
+      "naissance": "2013-06-12",
+      "sexe": "Féminin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "KONAN",
+      "prenom": "Bécély Marie-Désirée",
+      "naissance": "2011-10-29",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "KONAN",
+      "prenom": "Iris Ange Marie Myhima",
+      "naissance": "2009-02-28",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KONAN",
+      "prenom": "N'Sikan Mike Aaron",
+      "naissance": "2010-03-23",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "KONAN",
+      "prenom": "RASSOU CHRIS EMMANUEL",
+      "naissance": "2009-11-10",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KONAN ALLANY",
+      "prenom": "Stanislas Eytan Moungo",
+      "naissance": "2012-07-28",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "KONATE",
+      "prenom": "Aboubacar Noum",
+      "naissance": "2009-05-31",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "KONATE",
+      "prenom": "Oussein Imran Tarik",
+      "naissance": "2010-08-24",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Amad Latif Fougnigue",
+      "naissance": "2015-04-21",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Dodiomon Rayan",
+      "naissance": "2011-11-02",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "faiza Makagbé Yassine Nadia",
+      "naissance": "2010-05-20",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Fako Darnell-Ryan Malick",
+      "naissance": "2012-01-06",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Fatiha Beryl Naïla",
+      "naissance": "2014-06-30",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Fatim Yasmine",
+      "naissance": "2012-10-14",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Grâce Emmanuelle Chaili",
+      "naissance": "2012-10-09",
+      "sexe": "Féminin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Hamidou",
+      "naissance": "2011-03-25",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Hawa Leila",
+      "naissance": "2013-11-25",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Imane Aminata",
+      "naissance": "2015-06-21",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Imran Noah",
+      "naissance": "2013-02-15",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Inès Kadana",
+      "naissance": "2014-06-03",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Ishak Tareq",
+      "naissance": "2012-07-13",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Kanidjo Fatim Kenza",
+      "naissance": "2009-11-26",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "KOLO PIWO PERLE-MARIANE MOYA",
+      "naissance": "2010-05-31",
+      "sexe": "Féminin",
+      "classe": "1E"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Malika Yasmine Maimouna",
+      "naissance": "2011-11-08",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Mariam",
+      "naissance": "2009-04-24",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Marie Désirée Ange Murielle",
+      "naissance": "2010-08-04",
+      "sexe": "Féminin",
+      "classe": "2B"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Maryam Yassine",
+      "naissance": "2015-04-30",
+      "sexe": "Féminin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Maty Noura",
+      "naissance": "2010-02-17",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "May-Lynn Tano Marie",
+      "naissance": "2015-04-27",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Mounira Gneningnon",
+      "naissance": "2015-10-20",
+      "sexe": "Féminin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Nabalakan Isham",
+      "naissance": "2014-08-02",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Nabany Walid Rayane",
+      "naissance": "2009-11-05",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Nembelessini Rachide",
+      "naissance": "2013-01-10",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Onagna Yassine",
+      "naissance": "2013-10-29",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Oubiéguétchè Marie-Alice Maewenn",
+      "naissance": "2010-08-18",
+      "sexe": "Féminin",
+      "classe": "2C"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Oumar Morrel Antoine",
+      "naissance": "2009-11-04",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Paul-Ryan Kafonn",
+      "naissance": "2009-02-24",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Sarah Nailah",
+      "naissance": "2014-08-29",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Sidick-Elirham Gningnéry",
+      "naissance": "2012-07-09",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Soultone Ridwaane",
+      "naissance": "2013-11-03",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "KONE",
+      "prenom": "Yirigueden Chaida",
+      "naissance": "2010-01-03",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "KONZAN",
+      "prenom": "Mienhoman Loïc Emmanuel",
+      "naissance": "2010-02-15",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "KOREKI",
+      "prenom": "PAUL-HARRY RICHARD MARIE",
+      "naissance": "2010-05-03",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "KOSSA",
+      "prenom": "Hillary Ange Eliora",
+      "naissance": "2016-02-09",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "KOSSA",
+      "prenom": "KARIDIA GRACE ESLY",
+      "naissance": "2010-07-03",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "KOTCHI",
+      "prenom": "Anne Dallal Prosper",
+      "naissance": "2014-09-15",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "KOUA",
+      "prenom": "BENNY ANGE YOËL YEDIDYA",
+      "naissance": "2011-05-05",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Akpolay Ruben Mael",
+      "naissance": "2013-11-09",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Atouman Yann Fergus",
+      "naissance": "2012-02-15",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Defouet Ange Kévin",
+      "naissance": "2011-09-07",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Ettien Marc-Eli Aurel",
+      "naissance": "2010-06-29",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Kipeya Rassou Arielle Latifa",
+      "naissance": "2009-05-04",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Kobenan Kamboro Carl-Aurelien",
+      "naissance": "2009-10-13",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Marie-Christ Meyline",
+      "naissance": "2009-10-01",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Maureen Viha-Mirassouh",
+      "naissance": "2013-01-03",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "N'ZAN JEMINA Perle Nafissou",
+      "naissance": "2011-01-15",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Neima Leslie Yohana",
+      "naissance": "2012-05-01",
+      "sexe": "Féminin",
+      "classe": "2C"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Querene Maelle N'Dri",
+      "naissance": "2010-07-29",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Sean-David",
+      "naissance": "2012-05-09",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "KOUADIO",
+      "prenom": "Yves Manoah Yan Cédric",
+      "naissance": "2011-10-22",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "KOUAKAN",
+      "prenom": "Anaia Grace Hannielle",
+      "naissance": "2010-06-19",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "KOUAKOU",
+      "prenom": "Gaisy Yuan Pierre-Marie",
+      "naissance": "2011-01-26",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "KOUAKOU",
+      "prenom": "HANS-YVAN EMMANUEL",
+      "naissance": "2009-11-07",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KOUAKOU",
+      "prenom": "Kerane Syntiche Prunelle",
+      "naissance": "2013-12-06",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "KOUAKOU",
+      "prenom": "KYLE-WILLIAM NOE",
+      "naissance": "2010-09-16",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "KOUAKOU",
+      "prenom": "LHYNN HACEYNA",
+      "naissance": "2010-12-13",
+      "sexe": "Féminin",
+      "classe": "1E"
+    },
+    {
+      "nom": "KOUAKOU",
+      "prenom": "Mauhaet Saphira Marie Lydvine",
+      "naissance": "2014-01-28",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "KOUAKOU",
+      "prenom": "Moayé Christ Nathan",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "KOUAKOU",
+      "prenom": "Noëlly Grâce",
+      "naissance": "2015-04-27",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "KOUAKOU",
+      "prenom": "Otni Josué",
+      "naissance": "2012-02-27",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "KOUAKOU",
+      "prenom": "Yao Beynienh Milykay Mereja Aziel Marie Esther",
+      "naissance": "2009-07-22",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "KOUAKOU-APHELY",
+      "prenom": "Loïc Alexandre Fondi",
+      "naissance": "2009-10-07",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "Abenan Marie Pascale",
+      "naissance": "2009-04-07",
+      "sexe": "Féminin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "Alison-Yéné",
+      "naissance": "2009-07-25",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "Amani Maëlle Ayanne",
+      "naissance": "2014-07-26",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "Amani Yoelle Evane Koumba Daly",
+      "naissance": "2012-08-24",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "Axel Christ Elie",
+      "naissance": "2009-11-05",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "Carl Emmanuel",
+      "naissance": "2011-06-06",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "Diby Banian Jean-Noel",
+      "naissance": "2012-01-12",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "MANVERIE KENZA D. E",
+      "naissance": "2009-12-13",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "MARY-ELLEN AFFOUE",
+      "naissance": "2010-03-18",
+      "sexe": "Féminin",
+      "classe": "1E"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "Moro Meira Paule Hannielle",
+      "naissance": "2015-06-07",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "Yeni Ann-Iris Marie Aniela",
+      "naissance": "2013-02-27",
+      "sexe": "Féminin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "Yoan Joel Providence",
+      "naissance": "2009-06-04",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "KOUAME",
+      "prenom": "Yoann Cédric Emmanuel",
+      "naissance": "2012-07-19",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "KOUAME ASSOUAN",
+      "prenom": "Lisa Marie Kôkô",
+      "naissance": "2011-01-22",
+      "sexe": "Féminin",
+      "classe": "2B"
+    },
+    {
+      "nom": "KOUASSI",
+      "prenom": "Amani Komoah Ozi",
+      "naissance": "2015-02-17",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "KOUASSI",
+      "prenom": "Ehouman Paule Loïs",
+      "naissance": "2009-05-20",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "KOUASSI",
+      "prenom": "MOAYE LOÏK AUREL H.",
+      "naissance": "2010-05-06",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "KOUASSI",
+      "prenom": "Mouahe Ketsia Marie-Prunelle",
+      "naissance": "2011-09-01",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "KOUASSI",
+      "prenom": "Paul-Ylann Romuald Hacena",
+      "naissance": "2009-07-29",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "KOUASSY",
+      "prenom": "André Kouacou Issa",
+      "naissance": "2009-09-18",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "KOUDOU",
+      "prenom": "Amoin Moyhé Christina-Marie Lauricia",
+      "naissance": "2009-03-29",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "KOULIBALI",
+      "prenom": "Kettya Myriame Sarah",
+      "naissance": "2013-05-02",
+      "sexe": "Féminin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "KOULIBALY",
+      "prenom": "Gnalen",
+      "naissance": "2015-12-20",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "KOUTA",
+      "prenom": "Ibrahima Niasse",
+      "naissance": "2010-03-31",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "KOUTA",
+      "prenom": "Mouhamed",
+      "naissance": "2014-04-19",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "KOUTOU",
+      "prenom": "Péthuel Othniel N'Tah",
+      "naissance": "2009-11-10",
+      "sexe": "Masculin",
+      "classe": "TB"
+    },
+    {
+      "nom": "KOUYATE",
+      "prenom": "Bengali Yvan Junior",
+      "naissance": "2010-02-01",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "KOUYO",
+      "prenom": "JOAS DANIEL CHRIST-ALAIN",
+      "naissance": "2010-05-03",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "KPAI",
+      "prenom": "Sarah Kyrielle Josée",
+      "naissance": "2012-07-16",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "KPALOU",
+      "prenom": "Haylie Kéren Azaïa Nadré",
+      "naissance": "2014-10-15",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "KPOGO",
+      "prenom": "ELOM MAELLYS KEREN CLAUDE-PRISCILLA",
+      "naissance": "2011-02-15",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "KPOGO",
+      "prenom": "Maria Tehila Carla",
+      "naissance": "2012-08-01",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "KRA",
+      "prenom": "AYIMOH MYA MARIE KIRSTEN",
+      "naissance": "2010-11-01",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "KRA",
+      "prenom": "Eliram Marc-Emmanuel",
+      "naissance": "2011-05-17",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "KRA",
+      "prenom": "Koffi Rayan Habib",
+      "naissance": "2009-11-14",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "KRAMOH",
+      "prenom": "Marie-Désirée Moyai",
+      "naissance": "2009-10-01",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "KRAMOH",
+      "prenom": "Marie-Eurielle Amoinkan Akloudjouê",
+      "naissance": "2014-02-23",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "LAGAHI",
+      "prenom": "Mael Yves",
+      "naissance": "2011-09-28",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "LANYAN",
+      "prenom": "Imane Alya Marie",
+      "naissance": "2010-12-13",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "LATH",
+      "prenom": "Nila-Maelys Ilman",
+      "naissance": "2013-04-27",
+      "sexe": "Féminin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "LATH HEMLYS",
+      "prenom": "MARIE ASTRID JOHANA",
+      "naissance": "2011-04-03",
+      "sexe": "Féminin",
+      "classe": "1E"
+    },
+    {
+      "nom": "LAURENT",
+      "prenom": "Benjamin Yannick Samuel",
+      "naissance": "2012-12-09",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "LEROLLE",
+      "prenom": "Ilona Miniké Marie",
+      "naissance": "2009-09-17",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "LIGUE",
+      "prenom": "Paul-Elie Gnamia",
+      "naissance": "2014-07-10",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "LO",
+      "prenom": "Cheikh Ahmed Elkabir",
+      "naissance": "2012-02-11",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "LOGBO",
+      "prenom": "Chaya Jessyka",
+      "naissance": "2015-08-04",
+      "sexe": "Féminin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "LOHOURI",
+      "prenom": "Haïdi Yonomi",
+      "naissance": "2009-05-16",
+      "sexe": "Féminin",
+      "classe": "TB"
+    },
+    {
+      "nom": "LOKROU",
+      "prenom": "Sophie Grace Esther",
+      "naissance": "2013-05-25",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "LOROUGNON",
+      "prenom": "Orli Prielle",
+      "naissance": "2009-11-22",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "LOUKOU",
+      "prenom": "DEBATTO JADE-MARIE N.",
+      "naissance": "2010-05-06",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "LOUKOU",
+      "prenom": "Donantchat Indira Num Sally",
+      "naissance": "2010-03-09",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "MAIGA",
+      "prenom": "Chiri Malcolm Amir",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "MAIGA",
+      "prenom": "Chiri Malcolm Amir Oumar",
+      "naissance": "2014-09-29",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "MAIGA",
+      "prenom": "Neema Aissata Mia",
+      "naissance": "2012-07-05",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "MAMPOUYA",
+      "prenom": "Emmanuel Etté Yanis-Noah",
+      "naissance": "2010-07-16",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "MEITE",
+      "prenom": "Issac Noah",
+      "naissance": "2011-04-08",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "MEIZAN",
+      "prenom": "Abdoul Leila de Rach",
+      "naissance": "2011-01-07",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "MELEDJE",
+      "prenom": "Sascha Yannick Paul-Marie",
+      "naissance": "2009-09-05",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "MENZAN",
+      "prenom": "CHRIST Ryan Winner",
+      "naissance": "2011-06-06",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "MIEZAN",
+      "prenom": "Ramadan Abdoul",
+      "naissance": "2015-03-07",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "MISSAOUI",
+      "prenom": "Malick",
+      "naissance": "2013-12-04",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "MISSAOUI",
+      "prenom": "Mohamed Amine",
+      "naissance": "2011-05-15",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "MOH",
+      "prenom": "Samuel Karl-Anthony",
+      "naissance": "2014-12-29",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "MOLLE",
+      "prenom": "Mollé Gad Haskel Melohim",
+      "naissance": "2011-05-15",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "MONEY",
+      "prenom": "Aaron Achy-Brou",
+      "naissance": "2009-04-17",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "MONNET",
+      "prenom": "Ariel Guy Nael",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "MONNET",
+      "prenom": "Faith Maelle",
+      "naissance": "2011-09-13",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "MONNET",
+      "prenom": "Mérite Leva-Grâce Appie",
+      "naissance": "2012-12-19",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "MOUAWAD",
+      "prenom": "Axel yohann",
+      "naissance": "2009-05-21",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "MOUHO",
+      "prenom": "Sety Urvan",
+      "naissance": "2009-06-15",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "N GORAN",
+      "prenom": "Kylian Kouame",
+      "naissance": "2015-12-12",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "N'CHO",
+      "prenom": "Elielle Marie Charles",
+      "naissance": "2010-09-17",
+      "sexe": "Féminin",
+      "classe": "1B"
+    },
+    {
+      "nom": "N'CHO",
+      "prenom": "Maelys Princia Marie Emmanuelle",
+      "naissance": "2014-08-01",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "N'CHO",
+      "prenom": "Yannis Gilles Ahmad Haroun",
+      "naissance": "2012-06-12",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "N'DHATZ",
+      "prenom": "Eliora Marie Orlane M'pike",
+      "naissance": "2012-08-09",
+      "sexe": "Féminin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "N'DOUME",
+      "prenom": "Metegue",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "N'DOUMY-KOUAKOU",
+      "prenom": "Maera Faheni",
+      "naissance": "2010-03-27",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "N'DRAMAN",
+      "prenom": "Yanix Ochri",
+      "naissance": "2010-09-11",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "N'DRI",
+      "prenom": "Alain Joseph",
+      "naissance": "2009-11-16",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "N'DRI",
+      "prenom": "GRACE EVELYNE LAURE M.",
+      "naissance": "2010-09-05",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "N'DRI",
+      "prenom": "Kerane Prince-Emmanuel",
+      "naissance": "2009-08-20",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "N'DRI",
+      "prenom": "Konan Cédric Gael",
+      "naissance": "2011-12-26",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "N'DRI",
+      "prenom": "Leslie Marie-Emmannuelle",
+      "naissance": "2015-02-03",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "N'GORAN",
+      "prenom": "Marie Victoire Aurelie Graly",
+      "naissance": "2013-04-13",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "N'GORAN",
+      "prenom": "Ogabié Ruth Ornella N'Zrama",
+      "naissance": "2011-12-07",
+      "sexe": "Féminin",
+      "classe": "2A"
+    },
+    {
+      "nom": "N'GORAN",
+      "prenom": "URIELLE MARIE ESTHER",
+      "naissance": "2011-01-27",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "N'GOTTA",
+      "prenom": "CAYLEEN DAMOH",
+      "naissance": "2010-06-29",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "N'GUESSAN",
+      "prenom": "Abigail Naomie Adiyah",
+      "naissance": "2011-06-09",
+      "sexe": "Féminin",
+      "classe": "2B"
+    },
+    {
+      "nom": "N'GUESSAN",
+      "prenom": "Adiyah Sophie-Marguerite",
+      "naissance": "2014-07-28",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "N'GUESSAN",
+      "prenom": "Bethy MaÏly Emmanuela",
+      "naissance": "2009-08-23",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "N'GUESSAN",
+      "prenom": "Caleb David Koffi",
+      "naissance": "2011-06-09",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "N'GUESSAN",
+      "prenom": "Christ Lael-Hervé",
+      "naissance": "2008-01-19",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "N'GUESSAN",
+      "prenom": "Chrys-Alex Koffi",
+      "naissance": "2015-11-21",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "N'GUESSAN",
+      "prenom": "Kylian Djibril Alexandre Edgard",
+      "naissance": "2014-05-26",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "N'GUESSAN",
+      "prenom": "Mienman Laelle Chris Olive",
+      "naissance": "2013-09-16",
+      "sexe": "Féminin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "N'GUESSAN",
+      "prenom": "N'Clowo Francesca Marjorie",
+      "naissance": "2007-08-14",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "N'GUESSAN",
+      "prenom": "N'dri Marie-Paule Ahou Emmanuella",
+      "naissance": "2011-08-25",
+      "sexe": "Féminin",
+      "classe": "2B"
+    },
+    {
+      "nom": "N'GUESSAN",
+      "prenom": "Néka",
+      "naissance": "2009-10-22",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "N'GUESSAN-BLE",
+      "prenom": "Lena Marie-Emmanuelle",
+      "naissance": "2010-09-18",
+      "sexe": "Féminin",
+      "classe": "1A"
+    },
+    {
+      "nom": "N'GUETTA",
+      "prenom": "Kader Yoann",
+      "naissance": "2011-08-19",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "N'GUETTA",
+      "prenom": "Yah Yona Marie-Elsie",
+      "naissance": "2011-11-27",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "N'KLO",
+      "prenom": "Miyala Gnandja Amra Marie-Agnès",
+      "naissance": "2015-12-02",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "N'SOUA-AGBASSY",
+      "prenom": "Alexandra Lauren",
+      "naissance": "2011-04-14",
+      "sexe": "Féminin",
+      "classe": "2C"
+    },
+    {
+      "nom": "NAHOUA",
+      "prenom": "Mifolo Fougniguesih Marie-Eliora",
+      "naissance": "2014-03-30",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "NAHOUA",
+      "prenom": "Mifolo Nounadémé Mikan Raviya Maelys",
+      "naissance": "2012-02-15",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "NAMOGO",
+      "prenom": "Silué Gbon Yan-Elie",
+      "naissance": "2010-03-25",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "NANA",
+      "prenom": "WENYAM ORNELLA KENZA",
+      "naissance": "2010-05-20",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "NASREDINE",
+      "prenom": "Rayan Walid Joseph",
+      "naissance": "2014-11-19",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "NAVANGA",
+      "prenom": "Adia Arielle Meira",
+      "naissance": "2011-10-20",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "NDINGA",
+      "prenom": "Samuel Liam Elom",
+      "naissance": "2012-07-15",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "NFA-VERDON",
+      "prenom": "Joshua",
+      "naissance": "2014-08-26",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "NFA-VERDON",
+      "prenom": "MICHEE CHLOE",
+      "naissance": "2009-07-07",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "NGANSOP",
+      "prenom": "Ange Laureen",
+      "naissance": "2014-11-17",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "NGANSOP",
+      "prenom": "Paul-Mady",
+      "naissance": "2013-03-20",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "NIAMBAULT",
+      "prenom": "Okaly Norah-Yannis",
+      "naissance": "2009-03-09",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "NIAMIEN",
+      "prenom": "Evan Imann",
+      "naissance": "2013-08-25",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "NIAMKEY",
+      "prenom": "Kouassi Lohann Ahouanzi Roger Habib",
+      "naissance": "2011-11-18",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "NINDJIN",
+      "prenom": "AOUSSI RAVIYA",
+      "naissance": "2010-10-23",
+      "sexe": "Féminin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "NIOBLE",
+      "prenom": "OURIELA MARIE",
+      "naissance": "2010-10-06",
+      "sexe": "Féminin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "NKAH",
+      "prenom": "Anne Christelle Clarah",
+      "naissance": "2010-11-05",
+      "sexe": "Féminin",
+      "classe": "1B"
+    },
+    {
+      "nom": "NONOSSI",
+      "prenom": "Dylan Pharell Fenou",
+      "naissance": "2014-09-18",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "NONOSSI",
+      "prenom": "Tracy Laria Senami",
+      "naissance": "2013-01-19",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "NOUFE",
+      "prenom": "Emeraude Elia Noémie Ery",
+      "naissance": "2015-12-03",
+      "sexe": "Féminin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "NOUFE",
+      "prenom": "Ery Maellys Marie-Noeline",
+      "naissance": "2012-08-02",
+      "sexe": "Féminin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "NOUFE",
+      "prenom": "INI ROXANE",
+      "naissance": "2009-01-16",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "NYAMIEN",
+      "prenom": "Princesse Lydie Divine",
+      "naissance": "2011-10-03",
+      "sexe": "Féminin",
+      "classe": "2E"
+    },
+    {
+      "nom": "OGUNLEYE",
+      "prenom": "Nora Rachida",
+      "naissance": "2015-07-09",
+      "sexe": "Féminin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "OKOU",
+      "prenom": "GNAMIENSAN GUY DAVID-EMMANUEL",
+      "naissance": "2010-12-29",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "OKOU",
+      "prenom": "LIBANI OHINENE MARIE",
+      "naissance": "2010-08-31",
+      "sexe": "Féminin",
+      "classe": "1E"
+    },
+    {
+      "nom": "OKOU",
+      "prenom": "Matiya Kenza Tédjo Gnamienmo",
+      "naissance": "2013-10-25",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "OKOU",
+      "prenom": "Yohana Khadidjah Sane Moayé",
+      "naissance": "2013-10-25",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "OMAïS",
+      "prenom": "Neyssa",
+      "naissance": "2012-12-14",
+      "sexe": "Féminin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "OMAR",
+      "prenom": "Yerima Fadila",
+      "naissance": "2012-04-06",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "OMAR",
+      "prenom": "Yerima Mohamed Fadel",
+      "naissance": "2012-04-06",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "OMOLOLA",
+      "prenom": "Adnan Olawumi",
+      "naissance": "2009-01-11",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "ORO",
+      "prenom": "Marie-Esli Ornella Colombe",
+      "naissance": "2013-08-28",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "ORTIGOSA",
+      "prenom": "Nelty Tony Marcel",
+      "naissance": "2012-10-30",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "OSSEY",
+      "prenom": "Dognenena Mohamed-Desiré Stanley",
+      "naissance": "2013-04-15",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "OSSEY",
+      "prenom": "Jean-Ryan",
+      "naissance": "2008-05-30",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "OTOKORE",
+      "prenom": "GNAHORE Shine Kya-Marie",
+      "naissance": "2012-08-29",
+      "sexe": "Féminin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "OTTRO",
+      "prenom": "Salome Léhélika Bayoro",
+      "naissance": "2011-01-05",
+      "sexe": "Féminin",
+      "classe": "2A"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Ahmed-Ibrahim Evan",
+      "naissance": "2014-10-30",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Ahou Kaylie Mariame",
+      "naissance": "2013-04-26",
+      "sexe": "Féminin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Allamissa Mickael-Idriss",
+      "naissance": "2013-01-17",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Amir Enzo",
+      "naissance": "2011-05-25",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "DAOUDA KADER",
+      "naissance": "2010-01-15",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Elimane Aboubakr Sidick",
+      "naissance": "2014-06-10",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Ery Sarah Marie-Ilana Kambou",
+      "naissance": "2014-11-22",
+      "sexe": "Féminin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Fatima Yacine",
+      "naissance": "2014-08-23",
+      "sexe": "Féminin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Fougnigué Cheick Ibrahim",
+      "naissance": "2014-04-09",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Foungnigue Cheick Ibrahim",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Haissata Alia Anzoumana",
+      "naissance": "2015-08-02",
+      "sexe": "Féminin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Hylian Christ-Otelin Kouadio",
+      "naissance": "2013-12-17",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Imane Ayane Ablan",
+      "naissance": "2012-02-20",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Kendra Marie Elsie",
+      "naissance": "2011-10-28",
+      "sexe": "Féminin",
+      "classe": "2B"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Kitcha Abdel Yvann",
+      "naissance": "2012-01-09",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Kydou Yvann Michaël",
+      "naissance": "2009-03-26",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Lagnigui Myriam Héloise",
+      "naissance": "2012-12-28",
+      "sexe": "Féminin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Mafata Nour-Keyllah",
+      "naissance": "2014-07-07",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Malika Ornella",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Marc-Emmanuel Gninwôkan Eric",
+      "naissance": "2012-05-18",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Mayengue Sahid Abdel Hakim",
+      "naissance": "2015-12-20",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "MIRIAM KETURA IMANE",
+      "naissance": "2010-05-12",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Myriam Latifah",
+      "naissance": "2011-04-25",
+      "sexe": "Féminin",
+      "classe": "1E"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "NAGNOUHONYA ASSANATOU",
+      "naissance": "2011-09-18",
+      "sexe": "Féminin",
+      "classe": "1A"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Nanga Joseph-Marie",
+      "naissance": "2011-03-19",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Noée Nouplé Sionkana",
+      "naissance": "2009-02-10",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Rayana Dina Nafissa",
+      "naissance": "2009-08-03",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Tamatchen Zheinab Laetitia",
+      "naissance": "2015-08-20",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Toplé Amine David-Israel",
+      "naissance": "2011-11-08",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "OUATTARA",
+      "prenom": "Zaria Rachida Anzoumana Rahina",
+      "naissance": "2013-01-26",
+      "sexe": "Féminin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "OUEDRAOGO",
+      "prenom": "Tawfiq Omar sometta",
+      "naissance": "2014-09-20",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "OUFFOUE",
+      "prenom": "Kwam Marvean Marcel-Patrice",
+      "naissance": "2013-08-10",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "OUFKIR",
+      "prenom": "Imane",
+      "naissance": "2010-06-29",
+      "sexe": "Féminin",
+      "classe": "1A"
+    },
+    {
+      "nom": "OULAYE",
+      "prenom": "LANDRY PIERRE NIEMANN",
+      "naissance": "2010-03-02",
+      "sexe": "Masculin",
+      "classe": "1D"
+    },
+    {
+      "nom": "OUMAROU",
+      "prenom": "Korou Zakiatou",
+      "naissance": "2014-04-05",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "OURAGA",
+      "prenom": "Lewo Henri Boris Emmanuel",
+      "naissance": "2012-12-26",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "PALE",
+      "prenom": "Hery Konadourenan Grâce-Aurélie",
+      "naissance": "2012-10-09",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "PALE",
+      "prenom": "Sansan Ange-Dominique",
+      "naissance": "2011-05-31",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "PATOUMA-MOIDINECOUTY",
+      "prenom": "Ivy Kali",
+      "naissance": "2013-06-26",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "PAULETTE",
+      "prenom": "Koné Heylie",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "PETETY",
+      "prenom": "Paul-Marie David",
+      "naissance": "2015-11-06",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "PLOM",
+      "prenom": "Raphael",
+      "naissance": "2012-05-26",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "POKAM YAZE",
+      "prenom": "Nathan Manuel Jayden",
+      "naissance": "2014-06-20",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "PORQUET",
+      "prenom": "Nissi Joy",
+      "naissance": "2013-10-24",
+      "sexe": "Féminin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "POSSITI",
+      "prenom": "Aurel Alexandre",
+      "naissance": "2011-07-08",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "POSSITI",
+      "prenom": "Iloungou Serayah Joyce",
+      "naissance": "2013-04-02",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "POSSITI",
+      "prenom": "Yannis Sofiane",
+      "naissance": "2009-07-29",
+      "sexe": "Masculin",
+      "classe": "TC"
+    },
+    {
+      "nom": "QUENUM",
+      "prenom": "Bradley Christian Vignon",
+      "naissance": "2013-10-09",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "QUENUM",
+      "prenom": "Marc-Emmanuel Kouamé",
+      "naissance": "2014-08-29",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "QUENUM",
+      "prenom": "Marvin Ethan Bignon",
+      "naissance": "2015-01-09",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "QUENUM",
+      "prenom": "Paul-Emmanuel Hanks Gbêvi",
+      "naissance": "2010-05-12",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "REMTY",
+      "prenom": "Nouredine",
+      "naissance": "2014-10-25",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "RIPERT",
+      "prenom": "Lucas",
+      "naissance": "2015-02-28",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "ROBERT",
+      "prenom": "Auhiry-Koré Fatime-Keira Orane",
+      "naissance": "2011-07-25",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "ROBERT",
+      "prenom": "Brayan-Koré koumbé",
+      "naissance": "2014-03-06",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "ROLAND",
+      "prenom": "Elyna Melhem",
+      "naissance": "2012-11-06",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "ROLAND",
+      "prenom": "Ethan Philippe",
+      "naissance": "2010-12-28",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "ROLAND",
+      "prenom": "Jérémy",
+      "naissance": "2011-05-18",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "SAHLY",
+      "prenom": "Ambre Neïla",
+      "naissance": "2014-04-14",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "SAHLY",
+      "prenom": "Wael",
+      "naissance": "2011-04-03",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "SAHOUE",
+      "prenom": "Soletchi Kira Samuelle Chloé",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "SAKHO",
+      "prenom": "Imane Djérétou Badjo",
+      "naissance": "2009-04-17",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "SAKO",
+      "prenom": "Aïssata",
+      "naissance": "2013-01-07",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "SAKO",
+      "prenom": "IBRAHIM HASSAN JAMIL",
+      "naissance": "2009-07-09",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "SAKO",
+      "prenom": "Liam Nahim",
+      "naissance": "2010-07-02",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "SANGANOKO",
+      "prenom": "Chris David-Emmanuel",
+      "naissance": "2012-07-23",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "SANGARE",
+      "prenom": "Alhan Hadid",
+      "naissance": "2011-02-28",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "SANGARE",
+      "prenom": "Amar Hamid",
+      "naissance": "2009-02-09",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "SANGARE",
+      "prenom": "Amara Ismael",
+      "naissance": "2011-08-15",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "SANGARE",
+      "prenom": "Samuella Victoria Yeleen Saly",
+      "naissance": "2015-03-09",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "SANOGO",
+      "prenom": "Amina Kheira",
+      "naissance": "2012-06-06",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "SANOGO",
+      "prenom": "Amine Sidick",
+      "naissance": "2012-06-06",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "SANOGO",
+      "prenom": "ANNE MELVINE",
+      "naissance": "2009-06-24",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "SANOGO",
+      "prenom": "Nassogonon Emelle",
+      "naissance": "2010-04-14",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "SANOGO",
+      "prenom": "Sabira Ramata Cherif",
+      "naissance": "2012-11-26",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "SANOGO",
+      "prenom": "TCHENON ABDOULRAMANE AKEEM",
+      "naissance": "2010-04-25",
+      "sexe": "Masculin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "SASTRE",
+      "prenom": "Paul-Ethan Elon",
+      "naissance": "2011-01-26",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "SASTRE",
+      "prenom": "Selma Christie",
+      "naissance": "2015-01-31",
+      "sexe": "Féminin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "SAVANE",
+      "prenom": "PAUL KROBLA",
+      "naissance": "2011-01-22",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "SEHR",
+      "prenom": "LEXANE MARIE YOELLA",
+      "naissance": "2010-06-01",
+      "sexe": "Masculin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "SEILLER",
+      "prenom": "MARIA-STELLA",
+      "naissance": "2010-11-12",
+      "sexe": "Masculin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "SEILLER",
+      "prenom": "Paola",
+      "naissance": "2015-02-24",
+      "sexe": "Féminin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "SEKA",
+      "prenom": "ATSAIN PHILIPPE YVANN",
+      "naissance": "2010-05-17",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "SEKI",
+      "prenom": "Richemont Jérémy-Ryan",
+      "naissance": "2015-04-21",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "SEKONGO",
+      "prenom": "N'Dantcha Caroline Marie-Colombe",
+      "naissance": "2014-05-06",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "SEKONGO",
+      "prenom": "Tcheregnimin William C.R",
+      "naissance": "2011-11-13",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "SENE",
+      "prenom": "Malick Ibrahim Samuel",
+      "naissance": "2009-03-17",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "SEY",
+      "prenom": "Hira Lynn",
+      "naissance": "2011-09-28",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "SIDIBE",
+      "prenom": "Khalif Ilan Bryan",
+      "naissance": "2013-04-22",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "SIDIBE",
+      "prenom": "Rayane Aboubacar Sidik",
+      "naissance": "2009-07-31",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "SIDIME",
+      "prenom": "Moussa Cheick Imrane",
+      "naissance": "2012-11-02",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "SIE",
+      "prenom": "Aman N'Dianh Renée Marie-Elia",
+      "naissance": "2014-08-09",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "SIKA",
+      "prenom": "Loic Newa",
+      "naissance": "2011-06-09",
+      "sexe": "Masculin",
+      "classe": "2D"
+    },
+    {
+      "nom": "SIKOUA",
+      "prenom": "Gnonsekan Angel Evans",
+      "naissance": "2012-09-11",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "SIKOUA",
+      "prenom": "Pohe Marie Orfir",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "SILUE",
+      "prenom": "NOUKATIENIN FAITH SAMUELLA PRODIGE",
+      "naissance": "2011-10-17",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "SILUE",
+      "prenom": "Yeligué Cathy Justine",
+      "naissance": "2012-03-09",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "SOCADJO",
+      "prenom": "Cheryl-Divine Assiba Jane",
+      "naissance": "2012-06-16",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "SOGA",
+      "prenom": "Komla Elvis",
+      "naissance": "2013-09-17",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "SOGNON",
+      "prenom": "Hannie Christ Méliane",
+      "naissance": "2008-09-09",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "SOKAMBI DIBERT BEKOY",
+      "prenom": "Yelena Penuel Flora Marie-Christine Pierrette",
+      "naissance": "2012-01-14",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "SONAN",
+      "prenom": "Alléchi M'Bet Benson Philippe",
+      "naissance": "2009-04-20",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "SORGO",
+      "prenom": "Imrane Hassan Djibril",
+      "naissance": "2014-10-20",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "SORGO",
+      "prenom": "Kenza Balqis Ramatoullah",
+      "naissance": "2009-07-15",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "SORO",
+      "prenom": "Gnoudanhan Tchahoua Paule Kéren",
+      "naissance": "2013-04-06",
+      "sexe": "Féminin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "SORO",
+      "prenom": "Kanaga Adam Abdallah Ferelaha",
+      "naissance": "2010-08-10",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "SORO",
+      "prenom": "Katchèné Sienna Camila",
+      "naissance": "2014-09-10",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "SORO",
+      "prenom": "Katienefolo Ali Fabien",
+      "naissance": "2015-12-20",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "SORO",
+      "prenom": "Kimidénin Abran Kenza",
+      "naissance": "2011-12-13",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "SORO",
+      "prenom": "Kôrôfôtchanwa Parfait",
+      "naissance": "2011-03-21",
+      "sexe": "Masculin",
+      "classe": "2B"
+    },
+    {
+      "nom": "SORO",
+      "prenom": "N'ganyele Joella M",
+      "naissance": "2015-12-20",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "SORO",
+      "prenom": "N'ganyoh Aela-Ephraim",
+      "naissance": "2015-11-20",
+      "sexe": "Masculin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "SOSSOUHOUNTO",
+      "prenom": "AXELLE MALIKA",
+      "naissance": "2010-02-28",
+      "sexe": "Féminin",
+      "classe": "1A"
+    },
+    {
+      "nom": "SOUARE",
+      "prenom": "Naïla Saran",
+      "naissance": "2014-09-08",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "SOUARE",
+      "prenom": "Oulematou Jamila",
+      "naissance": "2010-10-27",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "SOUMAHORO",
+      "prenom": "Leeham Gabriel",
+      "naissance": "2008-10-22",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "SOUMAÏLA",
+      "prenom": "Keïta Faïza",
+      "naissance": "2009-05-11",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "SOUMBOUNOU",
+      "prenom": "Neila Marielle Ahou-Gnamessan",
+      "naissance": "2010-05-12",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "SOW",
+      "prenom": "Hawa Naïma",
+      "naissance": "2009-06-30",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "SYBI",
+      "prenom": "Mohamed El-Bachir Junior",
+      "naissance": "2009-03-08",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "SYLLA",
+      "prenom": "Abdel Abbas",
+      "naissance": "2010-12-09",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "SYLLA",
+      "prenom": "Abdoul Lamine",
+      "naissance": "2010-01-06",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "SYLLA",
+      "prenom": "Loukou Awa",
+      "naissance": "2013-03-14",
+      "sexe": "Féminin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "SYLLA",
+      "prenom": "Loukou Soualio",
+      "naissance": "2011-01-09",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "SYLLA",
+      "prenom": "Maimouna Nola Maria",
+      "naissance": "2015-12-20",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "SYLLA",
+      "prenom": "Mohamed Aziz",
+      "naissance": "2014-03-23",
+      "sexe": "Masculin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "SYLLA",
+      "prenom": "Noura Kadidjat",
+      "naissance": "2010-12-11",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "SZAL",
+      "prenom": "Mia Jeanne",
+      "naissance": "2013-09-25",
+      "sexe": "Féminin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "SZAL",
+      "prenom": "Zoé Hélène",
+      "naissance": "2015-07-14",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "TAKI",
+      "prenom": "Kouadio Noël Scofield",
+      "naissance": "2010-02-25",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "TANNY",
+      "prenom": "Chrystal-Mary Odile",
+      "naissance": "2011-05-12",
+      "sexe": "Féminin",
+      "classe": "2C"
+    },
+    {
+      "nom": "TANO",
+      "prenom": "AKOUA MARIE ANGE ILLARY",
+      "naissance": "2010-08-25",
+      "sexe": "Masculin",
+      "classe": "1B"
+    },
+    {
+      "nom": "TANO",
+      "prenom": "Amoikon Méraja Orlane",
+      "naissance": "2010-03-12",
+      "sexe": "Féminin",
+      "classe": "TA"
+    },
+    {
+      "nom": "TANO",
+      "prenom": "Kouassi Christ Junior",
+      "naissance": "2011-04-24",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "TANO",
+      "prenom": "N'DA IRINA",
+      "naissance": "2011-01-25",
+      "sexe": "Féminin",
+      "classe": "1 STMG"
+    },
+    {
+      "nom": "TANO",
+      "prenom": "Pierre-yves Assamoi",
+      "naissance": "2014-03-16",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "TANO",
+      "prenom": "Raviya Akoua-Hega",
+      "naissance": "2014-07-02",
+      "sexe": "Féminin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "TANOE",
+      "prenom": "Jean-Alfred Ethan Lee",
+      "naissance": "2015-07-05",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "TANOH",
+      "prenom": "Diarrassouba Annelyse Mayélé",
+      "naissance": "2013-09-28",
+      "sexe": "Féminin",
+      "classe": "4C europe"
+    },
+    {
+      "nom": "TANOH",
+      "prenom": "Maria Yohana Adja",
+      "naissance": "2015-01-19",
+      "sexe": "Féminin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "TANOH",
+      "prenom": "Nathan Georges-Marie",
+      "naissance": "2008-02-10",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "TAO",
+      "prenom": "Fatima Zahra",
+      "naissance": "2014-08-02",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "TAO",
+      "prenom": "Rama Tasnim",
+      "naissance": "2010-04-21",
+      "sexe": "Féminin",
+      "classe": "1A"
+    },
+    {
+      "nom": "TAPE",
+      "prenom": "Ada Aëla Jeanne",
+      "naissance": "2010-12-07",
+      "sexe": "Féminin",
+      "classe": "1B"
+    },
+    {
+      "nom": "TCHERE",
+      "prenom": "Gohonon Marlyne Elvira",
+      "naissance": "2013-05-08",
+      "sexe": "Féminin",
+      "classe": "2B"
+    },
+    {
+      "nom": "TEHE",
+      "prenom": "Christ-Noham Essmon Effaly",
+      "naissance": "2015-03-10",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "TEHE",
+      "prenom": "Erwan Pierre-Maurice",
+      "naissance": "2011-06-13",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "TETE",
+      "prenom": "Evan John-Axel Kablan",
+      "naissance": "2013-10-15",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "TETE",
+      "prenom": "Noélie Aya Gabrielle",
+      "naissance": "2015-10-24",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "TIE BI",
+      "prenom": "Vanié Christ-Jaurès",
+      "naissance": "2012-11-24",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "TIEMOKO",
+      "prenom": "YANN MARIE YVAN",
+      "naissance": "2011-02-11",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "TIENE",
+      "prenom": "Miriam Kamagaté Roxane",
+      "naissance": "2011-08-15",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "TIMITE",
+      "prenom": "Mariam Noura Tiana",
+      "naissance": "2013-06-08",
+      "sexe": "Féminin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "TIMITE",
+      "prenom": "VAVIALINA EMMA F. R.",
+      "naissance": "2009-12-23",
+      "sexe": "Féminin",
+      "classe": "TE"
+    },
+    {
+      "nom": "TINTO",
+      "prenom": "Imane Malika Sanata",
+      "naissance": "2010-01-04",
+      "sexe": "Féminin",
+      "classe": "1D"
+    },
+    {
+      "nom": "TIRERA",
+      "prenom": "Cheick-Liham Jude Hamala",
+      "naissance": "2015-05-10",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "TIRERA",
+      "prenom": "Massemba Cheick-Tidjane Jonael-Timothy",
+      "naissance": "2013-03-21",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "TIZIE",
+      "prenom": "Iris Félicité",
+      "naissance": "2014-05-08",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "TOKORE",
+      "prenom": "Naia Natisha Djédjé",
+      "naissance": "2012-04-08",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "TOKORE",
+      "prenom": "Noa Christian Lobè",
+      "naissance": "2009-01-24",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "TOKOURE",
+      "prenom": "Jean Emmanuel",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "5A: Les oiseaux"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Abdoul-Hamid",
+      "naissance": "2012-02-21",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Abdramane Chaid",
+      "naissance": "2012-12-20",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Anzata Yassine",
+      "naissance": "2015-05-15",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Djessua Yann Saadallah",
+      "naissance": "2011-06-05",
+      "sexe": "Masculin",
+      "classe": "2E"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Imad Mussa",
+      "naissance": "2013-01-05",
+      "sexe": "Masculin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Imane Abdoul-Aziz Amani Philippe",
+      "naissance": "2013-08-02",
+      "sexe": "Masculin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Ishane Ethan",
+      "naissance": "2009-04-14",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Khalil Rayhane",
+      "naissance": "2013-12-19",
+      "sexe": "Féminin",
+      "classe": "4D Asie"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Lifouôtchien Christie Anne-Lucette",
+      "naissance": "2014-12-07",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Mohamed Lamine Vassouatche",
+      "naissance": "2009-05-12",
+      "sexe": "Masculin",
+      "classe": "TE"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Nouhoun Yacine Junior",
+      "naissance": "2009-11-16",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Ouatoun Charles Marie-Antoine",
+      "naissance": "2014-08-13",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Potrizan Akim Hamidallah",
+      "naissance": "2013-12-29",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Ryan",
+      "naissance": "2009-08-14",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Vabrahima Ilyan",
+      "naissance": "2012-07-06",
+      "sexe": "Masculin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Zanah Abdoul Aziz",
+      "naissance": "2011-03-31",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "TOURE",
+      "prenom": "Zeinab Fathim Massé",
+      "naissance": "2009-05-25",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "TOURE-JENNI",
+      "prenom": "Kymanih Idrissa Markus",
+      "naissance": "2015-05-30",
+      "sexe": "Masculin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "TRA",
+      "prenom": "Vanie Saoua Noreen Alexia",
+      "naissance": "2010-03-05",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "TRA BI THA",
+      "prenom": "Chris Elie",
+      "naissance": "2014-02-18",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "TRAORE",
+      "prenom": "Abdessalam Kignon Hussain",
+      "naissance": "2010-06-17",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "TRAORE",
+      "prenom": "ABDOU-RAHMANE",
+      "naissance": "",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "TRAORE",
+      "prenom": "ABDOULAYE AZIZ",
+      "naissance": "2010-04-16",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "TRAORE",
+      "prenom": "Dohia Medhi Nathan Dofan",
+      "naissance": "2009-08-20",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "TRAORE",
+      "prenom": "Fatimat Sabiha",
+      "naissance": "2012-12-04",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "TRAORE",
+      "prenom": "Jean-Hakim Mohamed",
+      "naissance": "2010-07-27",
+      "sexe": "Masculin",
+      "classe": "1C"
+    },
+    {
+      "nom": "TRAORE",
+      "prenom": "Kidou-Raihan Abdallah",
+      "naissance": "2013-10-04",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "TRAORE",
+      "prenom": "Mahoua Samira Asma",
+      "naissance": "2015-12-17",
+      "sexe": "Féminin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "TRAORE",
+      "prenom": "Noura Kadidiatou",
+      "naissance": "2010-10-03",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "TRAORE",
+      "prenom": "Youssouf Hicham Ibrahim",
+      "naissance": "2014-12-23",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "TUO",
+      "prenom": "Gnimé Owen Karim",
+      "naissance": "2015-04-14",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "TUO",
+      "prenom": "LUCAS MEINFOUN",
+      "naissance": "2010-04-16",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "TUO",
+      "prenom": "Minfol Hayden Imad",
+      "naissance": "2013-04-18",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "TUO",
+      "prenom": "Nalourgo Ange Yannick",
+      "naissance": "2009-05-29",
+      "sexe": "Masculin",
+      "classe": "TA"
+    },
+    {
+      "nom": "TURE",
+      "prenom": "Malaika Marly Maria",
+      "naissance": "2014-05-08",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "VISIEDO",
+      "prenom": "Manon Emilie Kimberly Priscille",
+      "naissance": "2010-03-26",
+      "sexe": "Féminin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "VOGLER",
+      "prenom": "Jade-Lyrane Yohana",
+      "naissance": "2011-11-05",
+      "sexe": "Féminin",
+      "classe": "2C"
+    },
+    {
+      "nom": "WOGNIN",
+      "prenom": "Hogan Malick laurent Noël",
+      "naissance": "2009-06-03",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "YAGBA",
+      "prenom": "GUIBE VICTORIA",
+      "naissance": "2010-03-24",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Abigaelle Ivana",
+      "naissance": "2010-06-04",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Agara Aaron-Warrick",
+      "naissance": "2014-09-17",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Agara Yann-Ismael",
+      "naissance": "2012-03-29",
+      "sexe": "Masculin",
+      "classe": "2A"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Anon Kris Eliram Laloh",
+      "naissance": "2010-12-08",
+      "sexe": "Féminin",
+      "classe": "2A"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Atchelaud Don Miryam",
+      "naissance": "2012-03-22",
+      "sexe": "Féminin",
+      "classe": "2D"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Biemi Yohann Junior",
+      "naissance": "2013-10-26",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "BLA NANTIYHE",
+      "naissance": "2011-11-26",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Brou Muwayé Yves Noam",
+      "naissance": "2011-08-03",
+      "sexe": "Masculin",
+      "classe": "2C"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Chris Josué",
+      "naissance": "2009-08-03",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Fondi Isciane-Marie Pascale",
+      "naissance": "2015-04-04",
+      "sexe": "Féminin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Gnamien Yoman Emmanuel Josiphia",
+      "naissance": "2014-05-20",
+      "sexe": "Masculin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Kouadio Krist Tobié Ninsémou",
+      "naissance": "2009-04-27",
+      "sexe": "Masculin",
+      "classe": "TSTMG"
+    },
+    {
+      "nom": "YAO",
+      "prenom": "Seph-Emery",
+      "naissance": "2012-10-26",
+      "sexe": "Masculin",
+      "classe": "3A: Les dirigeants"
+    },
+    {
+      "nom": "YAPI",
+      "prenom": "Jacques Eliam Edi",
+      "naissance": "2015-08-10",
+      "sexe": "Masculin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "YAPI",
+      "prenom": "Jade-Anais Emma",
+      "naissance": "2009-12-04",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "YAPI",
+      "prenom": "Maeva Yanice",
+      "naissance": "2012-01-13",
+      "sexe": "Féminin",
+      "classe": "2C"
+    },
+    {
+      "nom": "YAPI",
+      "prenom": "YANN CEDRIC DAVID",
+      "naissance": "2009-12-29",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "YARA",
+      "prenom": "Ibrahim Noam",
+      "naissance": "2009-10-12",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "YATASSAYE",
+      "prenom": "Maisha Meryem",
+      "naissance": "2015-09-16",
+      "sexe": "Masculin",
+      "classe": "6B: Les céruléens"
+    },
+    {
+      "nom": "YAVO",
+      "prenom": "Epi Ange-Victiore Marie-Bernard",
+      "naissance": "2011-09-27",
+      "sexe": "Féminin",
+      "classe": "2A"
+    },
+    {
+      "nom": "YE",
+      "prenom": "Lodoube Elkana Alexandre",
+      "naissance": "2010-01-02",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "YE",
+      "prenom": "Yéréyavé Stanislas",
+      "naissance": "2013-08-06",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "YEBOUE",
+      "prenom": "Alexia Aurore",
+      "naissance": "2014-07-23",
+      "sexe": "Féminin",
+      "classe": "5B:Les reptiles"
+    },
+    {
+      "nom": "YED",
+      "prenom": "Audrey N'dolly Adèle",
+      "naissance": "2009-09-14",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "YEO",
+      "prenom": "Foudanran Charbel Ferdinand",
+      "naissance": "2013-07-15",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "YEO",
+      "prenom": "GNOUDANG RALIB",
+      "naissance": "2025-10-21",
+      "sexe": "Masculin",
+      "classe": "1E"
+    },
+    {
+      "nom": "YEO",
+      "prenom": "Nou-Katchinnin Mariane",
+      "naissance": "2012-01-26",
+      "sexe": "Féminin",
+      "classe": "3D: Les sportifs"
+    },
+    {
+      "nom": "YESSOH",
+      "prenom": "Anne Dominique Syntyche Maiween",
+      "naissance": "2009-03-06",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "YOBOU",
+      "prenom": "Kaitklyn Anoman Vassy",
+      "naissance": "2015-11-12",
+      "sexe": "Féminin",
+      "classe": "6C: Les carmins"
+    },
+    {
+      "nom": "YOBOUE",
+      "prenom": "Soumia Yohana Maria Lirane",
+      "naissance": "2014-07-11",
+      "sexe": "Féminin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "YOBOUE",
+      "prenom": "Yao Othniel Christ Bryan",
+      "naissance": "2014-07-11",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "YOBOUE",
+      "prenom": "YORO MARIE NATHANELIE ELIORA",
+      "naissance": "2011-03-31",
+      "sexe": "Féminin",
+      "classe": "1C"
+    },
+    {
+      "nom": "YOMAFOU",
+      "prenom": "N'doua Myriam Eunice",
+      "naissance": "2012-12-19",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "YORO",
+      "prenom": "ISAAC OTHNIEL",
+      "naissance": "2009-08-07",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "YOUSSEF",
+      "prenom": "Jamal Joseph Ethan",
+      "naissance": "2015-05-19",
+      "sexe": "Masculin",
+      "classe": "6D: Les Safrans"
+    },
+    {
+      "nom": "YOUSSEF",
+      "prenom": "Jamila",
+      "naissance": "2009-09-24",
+      "sexe": "Féminin",
+      "classe": "TD"
+    },
+    {
+      "nom": "YUMGA",
+      "prenom": "BILE TED EVAN",
+      "naissance": "2010-02-09",
+      "sexe": "Masculin",
+      "classe": "1A"
+    },
+    {
+      "nom": "ZEJLY",
+      "prenom": "Imran Ahmed Yassoa",
+      "naissance": "2012-11-20",
+      "sexe": "Masculin",
+      "classe": "3C:Les artistes et écrivain"
+    },
+    {
+      "nom": "ZEJLY",
+      "prenom": "Najib Mohamed Kobnan",
+      "naissance": "2014-10-28",
+      "sexe": "Masculin",
+      "classe": "5D: Les félins"
+    },
+    {
+      "nom": "ZEJLY",
+      "prenom": "SOUKEYNA AFFOUE FATMA",
+      "naissance": "2010-07-13",
+      "sexe": "Féminin",
+      "classe": "1A"
+    },
+    {
+      "nom": "ZELIGOU",
+      "prenom": "Melvyn-Joseph",
+      "naissance": "2013-06-14",
+      "sexe": "Masculin",
+      "classe": "4A Afrique"
+    },
+    {
+      "nom": "ZELIGOU",
+      "prenom": "Yasmine Maeva Aurore",
+      "naissance": "2012-06-19",
+      "sexe": "Féminin",
+      "classe": "3B: Les scientifiques"
+    },
+    {
+      "nom": "ZIALLO",
+      "prenom": "Armel Chris Enoc",
+      "naissance": "2014-04-17",
+      "sexe": "Masculin",
+      "classe": "5C: Les poissons"
+    },
+    {
+      "nom": "ZIALLO",
+      "prenom": "Armel Ephraïm Jonathan",
+      "naissance": "2009-12-06",
+      "sexe": "Masculin",
+      "classe": "TD"
+    },
+    {
+      "nom": "ZORKOT",
+      "prenom": "Jade Liora",
+      "naissance": "2013-08-18",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    },
+    {
+      "nom": "ZORKOT",
+      "prenom": "Jayne Sheila",
+      "naissance": "2015-03-15",
+      "sexe": "Féminin",
+      "classe": "6A:Les Céladons"
+    },
+    {
+      "nom": "ZROH",
+      "prenom": "N'Guessan Princesse Talia",
+      "naissance": "2013-03-18",
+      "sexe": "Féminin",
+      "classe": "4B Amerique"
+    }
+  ]
+}

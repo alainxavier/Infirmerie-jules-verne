@@ -19,8 +19,8 @@ var JSON_PATH = process.env.JSON_PATH || path.join(__dirname, 'data.json');
 
 /* Utilisateurs par défaut créés au premier démarrage */
 var DEFAULT_USERS = [
-  { username: 'admin', role: 'admin', password: 'admin123' },
-  { username: 'medecin', role: 'user', password: 'medecin123' }
+  { username: 'admin', role: 'admin', niveau: 'all', password: 'admin123' },
+  { username: 'medecin', role: 'user', niveau: 'primaire', password: 'medecin123' }
 ];
 
 function stripHash(u) {
@@ -28,6 +28,9 @@ function stripHash(u) {
     id: u.id,
     username: u.username,
     role: u.role,
+    niveau: u.role === 'admin' ? 'all' : (u.niveau || 'primaire'),
+    nom: u.nom || '',
+    prenoms: u.prenoms || '',
     createdAt: u.createdAt || null
   };
 }
@@ -86,7 +89,7 @@ function createJsonStore() {
       }
       return null;
     },
-    createUser: function (username, hash, role) {
+    createUser: function (username, hash, role, niveau) {
       var d = readDoc();
       for (var i = 0; i < d.users.length; i++) {
         if (d.users[i].username === username) throw new Error('EXISTS');
@@ -96,6 +99,7 @@ function createJsonStore() {
         username: username,
         password_hash: hash,
         role: role || 'user',
+        niveau: role === 'admin' ? 'all' : (niveau || 'primaire'),
         createdAt: new Date().toISOString()
       };
       d.users.push(user);
@@ -113,6 +117,18 @@ function createJsonStore() {
         if (Number(u.id) === Number(id)) u.password_hash = hash;
       });
       writeDoc(d);
+    },
+    updateUserProfile: function (id, nom, prenoms, hash) {
+      var d = readDoc();
+      d.users.forEach(function (u) {
+        if (Number(u.id) === Number(id)) {
+          u.nom = nom;
+          u.prenoms = prenoms;
+          if (hash) u.password_hash = hash;
+        }
+      });
+      writeDoc(d);
+      return this.findUserById(id);
     },
     countUsers: function () { return readDoc().users.length; },
     close: function () {},
@@ -135,6 +151,7 @@ function createSqliteStore() {
     '  username TEXT UNIQUE NOT NULL,' +
     '  password_hash TEXT NOT NULL,' +
     "  role TEXT NOT NULL DEFAULT 'user'," +
+    "  niveau TEXT NOT NULL DEFAULT 'primaire'," +
     '  createdAt TEXT DEFAULT CURRENT_TIMESTAMP' +
     ');' +
     'CREATE TABLE IF NOT EXISTS visits (' +
@@ -148,6 +165,12 @@ function createSqliteStore() {
     ');'
   );
 
+  // Migration douce des bases SQLite déjà créées.
+  var userColumns = db.prepare('PRAGMA table_info(users)').all().map(function (c) { return c.name; });
+  if (userColumns.indexOf('nom') === -1) db.exec("ALTER TABLE users ADD COLUMN nom TEXT NOT NULL DEFAULT ''");
+  if (userColumns.indexOf('prenoms') === -1) db.exec("ALTER TABLE users ADD COLUMN prenoms TEXT NOT NULL DEFAULT ''");
+  if (userColumns.indexOf('niveau') === -1) db.exec("ALTER TABLE users ADD COLUMN niveau TEXT NOT NULL DEFAULT 'primaire'");
+
   var q = {
     allVisits: db.prepare('SELECT data FROM visits ORDER BY ord ASC'),
     delVisits: db.prepare('DELETE FROM visits'),
@@ -157,11 +180,13 @@ function createSqliteStore() {
       'ON CONFLICT(key) DO UPDATE SET value = excluded.value'),
     userByUsername: db.prepare('SELECT * FROM users WHERE username = ?'),
     userById: db.prepare('SELECT * FROM users WHERE id = ?'),
-    allUsers: db.prepare('SELECT id, username, role, createdAt FROM users ORDER BY id'),
-    insUser: db.prepare('INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)'),
+    allUsers: db.prepare('SELECT id, username, role, niveau, nom, prenoms, createdAt FROM users ORDER BY id'),
+    insUser: db.prepare('INSERT INTO users (username, password_hash, role, niveau) VALUES (?, ?, ?, ?)'),
     userIdByName: db.prepare('SELECT id FROM users WHERE username = ?'),
     delUser: db.prepare('DELETE FROM users WHERE id = ?'),
     updUserPwd: db.prepare('UPDATE users SET password_hash = ? WHERE id = ?'),
+    updUserProfile: db.prepare('UPDATE users SET nom = ?, prenoms = ? WHERE id = ?'),
+    updUserProfilePwd: db.prepare('UPDATE users SET nom = ?, prenoms = ?, password_hash = ? WHERE id = ?'),
     countUsers: db.prepare('SELECT COUNT(*) AS c FROM users'),
     countVisits: db.prepare('SELECT COUNT(*) AS c FROM visits')
   };
@@ -218,13 +243,16 @@ function createSqliteStore() {
     findUserById: function (id) {
       return q.userById.get(Number(id)) || null;
     },
-    createUser: function (username, hash, role) {
+    createUser: function (username, hash, role, niveau) {
       if (q.userIdByName.get(username)) throw new Error('EXISTS');
-      var info = q.insUser.run(String(username), hash, role || 'user');
+      var userRole = role || 'user';
+      var userLevel = userRole === 'admin' ? 'all' : (niveau === 'lycee' ? 'lycee' : 'primaire');
+      var info = q.insUser.run(String(username), hash, userRole, userLevel);
       return {
         id: Number(info.lastInsertRowid),
         username: username,
-        role: role || 'user'
+        role: userRole,
+        niveau: userLevel
       };
     },
     deleteUser: function (id) {
@@ -232,6 +260,11 @@ function createSqliteStore() {
     },
     updateUserPassword: function (id, hash) {
       q.updUserPwd.run(hash, Number(id));
+    },
+    updateUserProfile: function (id, nom, prenoms, hash) {
+      if (hash) q.updUserProfilePwd.run(nom, prenoms, hash, Number(id));
+      else q.updUserProfile.run(nom, prenoms, Number(id));
+      return this.findUserById(id);
     },
     countUsers: function () { return q.countUsers.get().c; },
     close: function () { try { db.close(); } catch (e) { /* ignore */ } },
