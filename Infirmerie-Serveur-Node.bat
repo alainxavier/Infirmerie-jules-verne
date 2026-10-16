@@ -1,34 +1,47 @@
 @echo off
 title Registre d'infirmerie - Ecole Jules Verne (Serveur multi-utilisateurs)
 cd /d "%~dp0server"
+if errorlevel 1 (
+  echo [ERREUR] Dossier du serveur introuvable.
+  pause
+  exit /b 1
+)
 
-rem ---------------------------------------------------------------
-rem Utilise en priorite le Node.js portable embarque dans le projet
-rem (node-portable), sinon le Node.js installe sur la machine.
-rem Node.js 22+ requis (module SQLite integre).
-rem ---------------------------------------------------------------
-set "NODE_EXE=node"
-if exist "%~dp0node-portable\node-v22.23.2-win-x64\node.exe" (
-  set "NODE_EXE=%~dp0node-portable\node-v22.23.2-win-x64\node.exe"
-  echo Node.js portable detecte.
-) else (
-  node --version >nul 2>&1
-  if errorlevel 1 (
-    echo [ERREUR] Node.js introuvable.
-    echo          Conservez le dossier "node-portable" a cote de ce script,
-    echo          ou installez Node.js 22 ou plus recent.
-    echo.
-    pause
-    exit /b 1
-  )
+rem Utilise Node.js et npm deja installes sur le serveur.
+rem Node.js 22.5+ requis pour le module SQLite integre.
+where node >nul 2>&1
+if errorlevel 1 (
+  echo [ERREUR] Node.js introuvable dans le PATH.
+  echo          Installez Node.js 22.5 ou plus recent sur le serveur.
+  pause
+  exit /b 1
+)
+where npm >nul 2>&1
+if errorlevel 1 (
+  echo [ERREUR] npm introuvable dans le PATH.
+  echo          Reparez ou reinstallez Node.js avec npm sur le serveur.
+  pause
+  exit /b 1
 )
 
 echo Version de Node.js :
-"%NODE_EXE%" --version
+node --version
+if errorlevel 1 (
+  echo [ERREUR] Node.js ne peut pas etre execute.
+  pause
+  exit /b 1
+)
+echo Version de npm :
+call npm --version
+if errorlevel 1 (
+  echo [ERREUR] npm ne peut pas etre execute.
+  pause
+  exit /b 1
+)
 echo.
 
 rem Verification de la version minimale (22.5.0)
-"%NODE_EXE%" -e "var p=process.versions.node.split('.').map(Number); if(p[0]<22||(p[0]===22&&p[1]<5)){console.error('[ERREUR] Node.js 22.5+ requis (module SQLite integre). Version actuelle : '+process.versions.node);process.exit(1)}"
+node -e "var p=process.versions.node.split('.').map(Number); if(p[0]<22||(p[0]===22&&p[1]<5)){console.error('[ERREUR] Node.js 22.5+ requis. Version actuelle : '+process.versions.node);process.exit(1)}"
 if errorlevel 1 (
   pause
   exit /b 1
@@ -48,13 +61,10 @@ echo.
 echo Demarrage du serveur sur le port 8461...
 echo Le navigateur s'ouvrira une fois le serveur pret.
 echo.
-rem Ne pas ouvrir le navigateur apres un delai fixe : le serveur peut mettre
-rem plus de deux secondes a initialiser SQLite. Un processus PowerShell attend
-rem que l'API reponde avant d'ouvrir la page (30 secondes maximum).
+rem Attendre la reponse API avant d'ouvrir le navigateur sur l'hote.
 start "" powershell -NoProfile -WindowStyle Hidden -Command "$limite=(Get-Date).AddSeconds(30); do { try { $reponse=Invoke-WebRequest -UseBasicParsing 'http://127.0.0.1:8461/api/config' -TimeoutSec 1; if ($reponse.StatusCode -eq 200) { Start-Process 'http://localhost:8461/'; exit 0 } } catch { }; Start-Sleep -Milliseconds 500 } while ((Get-Date) -lt $limite)"
-"%NODE_EXE%" server.js
+node server.js
 echo.
 echo Le serveur s'est arrete (code %ERRORLEVEL%).
 echo Si le port 8461 est deja utilise, fermez l'autre serveur ou choisissez un autre port.
 pause
-

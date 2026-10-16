@@ -1,47 +1,31 @@
-# 📖 Guide d'installation — Mode serveur multi-utilisateurs
+# Registre d'infirmerie — Déploiement serveur
 
-> **Registre d'infirmerie — École Jules Verne**  
-> Ce guide explique comment installer l'application sur un serveur pour permettre à plusieurs utilisateurs de se connecter et de partager une base de données unique.
+L'application fonctionne exclusivement en mode serveur multi-utilisateurs et s'ouvre dans le navigateur, sans PWA à installer. Les visites, réglages et listes d'élèves sont conservés sur le serveur. Si celui-ci est inaccessible, l'application bloque l'accès et ne stocke pas de copie locale.
 
----
+Les données sont sensibles : limitez l'accès au réseau privé de l'établissement et n'exposez pas directement le port 8461 sur Internet. Le serveur fourni utilise HTTP ; pour un accès distant, configurez un accès sécurisé.
 
-## ⚙️ Prérequis
+## Prérequis
 
-| Composant | Version minimale |
-|-----------|-----------------|
-| **Windows** | Windows 10 / Windows Server 2019 |
-| **Node.js** | **22.5 ou supérieur** (module SQLite intégré `node:sqlite`) |
-| **Accès réseau** | Le port **8461** doit être accessible depuis les postes clients |
+- Windows 10/11 ou Windows Server 2019 ou ultérieur.
+- Node.js **22.5+** et npm installés sur le serveur, tous deux disponibles dans le `PATH`.
+- Le dossier de l'application (`server/`, `assets/`, lanceur) et le port TCP **8461**.
+- Accès réseau privé des postes clients vers le serveur.
 
-> ✅ **Aucune compilation, aucune dépendance native** : la base de données utilise
-> le module SQLite **intégré à Node.js** (`node:sqlite`). Un **Node.js portable
-> 22.23 est déjà inclus** dans le dossier `node-portable/` du projet : installer
-> Node.js sur le serveur est donc **facultatif**.
+Le serveur cible possède déjà Node.js 24.22.0 et npm 11.19.1. Le backend utilise SQLite intégré à Node.js et le paquet Express. Si les dépendances ne sont pas présentes, le lanceur exécute `npm install` au premier démarrage ; le serveur doit alors pouvoir accéder au registre npm.
 
----
+## Installation et démarrage
 
-## 🚀 Installation
+1. Copiez le dossier complet sur l'ordinateur qui hébergera le registre.
+2. Lancez `Infirmerie-Serveur-Node.bat`.
+3. Autorisez l'accès au réseau privé dans le pare-feu Windows si demandé. Gardez la fenêtre de commande ouverte.
+4. Le navigateur local s'ouvre sur `http://localhost:8461/`. L'application attend que l'API soit prête avant l'ouverture.
+5. La fenêtre affiche aussi l'adresse réseau à ouvrir depuis les postes clients, par exemple `http://192.168.1.10:8461/`.
 
-### 1. Node.js (facultatif si node-portable est présent)
+Les postes clients doivent utiliser l'adresse IPv4 du serveur. `localhost` ne fonctionne que sur l'ordinateur où le serveur tourne. Si le pare-feu bloque les clients, autorisez le port TCP 8461 pour le réseau privé (opération administrateur).
 
-Le lanceur utilise **en priorité** le Node.js portable embarqué
-(`node-portable\node-v22.23.2-win-x64\node.exe`). Si vous préférez un Node.js
-installé sur la machine, vérifiez la version :
+Pour arrêter le serveur, appuyez sur **Ctrl+C** dans sa fenêtre. Ne mettez pas l'ordinateur hôte en veille pendant que le registre doit être accessible.
 
-```bat
-node --version
-rem doit afficher v22.5.0 ou plus
-```
-
-### 2. Lancer l'application
-
-**Option A — Script de lancement automatique** (recommandé) :
-
-1. Double-cliquez sur `Infirmerie-Serveur-Node.bat` à la racine du projet.
-2. Le script détecte le Node.js portable, vérifie la version et démarre le serveur.
-3. Le navigateur s'ouvre sur `http://localhost:8461/`.
-
-**Option B — Ligne de commande** :
+### Lancement manuel
 
 ```bat
 cd server
@@ -49,189 +33,77 @@ npm install
 npm start
 ```
 
-Le serveur écoute sur le port **8461**.
+Le serveur écoute sur toutes les interfaces réseau sur le port 8461 par défaut.
 
----
+## Comptes et rôles
 
-## 👥 Première connexion
+Sur une base neuve, le serveur crée `admin` / `admin123` (administrateur) et `medecin` / `medecin123` (utilisateur). Changez immédiatement les mots de passe initiaux depuis **Mon profil**. Créez ensuite des comptes individuels dans **Paramètres**. Les comptes utilisateurs sont attribués au primaire ou au lycée ; l'administrateur a accès aux deux niveaux.
 
-Le serveur crée automatiquement deux comptes :
+Les sessions expirent après 12 heures. Le serveur ne recrée les comptes initiaux que si aucun compte n'est encore enregistré.
 
-| Nom d'utilisateur | Mot de passe | Rôle |
-|-------------------|-------------|------|
-| `admin` | `admin123` | Administrateur (gère les utilisateurs) |
-| `medecin` | `medecin123` | Utilisateur (lecture/écriture) |
+## Stockage, import et sauvegarde
 
-> 🔒 **Important** : Changez immédiatement les mots de passe après la première connexion !
+- Base principale : `server/data.sqlite`, créée au premier démarrage.
+- Repli automatique en JSON : `server/data.json` si SQLite ne peut pas être initialisé.
+- Import initial : si la base ne contient aucune visite, le serveur importe `sauvegarde/registre-infirmerie-sauvegarde.json` lorsqu'il existe.
+- L'application permet aussi l'import de visites Excel/CSV, l'import de listes d'élèves et l'export/restauration de sauvegardes JSON.
 
----
-
-## 💻 Accès depuis un poste client
-
-Depuis un autre ordinateur du réseau local, ouvrez :
-
-```
-http://<adresse-IP-du-serveur>:8461/
-```
-
-Exemple : `http://192.168.1.10:8461/`
-
-1. L'écran de connexion s'affiche.
-2. Saisissez vos identifiants.
-3. Le registre partagé s'affiche automatiquement.
-
----
-
-## 🔐 Gestion des utilisateurs (admin)
-
-1. Connectez-vous avec le compte **admin**.
-2. Ouvrez **Paramètres** → section **🔐 Compte utilisateur**.
-3. Pour créer / supprimer des utilisateurs, utilisez l'API :
-
-```bash
-# Lister
-curl -H "Authorization: Bearer <TOKEN>" http://localhost:8461/api/users
-
-# Créer
-curl -X POST -H "Authorization: Bearer <TOKEN>" -H "Content-Type: application/json" \
-  -d '{"username":"infirmier","password":"motdepasse","role":"user"}' \
-  http://localhost:8461/api/users
-
-# Supprimer (id > 1)
-curl -X DELETE -H "Authorization: Bearer <TOKEN>" http://localhost:8461/api/users/2
-```
-
-### Changer son mot de passe
-
-Depuis **Paramètres → 🔐 Compte utilisateur → Modifier mon mot de passe**, ou via l'API :
-
-```bash
-curl -X POST -H "Authorization: Bearer <TOKEN>" -H "Content-Type: application/json" \
-  -d '{"currentPassword":"ancien","password":"nouveau"}' \
-  http://localhost:8461/api/auth/change-password
-```
-
----
-
-## 🗄️ Base de données
-
-- **SQLite** : fichier `server/data.sqlite` (créé automatiquement au premier lancement).
-- **Import initial automatique** : si la base est vide, le serveur importe les
-  données existantes depuis `sauvegarde/registre-infirmerie-sauvegarde.json`
-  (visites, réglages et liste des élèves).
-- Partagée par tous les utilisateurs connectés (mode WAL, écritures sécurisées).
-- Si le module SQLite n'est pas disponible, le serveur bascule automatiquement
-  sur un stockage fichier JSON : `server/data.json`.
-
-### Sauvegarder la base
-
-Le plus simple : copier le fichier quand le serveur est arrêté.
+Copie sûre de la base SQLite : arrêtez le serveur, copiez le fichier, puis redémarrez-le.
 
 ```bat
-rem 1. Arrêtez le serveur (Ctrl+C), puis :
 copy server\data.sqlite sauvegarde\registre-infirmerie.sqlite
 ```
 
-Ou à chaud avec l'outil officiel SQLite (si installé) :
+Pour restaurer une copie SQLite, arrêtez le serveur, remplacez le fichier de base et redémarrez. Conservez les sauvegardes sur un emplacement protégé, distinct de l'hôte. Elles contiennent des données sensibles.
 
-```bat
-sqlite3 server\data.sqlite ".backup sauvegarde-infirmerie.sqlite"
-```
+## Synchronisation
 
-### Restaurer la base
+Les postes authentifiés lisent et écrivent dans la base partagée. Les changements des autres utilisateurs sont récupérés toutes les 30 secondes. Si le serveur devient inaccessible, l'application verrouille l'accès et n'enregistre pas de copie locale des données.
 
-1. Arrêtez le serveur (`Ctrl+C`).
-2. Remplacez `server\data.sqlite` par votre fichier de sauvegarde.
-3. Redémarrez le serveur.
+## Configuration
 
----
+| Variable | Par défaut | Description |
+|---|---|---|
+| `PORT` | `8461` | Port du serveur |
+| `JWT_SECRET` | `infirmerie-jv-secret-key-2026` | Clé de signature des sessions |
+| `DB_PATH` | `server/data.sqlite` | Chemin de la base SQLite |
+| `JSON_PATH` | `server/data.json` | Chemin de stockage JSON de repli |
+| `SEED_PATH` | `sauvegarde/registre-infirmerie-sauvegarde.json` | Fichier d'import initial |
 
-## 🔄 Synchronisation
-
-- **Sauvegarde en temps réel** : chaque modification est envoyée au serveur immédiatement.
-- **Synchronisation périodique** : le client interroge le serveur toutes les **30 secondes** pour récupérer les changements des autres utilisateurs.
-- **Mode hors ligne** : si le serveur est inaccessible, l'application continue à fonctionner localement via `localStorage`. Les données locales ne sont pas partagées tant que le serveur n'est pas de retour.
-
----
-
-## ⚠️ Mode local vs mode serveur
-
-| Fonctionnalité | Mode local (PWA) | Mode serveur |
-|----------------|-----------------|--------------|
-| Stockage | localStorage du navigateur | Base SQLite partagée |
-| Multi-utilisateur | ❌ Chaque navigateur a ses propres données | ✅ Tous partagent la même base |
-| Hors ligne | ✅ (PWA installée) | ❌ Nécessite le serveur |
-| PWA installable | ✅ | ❌ (pas de service worker en HTTP non-localhost) |
-| Authentification | ❌ | ✅ (JWT) |
-| Sauvegarde dossier | ✅ (File System Access) | ✅ (export JSON) |
-
-> Le mode est détecté automatiquement : le serveur répond à `/api/config`, l'application active le mode serveur.
-
----
-
-## 🔧 Configuration avancée
-
-| Variable | Valeur par défaut | Description |
-|----------|-------------------|-------------|
-| `PORT` | `8461` | Port d'écoute du serveur |
-| `JWT_SECRET` | `infirmerie-jv-secret-key-2026` | Clé secrète pour les tokens JWT |
-| `DB_PATH` | `server/data.sqlite` | Chemin vers la base SQLite |
-| `JSON_PATH` | `server/data.json` | Fichier de repli (mode JSON) |
-| `SEED_PATH` | `sauvegarde/registre-infirmerie-sauvegarde.json` | Données importées au premier démarrage |
-
-Exemple :
+Exemple pour un autre port :
 
 ```bat
 set PORT=9090
-set JWT_SECRET=mon-super-secret-2026
-node server/server.js
+set JWT_SECRET=remplacer-par-une-cle-longue-et-aleatoire
+node server\server.js
 ```
 
----
+## Dépannage
 
-## 🛠️ Dépannage
+| Symptôme | Vérification |
+|---|---|
+| « Node.js 22.5+ requis » | Installez Node.js 22.5 ou ultérieur et vérifiez que `node` est dans le `PATH`. |
+| Le port est déjà utilisé | Libérez le port 8461 ou définissez `PORT` avant le lancement. |
+| `ERR_CONNECTION_REFUSED` depuis un client | Vérifiez l'adresse IP du serveur, que le serveur tourne et que le pare-feu autorise TCP 8461 sur le réseau privé. |
+| Échec de dépendances | Vérifiez que npm est dans le `PATH` et que le serveur peut accéder à Internet lors du premier `npm install`. |
+| Le serveur ne répond plus | Consultez sa fenêtre de commande et redémarrez le BAT si le processus s'est arrêté. |
 
-| Problème | Solution |
-|----------|----------|
-| Serveur ne démarre pas | Vérifiez `node --version` (22.5+ requis). Libérez le port 8461 (`netstat -an \| findstr 8461`). |
-| « Node.js 22.5+ requis » | Le Node.js installé est trop ancien : conservez le dossier `node-portable/` du projet. |
-| "Identifiants incorrects" | Utilisez `admin`/`admin123` ou `medecin`/`medecin123` (minuscules). |
-| Blocage sur écran de connexion | Vérifiez que `http://localhost:8461/api/config` retourne du JSON. |
-| Inaccessible depuis un autre poste | Ouvrez le port 8461 dans le **pare-feu Windows** (voir ci-dessous). |
-| Données non synchronisées | Tous les utilisateurs doivent utiliser la même adresse IP du serveur. |
-| Erreur de dépendances | Supprimez `server\node_modules` et relancez `npm install`. |
+## Fichiers principaux
 
-### 🔥 Pare-feu Windows (accès multi-postes)
-
-Au premier démarrage, Windows peut demander l'autorisation : cochez
-**« Réseaux privés »** et validez. Pour ouvrir le port manuellement (en
-administrateur) :
-
-```bat
-netsh advfirewall firewall add rule name="Infirmerie Jules Verne" dir=in action=allow protocol=TCP localport=8461
-```
-
----
-
-## 📁 Structure des fichiers
-
-```
+```text
 Infirmerie-jules-verne/
-├── app.js                        # Client (mode serveur + local)
-├── index.html                    # Interface (login modal incluse)
-├── sw.js                         # Service worker
-├── styles.css                    # Styles
-├── manifest.webmanifest          # PWA manifest
-├── Infirmerie-Serveur-Node.bat   # Lanceur serveur multi-utilisateurs
-├── Infirmerie-Lancer-serveur.bat # Lanceur local (PWA)
-├── serveur-infirmerie.ps1        # Serveur PowerShell local (statique)
-├── README-SERVEUR.md             # Ce guide
-├── assets/                       # Images, icônes
-├── sauvegarde/                   # Dossier de sauvegarde locale
-└── server/                       # Backend Node.js
-    ├── package.json              # Dépendances
-    ├── server.js                 # Express + API REST + JWT
-    ├── store.js                  # Couche stockage (SQLite node:sqlite + repli JSON)
-    ├── data.sqlite               # Base de données (auto-créée)
-    └── node_modules/             # Modules npm
+├── app.js                         # Interface et API cliente
+├── index.html                     # Interface web avec authentification
+├── styles.css                     # Styles
+├── Infirmerie-Serveur-Node.bat    # Lanceur du serveur partagé
+├── README-SERVEUR.md              # Ce guide
+├── Manuel — École Jules Ve.md     # Manuel utilisateur
+├── assets/                        # Logos et images de l'école
+├── sauvegarde/                    # Sauvegardes et éventuel import initial
+└── server/
+    ├── package.json               # Dépendances
+    ├── server.js                  # Serveur web et API authentifiée
+    ├── store.js                   # Stockage SQLite / JSON
+    ├── package-lock.json          # Versions verrouillées des dépendances
+    └── data.sqlite                # Base créée au démarrage
 ```

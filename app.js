@@ -1,9 +1,9 @@
-'use strict';
+﻿'use strict';
 
 /* =========================================================
    Registre d'infirmerie — École Jules Verne (2026–2027)
-   Application web 100 % locale (aucun serveur requis).
-   Données conservées dans le navigateur (localStorage)
+   Application web connectée au serveur partagé.
+   Les visites, réglages et élèves sont enregistrés côté serveur.
    ========================================================= */
 
 /* ---------- Constantes ---------- */
@@ -12,9 +12,6 @@ var PRIMARY_CLASSES = ['TPS','PSA','PSB','MSA','MSB','GSA','GSB','CPA','CPB','CP
 var LYCEE_CLASSES = ['2A','1A','TA'];
 var AGES = ['2 ans','3 ans','4 ans','5 ans','6 ans','7 ans','8 ans','9 ans','10 ans','11 ans','12 ans','13 ans','14 ans','15 ans','16 ans','17 ans','18 ans','19 ans','Personnel'];
 var MOIS_NOMS = ['Janv','Févr','Mars','Avril','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
-
-var STORAGE_KEY = 'registre_infirmerie_jules_verne_v1';
-var SETTINGS_KEY = 'registre_infirmerie_jules_verne_settings_v1';
 
 var DEFAULT_SETTINGS = {
   ecole: 'École Jules Verne',
@@ -50,7 +47,6 @@ var FIELD_ALIASES = {
 };
 
 /* Colonnes du fichier « liste des élèves » (base d'autocomplétion) */
-var STUDENTS_KEY = 'registre_infirmerie_jules_verne_eleves_v1';
 var STUDENT_ALIASES = {
   'niveau': 'niveau',
   'niveau scolaire': 'niveau',
@@ -73,9 +69,11 @@ var studentsData = [];         // liste des élèves (autocomplétion du formula
 var settings = Object.assign({}, DEFAULT_SETTINGS);
 var pendingImportAction = '';  // 'excel' | 'csv' | 'json'
 var editingId = null;
+var PAGE_SIZE = 20;
+var currentPage = 1;
 
 /* ---------- Mode serveur / API / Authentification ---------- */
-var SERVER_MODE = false;          // activé si le backend Node.js détecté
+var SERVER_MODE = false;
 var API_BASE = '/api';
 var AUTH_TOKEN_KEY = 'authToken_infirmerie_jv';
 var currentUser = null;            // { id, username, role }
@@ -83,6 +81,7 @@ var syncPollTimer = null;
 var SYNC_POLL_MS = 30000;          // rafraîchissement toutes les 30 s
 var dataVersion = 0;               // détection de changements serveur
 var saveInProgress = false;        // debounce des sauvegardes
+var saveAgain = false;             // rejouer après une sauvegarde déjà en cours
 var editingModalOpen = false;      // bloque le polling pendant édition
 
 function apiFetch(url, options) {
@@ -99,9 +98,19 @@ function apiFetch(url, options) {
 
 function detectServerMode() {
   return fetch(API_BASE + '/config', { cache: 'no-store' })
-    .then(function (r) { return r.json(); })
-    .then(function (cfg) { if (cfg && cfg.serverMode) SERVER_MODE = true; })
-    .catch(function () { SERVER_MODE = false; });
+    .then(function (r) {
+      if (!r.ok) throw new Error('Le serveur a répondu avec le code ' + r.status + '.');
+      return r.json();
+    })
+    .then(function (cfg) {
+      if (!cfg || !cfg.serverMode) throw new Error('Ce site ne répond pas comme serveur Infirmerie.');
+      SERVER_MODE = true;
+      return true;
+    })
+    .catch(function (err) {
+      SERVER_MODE = false;
+      throw err;
+    });
 }
 
 function apiLogin(username, password) {
@@ -124,7 +133,7 @@ function apiLogout() {
   sessionStorage.removeItem(AUTH_TOKEN_KEY);
   currentUser = null;
   SERVER_MODE = false;
-  // Recharger la page en mode local
+  // Recharger puis se reconnecter au serveur.
   location.reload();
 }
 
@@ -147,10 +156,13 @@ function verifyAuthToken() {
 /* Synchronisation serveur → client */
 function syncLoadAll() {
   return apiFetch('/data')
-    .then(function (r) { return r.json(); })
+    .then(function (r) {
+      if (!r.ok) return r.json().then(function (err) { throw new Error(err.error || 'Lecture du serveur impossible'); });
+      return r.json();
+    })
     .then(function (all) {
       if (Array.isArray(all.visits)) {
-        data = all.visits.map(function (v) { v.archive = !!v.archive; return v; });
+        data = all.visits.map(function (v) { return v; });
       }
       if (all.settings) settings = Object.assign({}, DEFAULT_SETTINGS, all.settings);
       if (Array.isArray(all.students)) studentsData = all.students;
@@ -160,20 +172,44 @@ function syncLoadAll() {
 
 /* Synchronisation client → serveur (fire-and-forget) */
 function syncSaveAll() {
-  if (!SERVER_MODE || !currentUser || saveInProgress) return;
+  if (!SERVER_MODE || !currentUser) return;
+  if (saveInProgress) { saveAgain = true; return; }
   saveInProgress = true;
+  var status = $('saveStatus');
+  if (status) status.textContent = '💾 Synchronisation…';
+  var payloadVisits = data;
+  var payloadStudents = studentsData;
+  if (currentUser.role !== 'admin') {
+    var userLevel = currentUser.niveau || 'primaire';
+    payloadVisits = data.filter(function (v) {
+      return v && v.nom && inferNiveau('', v.classe) === userLevel;
+    });
+    payloadStudents = studentsData.filter(function (s) {
+      return !(s && s.classe) || inferNiveau('', s.classe) === userLevel;
+    });
+  }
   apiFetch('/data', {
     method: 'POST',
-    body: { visits: data, settings: settings, students: studentsData }
+    body: { visits: payloadVisits, settings: settings, students: payloadStudents }
   })
-    .then(function (r) { return r.json(); })
+    .then(function (r) {
+      if (!r.ok) return r.json().then(function (err) { throw new Error(err.error || 'Écriture sur le serveur impossible'); });
+      return r.json();
+    })
     .then(function (result) {
       saveInProgress = false;
-      if (result.success) { dataVersion++; }
+      if (result.success) {
+        dataVersion++;
+        if (status) status.textContent = '💾 Enregistré sur le serveur à ' + nowTime();
+      }
+      if (saveAgain) { saveAgain = false; syncSaveAll(); }
     })
     .catch(function (e) {
       saveInProgress = false;
+      if (status) status.textContent = '⚠️ Échec de synchronisation avec le serveur';
       console.error('Sync serveur impossible :', e);
+      showServerUnavailable(e);
+      if (saveAgain) { saveAgain = false; syncSaveAll(); }
     });
 }
 
@@ -189,6 +225,8 @@ function startPolling() {
         updateFooter();
       }).catch(function (e) {
         console.error('Polling error:', e);
+        stopPolling();
+        showServerUnavailable(e);
       });
     }
     startPolling();
@@ -326,39 +364,17 @@ function normalizeKey(s) {
 
 /* ---------- Persistance ---------- */
 function saveData() {
-  if (SERVER_MODE && currentUser) {
-    syncSaveAll();
-  } else {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
-    catch (e) { console.error('Sauvegarde impossible :', e); }
-  }
-  scheduleBackup();
+  if (!SERVER_MODE || !currentUser) return;
+  syncSaveAll();
   var el = $('saveStatus');
-  if (el) el.textContent = '💾 Enregistré à ' + nowTime();
-}
-
-function loadData() {
-  if (SERVER_MODE && currentUser) {
-    return syncLoadAll();
-  }
-  return new Promise(function (resolve) {
-    try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        var arr = JSON.parse(raw);
-        if (Array.isArray(arr)) data = arr;
-      }
-    } catch (e) { console.warn('Lecture du registre impossible :', e); }
-    migrateData();
-    resolve();
-  });
+  if (el) el.textContent = '💾 Synchronisation…';
 }
 
 function migrateData() {
   data.forEach(function (v) {
     if (!v.id) v.id = genId();
     if (!v.createdAt) v.createdAt = Date.now();
-    if (v.archive === undefined) v.archive = false;
+    delete v.archive;
     v.arrivee = normalizeTime(v.arrivee);
     v.departClasse = normalizeTime(v.departClasse);
     v.departMaison = normalizeTime(v.departMaison);
@@ -366,74 +382,14 @@ function migrateData() {
 }
 
 function saveSettings() {
-  if (SERVER_MODE && currentUser) {
-    syncSaveAll();
-  } else {
-    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (e) { /* ignore */ }
-  }
+  if (!SERVER_MODE || !currentUser) return;
+  syncSaveAll();
   applySettingsUI();
-  scheduleBackup();
-}
-
-var SETTINGS_MIGRATION_KEY = 'registre_infirmerie_jules_verne_settings_2026_2027';
-
-function loadSettings() {
-  if (SERVER_MODE && currentUser) {
-    return syncLoadAll();
-  }
-  return new Promise(function (resolve) {
-    try {
-      var raw = localStorage.getItem(SETTINGS_KEY);
-      if (raw) settings = Object.assign({}, DEFAULT_SETTINGS, JSON.parse(raw));
-    } catch (e) { settings = Object.assign({}, DEFAULT_SETTINGS); }
-    migrateSettings();
-    resolve();
-  });
-}
-
-/* Une seule fois : les paramètres datant de l'année 2025–2026 passent à 2026–2027.
-   Ne touche jamais à un choix postérieur (le drapeau évite toute répétition). */
-function migrateSettings() {
-  var done = false;
-  try { done = localStorage.getItem(SETTINGS_MIGRATION_KEY) === '1'; } catch (e) { /* ignore */ }
-  if (done) return;
-  var changed = false;
-  if (settings.anneeDebut === '2025-09-01') {
-    settings.anneeDebut = DEFAULT_SETTINGS.anneeDebut;
-    settings.anneeFin = DEFAULT_SETTINGS.anneeFin;
-    changed = true;
-  }
-  if (settings.titre === "Registre d'infirmerie scolaire 2025–2026") {
-    settings.titre = DEFAULT_SETTINGS.titre;
-    changed = true;
-  }
-  try { localStorage.setItem(SETTINGS_MIGRATION_KEY, '1'); } catch (e) { /* ignore */ }
-  if (changed) saveSettings();
-}
-
-function loadStudents() {
-  if (SERVER_MODE && currentUser) {
-    return syncLoadAll();
-  }
-  return new Promise(function (resolve) {
-    try {
-      var raw = localStorage.getItem(STUDENTS_KEY);
-      if (raw) {
-        var arr = JSON.parse(raw);
-        if (Array.isArray(arr)) studentsData = arr;
-      }
-    } catch (e) { console.warn('Lecture de la liste des élèves impossible :', e); }
-    resolve();
-  });
 }
 
 function saveStudents() {
-  if (SERVER_MODE && currentUser) {
-    syncSaveAll();
-  } else {
-    try { localStorage.setItem(STUDENTS_KEY, JSON.stringify(studentsData)); }
-    catch (e) { console.error('Sauvegarde de la liste des élèves impossible :', e); }
-  }
+  if (!SERVER_MODE || !currentUser) return;
+  syncSaveAll();
 }
 
 function maxNumero() {
@@ -451,9 +407,12 @@ function filteredData() {
   var age = $('filterAge').value;
   var from = $('filterFrom').value;
   var to = $('filterTo').value;
-  var showArch = $('filterArchives').checked;
+  var userLevel = (SERVER_MODE && currentUser && currentUser.role !== 'admin') ? (currentUser.niveau || 'primaire') : '';
   var liste = data.filter(function (v) {
-    if (!showArch && v.archive) return false;
+    if (userLevel) {
+      var recordLevel = (v && v.niveau) ? v.niveau : inferNiveau('', v.classe);
+      if (recordLevel !== userLevel) return false;
+    }
     if (classe && v.classe !== classe) return false;
     if (age && v.age !== age) return false;
     if (from && v.date && v.date < from) return false;
@@ -475,13 +434,17 @@ function filteredData() {
 }
 
 function renderTable() {
-  var rows = filteredData();
+  var allRows = filteredData();
+  var pageCount = Math.max(1, Math.ceil(allRows.length / PAGE_SIZE));
+  if (currentPage > pageCount) currentPage = pageCount;
+  if (currentPage < 1) currentPage = 1;
+  var start = (currentPage - 1) * PAGE_SIZE;
+  var rows = allRows.slice(start, start + PAGE_SIZE);
   var tbody = $('registerBody');
   tbody.innerHTML = '';
-  $('emptyState').hidden = rows.length > 0;
+  $('emptyState').hidden = allRows.length > 0;
   rows.forEach(function (v) {
     var tr = document.createElement('tr');
-    if (v.archive) tr.className = 'is-archived';
     tr.innerHTML =
       '<td class="col-num">' + (v.numero || '') + '</td>' +
       '<td class="col-date">' + esc(fmtDateFR(v.date)) + '</td>' +
@@ -496,13 +459,10 @@ function renderTable() {
       '<td class="col-parent">' + esc(v.parent) + '</td>' +
       '<td class="col-actions"><div class="cell-actions">' +
         '<button type="button" class="btn-icon" data-action="edit" data-id="' + v.id + '" title="Modifier">✏️</button>' +
-        (v.archive
-          ? '<button type="button" class="btn-icon" data-action="restore" data-id="' + v.id + '" title="Restaurer la visite">↩️</button>'
-          : '<button type="button" class="btn-icon danger" data-action="archive" data-id="' + v.id + '" title="Archiver (retirer du registre actif)">🗄️</button>') +
       '</div></td>';
     tbody.appendChild(tr);
   });
-  updateFooter();
+  updateFooter(allRows.length, pageCount);
 }
 
 /* Valeurs distinctes pour les menus de filtre : tirées de la liste des élèves
@@ -647,7 +607,7 @@ function renderStats() {
   var today = todayISO();
   var wk = weekBounds();
   var monthNow = today.slice(0, 7);
-  var active = data.filter(function (v) { return !v.archive; });
+  var active = data;
   var total = active.length, todayN = 0, weekN = 0, monthN = 0;
   var students = {};
   active.forEach(function (v) {
@@ -724,11 +684,19 @@ function renderStats() {
   });
 }
 
-function updateFooter() {
-  var n = data.filter(function (v) { return !v.archive; }).length;
-  var a = data.length - n;
+function updateFooter(total, pageCount) {
+  var n = total == null ? data.length : total;
+  var pageTotal = pageCount || Math.max(1, Math.ceil(n / PAGE_SIZE));
   var t = $('footerCount');
-  t.textContent = n + ' visite' + (n > 1 ? 's' : '') + ' enregistrée' + (n > 1 ? 's' : '') + ' | ' + a + ' archivée' + (a > 1 ? 's' : '');
+  t.textContent = n + ' visite' + (n > 1 ? 's' : '') + ' enregistrée' + (n > 1 ? 's' : '');
+  var pageInfo = $('pageInfo');
+  var prev = $('btnPrevPage');
+  var next = $('btnNextPage');
+  if (pageInfo) {
+    pageInfo.textContent = 'Page ' + currentPage + '/' + pageTotal;
+  }
+  if (prev) prev.disabled = currentPage <= 1;
+  if (next) next.disabled = currentPage >= pageTotal;
 }
 
 function applySettingsUI() {
@@ -814,7 +782,6 @@ function onVisitSubmit(e) {
     departClasse: normalizeTime($('fDepartClasse').value),
     departMaison: normalizeTime($('fDepartMaison').value),
     parent: $('fParent').value,
-    archive: false,
     createdAt: Date.now()
   };
 
@@ -826,7 +793,6 @@ function onVisitSubmit(e) {
     if (idx >= 0) {
       rec.numero = data[idx].numero;
       rec.createdAt = data[idx].createdAt;
-      rec.archive = data[idx].archive;
       data[idx] = rec;
     }
   }
@@ -839,27 +805,6 @@ function onVisitSubmit(e) {
   renderAll();
 }
 
-function archiveVisit(id) {
-  for (var i = 0; i < data.length; i++) {
-    if (data[i].id === id && !data[i].archive) {
-      data[i].archive = true;
-      saveData();
-      renderAll();
-      return;
-    }
-  }
-}
-
-function restoreVisit(id) {
-  for (var i = 0; i < data.length; i++) {
-    if (data[i].id === id) {
-      data[i].archive = false;
-      saveData();
-      renderAll();
-      return;
-    }
-  }
-}
 
 /* ---------- Import / export : ouverture des menus ---------- */
 function closeDropdowns() {
@@ -887,18 +832,26 @@ function openFilePicker(action) {
 }
 
 function handleExport(action) {
-  var list = data.filter(function (v) { return !v.archive; });
-  if (action === 'xlsx') {
+  var mode = action || '';
+  if (mode === 'export-xlsx') mode = 'xlsx';
+  else if (mode === 'export-csv') mode = 'csv';
+  else if (mode === 'export-json') mode = 'json';
+
+  var list = data;
+  if (mode === 'xlsx') {
     var bytes = buildXlsxBytes(list);
     downloadBlob(new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), fileName('xlsx'));
-  } else if (action === 'csv') {
+  } else if (mode === 'csv') {
     downloadBlob(new Blob([buildCsv(list)], { type: 'text/csv;charset=utf-8' }), fileName('csv'));
-  } else if (action === 'json') {
+  } else if (mode === 'json') {
     var payload = buildBackupPayload();
     downloadBlob(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }), fileName('json'));
+  } else {
+    return;
   }
+
   closeDropdowns();
-  toast('Export ' + action.toUpperCase() + ' téléchargé.');
+  toast('Export ' + mode.toUpperCase() + ' téléchargé.');
 }
 
 function toast(msg, isError) {
@@ -1251,7 +1204,6 @@ function appendImportedRecords(recs) {
       departClasse: normalizeTime(r.departClasse),
       departMaison: normalizeTime(r.departMaison),
       parent: r.parent || '',
-      archive: false,
       createdAt: Date.now()
     });
     added++;
@@ -1299,26 +1251,69 @@ function importCsvText(text) {
   return { added: added };
 }
 
+function mergeImportedRecords(existing, incoming) {
+  var merged = existing.slice();
+  var seenIds = {};
+  merged.forEach(function (v) {
+    if (v && v.id) seenIds[String(v.id)] = true;
+  });
+  var nextNumero = maxNumero();
+  incoming.forEach(function (v) {
+    if (!v || !v.nom) return;
+    var clone = Object.assign({}, v);
+    var key = clone.id ? String(clone.id) : '';
+    if (key && seenIds[key]) return;
+    clone.id = key || genId();
+    clone.createdAt = clone.createdAt || Date.now();
+    delete clone.archive;
+    if (!clone.numero || merged.some(function (existingV) { return Number(existingV.numero) === Number(clone.numero); })) {
+      nextNumero += 1;
+      clone.numero = nextNumero;
+    }
+    seenIds[String(clone.id)] = true;
+    merged.push(clone);
+  });
+  return merged;
+}
+
+function mergeImportedStudents(existing, incoming) {
+  var merged = existing.slice();
+  var seen = {};
+  merged.forEach(function (s) {
+    var key = normalizeKey([(s && s.nom) || '', (s && s.prenom) || '', (s && s.classe) || '', (s && s.naissance) || ''].join('|'));
+    if (key) seen[key] = true;
+  });
+  incoming.forEach(function (s) {
+    if (!s || !(s.nom || s.prenom)) return;
+    var key = normalizeKey([(s.nom || ''), (s.prenom || ''), (s.classe || ''), (s.naissance || '')].join('|'));
+    if (!key || seen[key]) return;
+    seen[key] = true;
+    merged.push(Object.assign({}, s));
+  });
+  return merged;
+}
+
 function importJsonText(text) {
   var obj = JSON.parse(text);
   if (!obj || !Array.isArray(obj.data)) throw new Error('Fichier de sauvegarde invalide.');
   var arr = obj.data.filter(function (v) { return v && v.nom; });
-  data = arr;
+  data = mergeImportedRecords(data, arr);
   if (SERVER_MODE && currentUser && currentUser.role !== 'admin') {
     var accountLevel = currentUser.niveau || 'primaire';
     data = data.filter(function (v) { return inferNiveau('', v.classe) === accountLevel; });
   }
-  if (obj.settings) settings = Object.assign({}, DEFAULT_SETTINGS, obj.settings);
+  if (obj.settings) settings = Object.assign({}, DEFAULT_SETTINGS, settings, obj.settings);
   if (obj.eleves && Array.isArray(obj.eleves)) {
-    studentsData = obj.eleves.filter(function (s) { return s && (s.nom || s.prenom); });
+    var importedStudents = obj.eleves.filter(function (s) { return s && (s.nom || s.prenom); });
     if (SERVER_MODE && currentUser && currentUser.role !== 'admin') {
       var accountLevelForStudents = currentUser.niveau || 'primaire';
-      studentsData = studentsData.filter(function (s) { return inferNiveau('', s.classe) === accountLevelForStudents; });
+      importedStudents = importedStudents.filter(function (s) { return inferNiveau('', s.classe) === accountLevelForStudents; });
     }
-    studentsData = studentsData.map(function (s) {
+    importedStudents = importedStudents.map(function (s) {
       var assigned = SERVER_MODE && currentUser && currentUser.role !== 'admin' ? currentUser.niveau : inferNiveau(s.niveau, s.classe);
       return Object.assign({}, s, { niveau: assigned || 'primaire' });
     });
+    studentsData = mergeImportedStudents(studentsData, importedStudents);
   }
   migrateData();
   saveData();
@@ -1484,6 +1479,130 @@ function updateStudentsUI() {
     box.className = 'backup-status on';
     box.textContent = studentsData.length + ' élève(s) enregistré(s) — autocomplétion active dans le formulaire de visite.';
     if (clearBtn) clearBtn.hidden = false;
+  }
+  renderAdminStudentsTable();
+}
+
+function ensureStudentId(student, fallbackIndex) {
+  if (!student) return '';
+  if (!student.id) student.id = 'student-' + (fallbackIndex + 1) + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 6);
+  return student.id;
+}
+
+function renderAdminStudentsTable() {
+  var body = $('adminStudentsBody');
+  if (!body) return;
+  body.innerHTML = '';
+  if (!studentsData.length) {
+    var emptyRow = document.createElement('tr');
+    emptyRow.innerHTML = '<td colspan="7">Aucun élève importé.</td>';
+    body.appendChild(emptyRow);
+    return;
+  }
+
+  studentsData.forEach(function (student, index) {
+    ensureStudentId(student, index);
+    var tr = document.createElement('tr');
+    var nom = document.createElement('td'); nom.textContent = student.nom || '—';
+    var prenom = document.createElement('td'); prenom.textContent = student.prenom || '—';
+    var classe = document.createElement('td'); classe.textContent = student.classe || '—';
+    var niveau = document.createElement('td'); niveau.textContent = student.niveau === 'lycee' ? 'Lycée' : 'Primaire';
+    var naissance = document.createElement('td'); naissance.textContent = student.naissance ? fmtDateFR(student.naissance) : '—';
+    var sexe = document.createElement('td'); sexe.textContent = student.sexe || '—';
+    var actions = document.createElement('td');
+    var editBtn = document.createElement('button');
+    editBtn.type = 'button'; editBtn.className = 'btn btn-secondary';
+    editBtn.textContent = 'Modifier';
+    editBtn.setAttribute('data-action', 'edit-student');
+    editBtn.setAttribute('data-student-id', student.id);
+    var deleteBtn = document.createElement('button');
+    deleteBtn.type = 'button'; deleteBtn.className = 'btn btn-secondary';
+    deleteBtn.textContent = 'Supprimer';
+    deleteBtn.setAttribute('data-action', 'delete-student');
+    deleteBtn.setAttribute('data-student-id', student.id);
+    actions.appendChild(editBtn); actions.appendChild(deleteBtn);
+    tr.appendChild(nom); tr.appendChild(prenom); tr.appendChild(classe); tr.appendChild(niveau); tr.appendChild(naissance); tr.appendChild(sexe); tr.appendChild(actions);
+    body.appendChild(tr);
+  });
+}
+
+function resetAdminStudentForm() {
+  var form = $('adminStudentForm');
+  if (!form) return;
+  form.reset();
+  $('adminStudentId').value = '';
+  $('adminStudentNiveau').value = 'primaire';
+}
+
+function openAdminStudentEditor(studentId) {
+  var student = studentsData.find(function (s) { return s.id === studentId; });
+  if (!student) return;
+  $('adminStudentId').value = student.id || '';
+  $('adminStudentNom').value = student.nom || '';
+  $('adminStudentPrenom').value = student.prenom || '';
+  $('adminStudentClasse').value = student.classe || '';
+  $('adminStudentNiveau').value = student.niveau === 'lycee' ? 'lycee' : 'primaire';
+  $('adminStudentNaissance').value = student.naissance || '';
+  $('adminStudentSexe').value = student.sexe || '';
+  $('adminStudentNom').focus();
+}
+
+function onAdminStudentSubmit(e) {
+  e.preventDefault();
+  if (!SERVER_MODE || !currentUser || currentUser.role !== 'admin') {
+    toast('Accès réservé à l’administrateur.');
+    return;
+  }
+  var studentId = $('adminStudentId').value;
+  var student = studentId ? studentsData.find(function (s) { return s.id === studentId; }) : null;
+  if (!student) {
+    toast('Sélectionnez un élève à modifier.', true);
+    return;
+  }
+  var nom = $('adminStudentNom').value.trim();
+  var prenom = $('adminStudentPrenom').value.trim();
+  if (!nom || !prenom) {
+    toast('Le nom et le prénom sont obligatoires.', true);
+    return;
+  }
+  student.nom = nom;
+  student.prenom = prenom;
+  student.classe = $('adminStudentClasse').value.trim();
+  student.niveau = $('adminStudentNiveau').value || inferNiveau(student.niveau, student.classe);
+  student.naissance = $('adminStudentNaissance').value || '';
+  student.sexe = $('adminStudentSexe').value || '';
+  student.niveau = inferNiveau(student.niveau, student.classe);
+  saveStudents();
+  updateStudentsUI();
+  renderFilters();
+  populateFormSelects();
+  renderAll();
+  resetAdminStudentForm();
+  toast('Élève modifié.');
+}
+
+function onAdminStudentsTableClick(e) {
+  var btn = e.target.closest ? e.target.closest('button[data-action]') : null;
+  if (!btn || !SERVER_MODE || !currentUser || currentUser.role !== 'admin') return;
+  var action = btn.getAttribute('data-action');
+  var id = btn.getAttribute('data-student-id');
+  if (!id) return;
+  if (action === 'edit-student') {
+    openAdminStudentEditor(id);
+    return;
+  }
+  if (action === 'delete-student') {
+    var student = studentsData.find(function (s) { return s.id === id; });
+    if (!student) return;
+    if (!confirm('Supprimer cet élève importé de la liste ?')) return;
+    studentsData = studentsData.filter(function (s) { return s.id !== id; });
+    saveStudents();
+    updateStudentsUI();
+    renderFilters();
+    populateFormSelects();
+    renderAll();
+    resetAdminStudentForm();
+    toast('Élève supprimé.');
   }
 }
 
@@ -1889,8 +2008,6 @@ function bindEvents() {
     var id = btn.getAttribute('data-id');
     var action = btn.getAttribute('data-action');
     if (action === 'edit') openModal(id);
-    else if (action === 'archive') archiveVisit(id);
-    else if (action === 'restore') restoreVisit(id);
   });
 
   $('btnImport').addEventListener('click', function (e) { e.stopPropagation(); toggleMenu('importMenu'); });
@@ -1919,13 +2036,38 @@ function bindEvents() {
   $('fileInput').addEventListener('change', onFileInputChange);
 
   /* Filtres */
-  var filterIds = ['filterSearch', 'filterClasse', 'filterAge', 'filterFrom', 'filterTo', 'filterArchives'];
+  var filterIds = ['filterSearch', 'filterClasse', 'filterAge', 'filterFrom', 'filterTo'];
   filterIds.forEach(function (id) {
     var el = $(id);
     if (!el) return;
-    el.addEventListener('input', renderTable);
-    el.addEventListener('change', renderTable);
+    el.addEventListener('input', function () {
+      currentPage = 1;
+      renderTable();
+    });
+    el.addEventListener('change', function () {
+      currentPage = 1;
+      renderTable();
+    });
   });
+
+  if ($('btnPrevPage')) {
+    $('btnPrevPage').addEventListener('click', function () {
+      if (currentPage > 1) {
+        currentPage -= 1;
+        renderTable();
+      }
+    });
+  }
+  if ($('btnNextPage')) {
+    $('btnNextPage').addEventListener('click', function () {
+      var total = filteredData().length;
+      var pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
+      if (currentPage < pageCount) {
+        currentPage += 1;
+        renderTable();
+      }
+    });
+  }
 
   /* Boutons « Maintenant » */
   document.querySelectorAll('.btn-mini[data-time-target]').forEach(function (b) {
@@ -1942,7 +2084,11 @@ function bindEvents() {
   $('createUserForm').addEventListener('submit', onCreateUserSubmit);
   $('usersBody').addEventListener('click', onUsersTableClick);
   $('newUserRole').addEventListener('change', updateNewUserLevelControl);
+  $('adminStudentForm').addEventListener('submit', onAdminStudentSubmit);
+  $('adminStudentsBody').addEventListener('click', onAdminStudentsTableClick);
+  $('btnResetAdminStudent').addEventListener('click', resetAdminStudentForm);
   updateNewUserLevelControl();
+  renderAdminStudentsTable();
 
     /* Authentification (mode serveur) */
     /* Authentification (mode serveur) */
@@ -1950,7 +2096,7 @@ function bindEvents() {
   if (loginForm) loginForm.addEventListener('submit', onLoginSubmit);
 
   var btnOpenLogin = $('btnOpenLogin');
-  if (btnOpenLogin) btnOpenLogin.addEventListener('click', showLogin);
+  if (btnOpenLogin) btnOpenLogin.addEventListener('click', retryServerConnection);
 
   var btnLogout = $('btnLogout');
   if (btnLogout) btnLogout.addEventListener('click', function () {
@@ -1970,18 +2116,6 @@ function bindEvents() {
   if (btnCancelChangePwd) btnCancelChangePwd.addEventListener('click', closeChangePasswordModal);
   var changePwdOverlay = $('changePwdOverlay');
   if (changePwdOverlay) changePwdOverlay.addEventListener('click', function (e) { if (e.target === this) closeChangePasswordModal(); });
-
-  /* Sauvegarde automatique dans un dossier */
-  $('btnBackupPick').addEventListener('click', chooseBackupFolder);
-  $('btnBackupNow').addEventListener('click', function () {
-    if (!backupDirHandle) { chooseBackupFolder(); return; }
-    performBackup('manuel').then(function (ok) {
-      toast(ok ? 'Sauvegarde écrite dans « ' + backupDirHandle.name + ' ».' : 'Échec de la sauvegarde : ' + backupLastError);
-    });
-  });
-  $('btnBackupRestore').addEventListener('click', restoreFromBackupFolder);
-  $('btnBackupReactivate').addEventListener('click', reactivateBackup);
-  $('btnBackupDisable').addEventListener('click', disableBackupFolder);
 
   /* Liste des élèves (autocomplétion) */
   $('btnStudentsImport').addEventListener('click', function () { openFilePicker('students'); });
@@ -2024,16 +2158,6 @@ function bindEvents() {
     window.print();
   });
 
-  /* Installation en tant qu'application (PWA) */
-  $('btnInstallApp').addEventListener('click', function () {
-    if (!deferredInstallPrompt) return;
-    deferredInstallPrompt.prompt();
-    deferredInstallPrompt.userChoice.then(function () {
-      deferredInstallPrompt = null;
-      $('btnInstallApp').hidden = true;
-    });
-  });
-
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       closeModal();
@@ -2052,7 +2176,6 @@ function openSettingsModal() {
   $('sTitle').value = settings.titre;
   $('sYearStart').value = settings.anneeDebut;
   $('sYearEnd').value = settings.anneeFin;
-  updateBackupUI();
   updateStudentsUI();
   $('mainContent').hidden = true;
   $('appFooter').hidden = true;
@@ -2208,63 +2331,6 @@ function onChangePasswordSubmit(e) {
   });
 }
 
-/* =========================================================
-   SAUVEGARDE AUTOMATIQUE DANS UN DOSSIER (File System Access)
-   Le dossier est choisi une fois via Paramètres, mémorisé dans
-   IndexedDB, puis chaque modification y est écrite en silence :
-   - registre-infirmerie-sauvegarde.json  (dernier état complet)
-   - sauvegarde-JJ-MM-AAAA.json           (copie datée par jour)
-   ========================================================= */
-var backupDirHandle = null;        // handle du dossier choisi
-var backupNeedsPermission = false; // autorisation à réactiver (nouvelle session)
-var backupLastError = null;
-var backupLastOkAt = null;         // Date de la dernière écriture réussie (session)
-var backupTimer = null;            // temporisation anti-écriture en rafale
-var backupBusy = false;            // une écriture est en cours
-var BACKUP_DEBOUNCE_MS = 1200;
-var BACKUP_MAIN_FILE = 'registre-infirmerie-sauvegarde.json';
-var BACKUP_DAILY_PREFIX = 'sauvegarde-';
-var BACKUP_DAILY_SUFFIX = '.json';
-var BACKUP_MAX_DAILY = 30;         // purge des copies quotidiennes trop anciennes
-var IDB_NAME = 'registre-infirmerie-fs';
-var IDB_STORE = 'handles';
-
-/* =========================================================
-   INSTALLATION EN TANT QU'APPLICATION (PWA)
-   ========================================================= */
-var deferredInstallPrompt = null;
-
-function canRegisterServiceWorker() {
-  if (!('serviceWorker' in navigator)) return false;
-  if (location.protocol === 'file:') return false;
-  return location.protocol === 'https:' ||
-    location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-}
-
-if (canRegisterServiceWorker()) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./sw.js').then(function () {
-      document.body.setAttribute('data-sw', 'ok');
-    })['catch'](function (err) {
-      document.body.setAttribute('data-sw', 'erreur: ' + (err && err.message ? err.message : String(err)));
-    });
-  });
-}
-
-window.addEventListener('beforeinstallprompt', function (e) {
-  e.preventDefault();
-  deferredInstallPrompt = e;
-  var b = $('btnInstallApp');
-  if (b) b.hidden = false;
-});
-
-window.addEventListener('appinstalled', function () {
-  deferredInstallPrompt = null;
-  var b = $('btnInstallApp');
-  if (b) b.hidden = true;
-  toast('Application installée : raccourci ajouté au menu Démarrer.');
-});
-
 function buildBackupPayload() {
   return {
     application: "Registre d'infirmerie — École Jules Verne",
@@ -2274,294 +2340,6 @@ function buildBackupPayload() {
     data: data,
     eleves: studentsData
   };
-}
-
-/* ---------- Mémorisation du dossier (IndexedDB) ---------- */
-function idbOpen() {
-  return new Promise(function (resolve, reject) {
-    var rq = indexedDB.open(IDB_NAME, 1);
-    rq.onupgradeneeded = function () { rq.result.createObjectStore(IDB_STORE); };
-    rq.onsuccess = function () { resolve(rq.result); };
-    rq.onerror = function () { reject(rq.error); };
-  });
-}
-
-function idbSet(key, val) {
-  return idbOpen().then(function (db) {
-    return new Promise(function (resolve, reject) {
-      var tx = db.transaction(IDB_STORE, 'readwrite');
-      tx.objectStore(IDB_STORE).put(val, key);
-      tx.oncomplete = function () { resolve(true); };
-      tx.onerror = function () { reject(tx.error); };
-    });
-  });
-}
-
-function idbGet(key) {
-  return idbOpen().then(function (db) {
-    return new Promise(function (resolve, reject) {
-      var rq = db.transaction(IDB_STORE, 'readonly').objectStore(IDB_STORE).get(key);
-      rq.onsuccess = function () { resolve(rq.result || null); };
-      rq.onerror = function () { reject(rq.error); };
-    });
-  });
-}
-
-function idbDel(key) {
-  return idbOpen().then(function (db) {
-    return new Promise(function (resolve) {
-      var tx = db.transaction(IDB_STORE, 'readwrite');
-      tx.objectStore(IDB_STORE)['delete'](key);
-      tx.oncomplete = function () { resolve(true); };
-      tx.onerror = function () { resolve(false); };
-    });
-  });
-}
-
-/* ---------- Primitives fichiers ---------- */
-function backupSupported() {
-  return typeof window.showDirectoryPicker === 'function';
-}
-
-function verifyBackupPermission(handle, askUser) {
-  var opts = { mode: 'readwrite' };
-  return handle.queryPermission(opts).then(function (st) {
-    if (st === 'granted') return true;
-    if (!askUser) return false;
-    return handle.requestPermission(opts).then(function (st2) { return st2 === 'granted'; });
-  });
-}
-
-function writeTextToDir(dirHandle, name, text) {
-  return dirHandle.getFileHandle(name, { create: true }).then(function (fh) {
-    return fh.createWritable().then(function (w) {
-      return w.write(new Blob([text], { type: 'application/json;charset=utf-8' })).then(function () {
-        return w.close();
-      });
-    });
-  });
-}
-
-function readTextFromDir(dirHandle, name) {
-  return dirHandle.getFileHandle(name).then(function (fh) {
-    return fh.getFile().then(function (f) { return f.text(); });
-  });
-}
-
-function listBackupEntries(dirHandle) {
-  return new Promise(function (resolve, reject) {
-    if (!dirHandle.values) { resolve([]); return; }
-    var it = dirHandle.values(), out = [];
-    (function step() {
-      it.next().then(function (r) {
-        if (r.done) { resolve(out); return; }
-        out.push(r.value);
-        step();
-      })['catch'](reject);
-    })();
-  });
-}
-
-function parseDailyName(name) {
-  var m = name.match(/^sauvegarde-(\d{2})-(\d{2})-(\d{4})\.json$/);
-  return m ? (m[3] + '-' + m[2] + '-' + m[1]) : null; // AAAA-MM-JJ
-}
-
-function purgeOldDailies(dirHandle) {
-  return listBackupEntries(dirHandle).then(function (entries) {
-    var dailies = [];
-    entries.forEach(function (en) {
-      if (en.kind !== 'file') return;
-      var d = parseDailyName(en.name);
-      if (d) dailies.push({ name: en.name, date: d });
-    });
-    dailies.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
-    var chain = Promise.resolve();
-    dailies.slice(BACKUP_MAX_DAILY).forEach(function (d) {
-      chain = chain.then(function () { return dirHandle.removeEntry(d.name); })['catch'](function () { /* ignore */ });
-    });
-    return chain;
-  });
-}
-
-/* ---------- Écriture de la sauvegarde ---------- */
-var BACKUP_TS_KEY = 'registre_infirmerie_jules_verne_backup_ts';
-
-function performBackup() {
-  if (!backupDirHandle || backupBusy) return Promise.resolve(false);
-  backupBusy = true;
-  updateBackupUI();
-  var json = JSON.stringify(buildBackupPayload(), null, 2);
-  var dailyName = BACKUP_DAILY_PREFIX + fmtDateFileFR() + BACKUP_DAILY_SUFFIX;
-  return verifyBackupPermission(backupDirHandle, false).then(function (ok) {
-    if (!ok) {
-      backupNeedsPermission = true;
-      return false;
-    }
-    return writeTextToDir(backupDirHandle, BACKUP_MAIN_FILE, json)
-      .then(function () { return writeTextToDir(backupDirHandle, dailyName, json); })
-      .then(function () { return purgeOldDailies(backupDirHandle); })
-      .then(function () {
-        backupLastError = null;
-        backupNeedsPermission = false;
-        backupLastOkAt = new Date();
-        try { localStorage.setItem(BACKUP_TS_KEY, String(backupLastOkAt.getTime())); } catch (e2) { /* ignore */ }
-        return true;
-      });
-  })['catch'](function (e) {
-    backupLastError = (e && e.message) ? e.message : String(e);
-    return false;
-  }).then(function (ok) {
-    backupBusy = false;
-    updateBackupUI();
-    return ok;
-  });
-}
-
-/* Écriture différée : évite un fichier réécrit à chaque frappe */
-function scheduleBackup() {
-  if (!backupDirHandle || backupNeedsPermission) return;
-  if (backupTimer) clearTimeout(backupTimer);
-  backupTimer = setTimeout(function () {
-    backupTimer = null;
-    performBackup();
-  }, BACKUP_DEBOUNCE_MS);
-}
-
-/* ---------- Interface de la boîte Paramètres ---------- */
-function updateBackupUI() {
-  var box = $('backupStatus');
-  if (!box) return;
-  var pick = $('btnBackupPick'), now = $('btnBackupNow'), rest = $('btnBackupRestore'),
-      react = $('btnBackupReactivate'), dis = $('btnBackupDisable');
-  function setCls(c) { box.className = 'backup-status ' + c; }
-
-  if (!backupSupported()) {
-    setCls('off');
-    box.textContent = 'Sauvegarde automatique : non prise en charge par ce navigateur. Utilisez Microsoft Edge ou Google Chrome, ou passez par Exporter → Sauvegarde complète (JSON).';
-    pick.hidden = true; now.hidden = true; rest.hidden = true; react.hidden = true; dis.hidden = true;
-    return;
-  }
-  pick.hidden = false;
-  if (!backupDirHandle) {
-    setCls('off');
-    box.textContent = 'Sauvegarde automatique : désactivée. Cliquez sur « Choisir le dossier… » puis sélectionnez le dossier sauvegarde de l’application.';
-    now.hidden = true; rest.hidden = true; react.hidden = true; dis.hidden = true;
-    return;
-  }
-
-  var lastTxt = '';
-  var ts = null;
-  try { ts = localStorage.getItem(BACKUP_TS_KEY); } catch (e3) { /* ignore */ }
-  if (backupLastOkAt) lastTxt = ' · dernière écriture : ' + fmtDateTimeFR(backupLastOkAt);
-  else if (ts) lastTxt = ' · dernière écriture : ' + fmtDateTimeFR(new Date(parseInt(ts, 10)));
-
-  if (backupBusy) {
-    setCls('off');
-    box.textContent = 'Sauvegarde en cours dans « ' + backupDirHandle.name + ' »…';
-  } else if (backupLastError) {
-    setCls('error');
-    box.textContent = 'Échec de sauvegarde (' + backupLastError + ')' + lastTxt;
-  } else if (backupNeedsPermission) {
-    setCls('warn');
-    box.textContent = 'Autorisation à réactiver pour « ' + backupDirHandle.name + ' » : cliquez sur 🔑 Réactiver l’autorisation.';
-  } else {
-    setCls('on');
-    box.textContent = 'Sauvegarde automatique active — dossier « ' + backupDirHandle.name + ' »' + lastTxt;
-  }
-  now.hidden = false; rest.hidden = false; dis.hidden = false;
-  react.hidden = !backupNeedsPermission;
-}
-
-/* ---------- Choix du dossier, autorisation, désactivation ---------- */
-var IDB_DIR_KEY = 'backupDirHandle';
-
-function chooseBackupFolder() {
-  if (!backupSupported()) { updateBackupUI(); return; }
-  window.showDirectoryPicker({ mode: 'readwrite' }).then(function (handle) {
-    return verifyBackupPermission(handle, true).then(function (granted) {
-      if (!granted) {
-        backupLastError = 'autorisation refusée pour ce dossier';
-        updateBackupUI();
-        return;
-      }
-      backupDirHandle = handle;
-      backupNeedsPermission = false;
-      backupLastError = null;
-      return idbSet(IDB_DIR_KEY, handle).then(function () {
-        updateBackupUI();
-        toast('Sauvegarde automatique : dossier « ' + handle.name + ' » activé.');
-        performBackup();
-      });
-    });
-  })['catch'](function (e) {
-    if (e && (e.name === 'AbortError' || e.code === 20)) return; /* sélection annulée par l'utilisateur */
-    backupLastError = (e && e.message) ? e.message : String(e);
-    updateBackupUI();
-  });
-}
-
-function reactivateBackup() {
-  if (!backupDirHandle) { updateBackupUI(); return; }
-  verifyBackupPermission(backupDirHandle, true).then(function (granted) {
-    if (!granted) {
-      backupNeedsPermission = true;
-      updateBackupUI();
-      toast('Autorisation toujours refusée pour « ' + backupDirHandle.name + ' ».', true);
-      return;
-    }
-    backupNeedsPermission = false;
-    backupLastError = null;
-    updateBackupUI();
-    performBackup();
-  })['catch'](function (e) {
-    backupLastError = (e && e.message) ? e.message : String(e);
-    updateBackupUI();
-  });
-}
-
-function disableBackupFolder() {
-  backupDirHandle = null;
-  backupNeedsPermission = false;
-  backupLastError = null;
-  if (backupTimer) { clearTimeout(backupTimer); backupTimer = null; }
-  idbDel(IDB_DIR_KEY)['catch'](function () { /* ignore */ });
-  updateBackupUI();
-  toast('Sauvegarde automatique désactivée.');
-}
-
-function restoreFromBackupFolder() {
-  if (!backupDirHandle) { chooseBackupFolder(); return; }
-  verifyBackupPermission(backupDirHandle, true).then(function (granted) {
-    if (!granted) {
-      backupNeedsPermission = true;
-      updateBackupUI();
-      return;
-    }
-    return readTextFromDir(backupDirHandle, BACKUP_MAIN_FILE).then(function (text) {
-      var res = importJsonText(text); /* restaure les données, sauvegarde et ré-affiche */
-      toast('Restauration réussie depuis « ' + backupDirHandle.name + ' » : ' + res.dataCount + ' visite(s).');
-    });
-  })['catch'](function (e) {
-    if (e && e.name === 'NotFoundError') {
-      toast('Aucun fichier « ' + BACKUP_MAIN_FILE + ' » dans ce dossier.', true);
-      return;
-    }
-    toast('Restauration impossible : ' + ((e && e.message) ? e.message : String(e)), true);
-  });
-}
-
-/* ---------- Démarrage : reprise du dossier mémorisé (IndexedDB) ---------- */
-function initBackupSystem() {
-  if (!backupSupported()) { updateBackupUI(); return; }
-  idbGet(IDB_DIR_KEY).then(function (handle) {
-    if (!handle) { updateBackupUI(); return; }
-    backupDirHandle = handle;
-    return verifyBackupPermission(handle, false).then(function (granted) {
-      backupNeedsPermission = !granted;
-      updateBackupUI();
-    });
-  })['catch'](function () { updateBackupUI(); });
 }
 
 /* ---------- Traitement du fichier choisi ---------- */
@@ -2749,36 +2527,11 @@ function runSelfTest() {
    ========================================================= */
 function init() {
   bindEvents();
-
-  // Détection du mode serveur (backend Node.js present)
-  detectServerMode().then(function () {
-    if (SERVER_MODE) {
-      initServerMode();
-    } else {
-      initLocalMode();
-    }
-  }).catch(function () {
-    initLocalMode();
-  });
-}
-
-/* --- Mode local (PWA hors ligne) : localStorage --- */
-function initLocalMode() {
-  loadSettings();
-  loadData();
-  loadStudents();
-  renderFilters();
-  populateFormSelects();
-  applySettingsUI();
-  renderAll();
-  initBackupSystem();
-  var params = new URLSearchParams(location.search);
-  if (params.get('selftest') === '1') setTimeout(runSelfTest, 200);
+  detectServerMode().then(initServerMode).catch(showServerUnavailable);
 }
 
 /* --- Mode serveur : authentification + synchronisation --- */
 function initServerMode() {
-  // Montrer le verrouillage (l'appContent reste dans le DOM mais est couvert)
   var lock = $('serverAuthLock');
   if (lock) lock.hidden = false;
 
@@ -2789,11 +2542,29 @@ function initServerMode() {
       loadServerDataAndRender();
       startPolling();
     } else {
+      if (lock) lock.hidden = true;
       showLogin();
     }
     var params = new URLSearchParams(location.search);
     if (params.get('selftest') === '1') setTimeout(runSelfTest, 200);
   });
+}
+
+function showServerUnavailable(err) {
+  var lock = $('serverAuthLock');
+  if (!lock) return;
+  lock.hidden = false;
+  $('serverAuthTitle').textContent = 'Serveur indisponible';
+  $('serverAuthMessage').textContent = 'Impossible de joindre le serveur. Vérifiez la connexion réseau puis réessayez.' +
+    (err && err.message ? ' (' + err.message + ')' : '');
+  $('btnOpenLogin').textContent = 'Réessayer';
+  $('btnOpenLogin').disabled = false;
+}
+
+function retryServerConnection() {
+  var button = $('btnOpenLogin');
+  if (button) { button.disabled = true; button.textContent = 'Connexion…'; }
+  detectServerMode().then(initServerMode).catch(showServerUnavailable);
 }
 
 /* Charge toutes les données depuis le serveur, puis rendu */
@@ -2805,10 +2576,10 @@ function loadServerDataAndRender() {
     renderAll();
   }).catch(function (err) {
     console.error('Erreur de chargement serveur :', err);
-    alert('Impossible de charger les données depuis le serveur : ' + err.message);
-    // Revenir au mode local en fallback
-    SERVER_MODE = false;
-    initLocalMode();
+    stopPolling();
+    sessionStorage.removeItem(AUTH_TOKEN_KEY);
+    currentUser = null;
+    showServerUnavailable(err);
   });
 }
 
@@ -2836,15 +2607,5 @@ window.RegistreApp = {
   syncLoadAll: syncLoadAll,
   syncSaveAll: syncSaveAll,
   getServerMode: function () { return SERVER_MODE; },
-  getCurrentUser: function () { return currentUser; },
-  _backupTest: {
-    setHandle: function (h) { backupDirHandle = h; },
-    performBackup: performBackup,
-    buildBackupPayload: buildBackupPayload,
-    updateBackupUI: updateBackupUI,
-    scheduleBackup: scheduleBackup,
-    purgeOldDailies: purgeOldDailies,
-    storeHandle: function (h) { return idbSet('backupDir', h); },
-    readStoredHandle: function () { return idbGet('backupDir'); }
-  }
+  getCurrentUser: function () { return currentUser; }
 };

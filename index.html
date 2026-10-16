@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Registre d'infirmerie — École Jules Verne</title>
-<link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1a3a5c">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/svg+xml" href="assets/blason-jules-verne.svg">
@@ -12,11 +11,11 @@
 <body>
 
 <!-- Verrouillage serveur : masque le contenu tant que non connecté -->
-<div id="serverAuthLock" class="auth-lock" hidden>
+<div id="serverAuthLock" class="auth-lock">
   <div class="auth-lock-content">
-    <h2>🔒 Accès au registre partagé</h2>
-    <p>Veuillez vous connecter pour accéder aux données partagées du serveur.</p>
-    <button id="btnOpenLogin" class="btn btn-primary">Se connecter</button>
+    <h2 id="serverAuthTitle">Connexion au serveur</h2>
+    <p id="serverAuthMessage">Vérification de la connexion au registre partagé…</p>
+    <button id="btnOpenLogin" class="btn btn-primary">Réessayer</button>
   </div>
 </div>
 
@@ -105,7 +104,6 @@
       </div>
 
       <button id="btnPrint" class="btn btn-secondary" type="button">🖨️ Imprimer</button>
-      <button id="btnInstallApp" class="btn btn-secondary" type="button" hidden title="Installer comme application (raccourci Bureau + menu Démarrer)">📲 Installer l'application</button>
     </div>
 
     <div class="toolbar-row filters">
@@ -114,7 +112,6 @@
       <select id="filterAge" aria-label="Filtrer par âge"><option value="">Tous les âges</option></select>
       <label class="date-range">Du <input type="date" id="filterFrom" lang="fr"></label>
       <label class="date-range">au <input type="date" id="filterTo" lang="fr"></label>
-      <label class="checkbox-label"><input type="checkbox" id="filterArchives"> Afficher les visites archivées</label>
     </div>
   </section>
 <section class="stats no-print" id="statsSection" aria-label="Statistiques">
@@ -164,8 +161,12 @@
 
 <footer id="appFooter" class="app-footer no-print">
   <span id="footerCount"></span>
-  <span>· Enregistré automatiquement dans ce navigateur.</span>
-  <span>· Activez la sauvegarde automatique dans un dossier : ⚙ Paramètres → « Sauvegarde automatique ».</span>
+  <span class="page-controls">
+    <button id="btnPrevPage" class="btn btn-mini" type="button" aria-label="Page précédente">◀</button>
+    <span id="pageInfo">Page 1/1</span>
+    <button id="btnNextPage" class="btn btn-mini" type="button" aria-label="Page suivante">▶</button>
+  </span>
+  <span>· Les données sont enregistrées sur le serveur partagé.</span>
 </footer>
 
 <!-- ======================= Modal : visite ======================= -->
@@ -290,21 +291,24 @@
         </div>
       </div>
 
-      <div class="backup-box">
-        <div class="backup-box-title">📁 Sauvegarde automatique dans un dossier</div>
-        <p class="backup-hint">Choisissez <strong>une seule fois</strong> le dossier <code>sauvegarde</code> de l'application
-          (<code>D:\Web-app\Infirmerie-jules-verne\sauvegarde</code>) : chaque modification y sera ensuite
-          enregistrée automatiquement — fichier <code>registre-infirmerie-sauvegarde.json</code> (dernier état)
-          + une copie datée par jour. Fonctionne avec Microsoft Edge et Google Chrome.</p>
-        <div id="backupStatus" class="backup-status off" aria-live="polite">Sauvegarde automatique : chargement…</div>
-        <div class="backup-actions">
-          <button type="button" class="btn btn-secondary" id="btnBackupPick">📁 Choisir le dossier…</button>
-          <button type="button" class="btn btn-secondary" id="btnBackupNow">💾 Sauvegarder maintenant</button>
-          <button type="button" class="btn btn-secondary" id="btnBackupRestore">♻️ Restaurer depuis le dossier</button>
-          <button type="button" class="btn btn-secondary" id="btnBackupReactivate" hidden>🔑 Réactiver l'autorisation</button>
-          <button type="button" class="btn btn-secondary" id="btnBackupDisable" hidden>Désactiver</button>
-        </div>
-            </div>
+      <div class="settings-card admin-students-panel">
+        <div class="settings-card-heading"><h3>Élèves importés</h3><p>Consultez, modifiez et supprimez les élèves présents dans la base d’autocomplétion.</p></div>
+        <form id="adminStudentForm" class="create-user-form" autocomplete="off">
+          <input type="hidden" id="adminStudentId">
+          <div class="field"><label for="adminStudentNom">Nom</label><input type="text" id="adminStudentNom" maxlength="80" required></div>
+          <div class="field"><label for="adminStudentPrenom">Prénom</label><input type="text" id="adminStudentPrenom" maxlength="80" required></div>
+          <div class="field"><label for="adminStudentClasse">Classe</label><input type="text" id="adminStudentClasse" maxlength="40"></div>
+          <div class="field"><label for="adminStudentNiveau">Niveau</label><select id="adminStudentNiveau"><option value="primaire">Primaire</option><option value="lycee">Lycée</option></select></div>
+          <div class="field"><label for="adminStudentNaissance">Né(e) le</label><input type="date" id="adminStudentNaissance" lang="fr"></div>
+          <div class="field"><label for="adminStudentSexe">Sexe</label><select id="adminStudentSexe"><option value="">Non renseigné</option><option value="Masculin">Masculin</option><option value="Féminin">Féminin</option></select></div>
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            <button type="button" class="btn btn-secondary" id="btnResetAdminStudent">Réinitialiser</button>
+          </div>
+        </form>
+        <div class="users-table-wrap"><table class="users-table"><thead><tr><th>Nom</th><th>Prénom</th><th>Classe</th><th>Niveau</th><th>Né(e) le</th><th>Sexe</th><th>Action</th></tr></thead><tbody id="adminStudentsBody"></tbody></table></div>
+      </div>
+
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Enregistrer les paramètres</button>
       </div>

@@ -80,7 +80,7 @@ app.use(express.json({ limit: '10mb' }));
 /* ---------- Fichiers statiques (liste blanche stricte) ----------
    On ne sert QUE les fichiers de l'application : la base de
    données, les sauvegardes et node_modules ne sont jamais exposés. */
-var STATIC_FILES = ['index.html', 'app.js', 'styles.css', 'sw.js', 'manifest.webmanifest'];
+var STATIC_FILES = ['index.html', 'app.js', 'styles.css'];
 STATIC_FILES.forEach(function (name) {
   app.get('/' + name, function (req, res) {
     res.sendFile(path.join(APP_ROOT, name));
@@ -89,6 +89,19 @@ STATIC_FILES.forEach(function (name) {
 app.use('/assets', express.static(path.join(APP_ROOT, 'assets'), { maxAge: '1d' }));
 app.get('/', function (req, res) {
   res.sendFile(path.join(APP_ROOT, 'index.html'));
+});
+
+/* Retire le service worker des anciennes installations PWA, puis ne le
+   réinscrit plus. L'application actuelle fonctionne uniquement via le serveur. */
+app.get('/sw.js', function (req, res) {
+  res.set('Cache-Control', 'no-store').type('application/javascript').send([
+    "self.addEventListener('install', function (event) { event.waitUntil(self.skipWaiting()); });",
+    "self.addEventListener('activate', function (event) {",
+    "  event.waitUntil(caches.keys().then(function (keys) {",
+    "    return Promise.all(keys.filter(function (key) { return key.indexOf('infirmerie-jv-') === 0; }).map(function (key) { return caches.delete(key); }));",
+    "  }).then(function () { return self.registration.unregister(); }));",
+    "});"
+  ].join('\n'));
 });
 
 /* ---------- Authentification ---------- */
@@ -125,6 +138,7 @@ function normalizeLevel(level, classe) {
 
 function withLevel(item) {
   var copy = Object.assign({}, item);
+  delete copy.archive;
   copy.niveau = normalizeLevel(copy.niveau, copy.classe);
   return copy;
 }
@@ -234,12 +248,12 @@ app.post('/api/data', authenticate, function (req, res) {
       var level = normalizeLevel(user.niveau);
       var otherVisits = current.visits.map(withLevel).filter(function (v) { return v.niveau !== level; });
       var otherStudents = current.students.map(withLevel).filter(function (s) { return s.niveau !== level; });
-      var scopedVisits = nextVisits.map(function (v) {
-        if (normalizeLevel('', v.classe) !== level) throw new Error('Une visite appartient à un autre niveau.');
+      var scopedVisits = nextVisits.filter(function (v) { return v && v.nom && normalizeLevel('', v.classe) === level; }).map(function (v) {
         return Object.assign({}, v, { niveau: level });
       });
-      var scopedStudents = nextStudents.map(function (s) {
-        if (s.classe && normalizeLevel('', s.classe) !== level) throw new Error('Un élève appartient à un autre niveau.');
+      var scopedStudents = nextStudents.filter(function (s) {
+        return s && (s.nom || s.prenom) && (!s.classe || normalizeLevel('', s.classe) === level);
+      }).map(function (s) {
         return Object.assign({}, s, { niveau: level });
       });
       nextVisits = otherVisits.concat(scopedVisits);
