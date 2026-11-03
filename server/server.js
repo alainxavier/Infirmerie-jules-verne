@@ -83,11 +83,17 @@ app.use(express.json({ limit: '10mb' }));
 var STATIC_FILES = ['index.html', 'app.js', 'styles.css'];
 STATIC_FILES.forEach(function (name) {
   app.get('/' + name, function (req, res) {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
     res.sendFile(path.join(APP_ROOT, name));
   });
 });
 app.use('/assets', express.static(path.join(APP_ROOT, 'assets'), { maxAge: '1d' }));
 app.get('/', function (req, res) {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
   res.sendFile(path.join(APP_ROOT, 'index.html'));
 });
 
@@ -128,8 +134,10 @@ function publicUser(u) {
 
 function normalizeLevel(level, classe) {
   var classKey = String(classe || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/gi, '').toUpperCase();
-  if (['2A', '1A', 'TA'].indexOf(classKey) !== -1) return 'lycee';
-  if (['TPS', 'PSA', 'PSB', 'MSA', 'MSB', 'GSA', 'GSB', 'CPA', 'CPB', 'CPC', 'CE1A', 'CE1B', 'CE1C', 'CE2A', 'CE2B', 'CE2C', 'CM1A', 'CM1B', 'CM1C', 'CM2A', 'CM2B', 'CM2C', 'PERSONNEL'].indexOf(classKey) !== -1) return 'primaire';
+  var lyceePatterns = ['2A', '1A', 'TA', 'TB', 'TC', 'TD', 'TE', 'STMG', 'TSTMG'];
+  var primaryPatterns = ['TPS', 'PSA', 'PSB', 'MSA', 'MSB', 'GSA', 'GSB', 'CPA', 'CPB', 'CPC', 'CE1A', 'CE1B', 'CE1C', 'CE2A', 'CE2B', 'CE2C', 'CM1A', 'CM1B', 'CM1C', 'CM2A', 'CM2B', 'CM2C', 'PERSONNEL'];
+  if (lyceePatterns.indexOf(classKey) !== -1 || /^([1-6][A-Z]|T[A-Z])/.test(classKey)) return 'lycee';
+  if (primaryPatterns.indexOf(classKey) !== -1 || /^(CP|CE1|CE2|CM1|CM2|GS|MS|PS|TPS)/.test(classKey)) return 'primaire';
   var value = String(level || '').trim().toLowerCase();
   if (value === 'lycee' || value === 'lycée' || value === 'secondaire') return 'lycee';
   if (value === 'primaire' || value === 'primary') return 'primaire';

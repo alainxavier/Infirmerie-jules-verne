@@ -14,6 +14,7 @@
 <div id="serverAuthLock" class="auth-lock">
   <div class="auth-lock-content">
     <h2 id="serverAuthTitle">Connexion au serveur</h2>
+
     <p id="serverAuthMessage">Vérification de la connexion au registre partagé…</p>
     <button id="btnOpenLogin" class="btn btn-primary">Réessayer</button>
   </div>
@@ -81,37 +82,18 @@
 
 <main id="mainContent">
   <section class="toolbar no-print">
-    <div class="toolbar-row">
+    <div class="toolbar-row toolbar-main">
       <button id="btnAdd" class="btn btn-primary">＋ Nouvelle visite</button>
 
-      <div class="btn-group">
-        <button class="btn btn-secondary" id="btnImport" type="button">📥 Importer ▾</button>
-        <div class="dropdown-menu" id="importMenu">
-          <button type="button" data-action="import-excel">Fichier Excel (.xlsx)…</button>
-          <button type="button" data-action="import-csv">Fichier CSV…</button>
-          <button type="button" data-action="import-students">👥 Liste des élèves (Excel / CSV)…</button>
-          <button type="button" data-action="import-json">Restauration de sauvegarde (JSON)…</button>
-        </div>
-      </div>
-
-      <div class="btn-group">
-        <button class="btn btn-secondary" id="btnExport" type="button">📤 Exporter ▾</button>
-        <div class="dropdown-menu" id="exportMenu">
-          <button type="button" data-action="export-xlsx">Excel (.xlsx)</button>
-          <button type="button" data-action="export-csv">CSV (compatible Excel)</button>
-          <button type="button" data-action="export-json">Sauvegarde complète (JSON)</button>
-        </div>
+      <div class="toolbar-filters filters">
+        <input type="search" id="filterSearch" placeholder="🔍 Rechercher un nom, une observation, un traitement…" autocomplete="off">
+        <select id="filterClasse" aria-label="Filtrer par classe"><option value="">Toutes les classes</option></select>
+        <select id="filterAge" aria-label="Filtrer par âge"><option value="">Tous les âges</option></select>
+        <label class="date-range">Du <input type="date" id="filterFrom" lang="fr"></label>
+        <label class="date-range">au <input type="date" id="filterTo" lang="fr"></label>
       </div>
 
       <button id="btnPrint" class="btn btn-secondary" type="button">🖨️ Imprimer</button>
-    </div>
-
-    <div class="toolbar-row filters">
-      <input type="search" id="filterSearch" placeholder="🔍 Rechercher un nom, une observation, un traitement…" autocomplete="off">
-      <select id="filterClasse" aria-label="Filtrer par classe"><option value="">Toutes les classes</option></select>
-      <select id="filterAge" aria-label="Filtrer par âge"><option value="">Tous les âges</option></select>
-      <label class="date-range">Du <input type="date" id="filterFrom" lang="fr"></label>
-      <label class="date-range">au <input type="date" id="filterTo" lang="fr"></label>
     </div>
   </section>
 <section class="stats no-print" id="statsSection" aria-label="Statistiques">
@@ -258,63 +240,116 @@
       <div><p class="settings-eyebrow">Administration</p><h2 id="settingsTitle">Paramètres</h2></div>
       <button class="btn btn-secondary" id="btnSettingsBack" type="button">← Retour au registre</button>
     </div>
-    <form id="settingsForm">
-      <section class="settings-card">
-        <div class="settings-card-heading"><h3>Paramètres du registre</h3><p>Personnalisez l'en-tête et l'année scolaire.</p></div>
-      <div class="form-grid plain">
-        <div class="field">
-          <label for="sSchool">Nom de l'école</label>
-          <input type="text" id="sSchool" maxlength="80">
-        </div>
-        <div class="field">
-          <label for="sTitle">Titre du registre</label>
-          <input type="text" id="sTitle" maxlength="80">
-        </div>
-        <div class="field">
-          <label for="sYearStart">Début de l'année scolaire</label>
-          <input type="date" id="sYearStart" lang="fr">
-        </div>
-        <div class="field">
-          <label for="sYearEnd">Fin de l'année scolaire</label>
-          <input type="date" id="sYearEnd" lang="fr">
-        </div>
-      </div>
-      <div class="backup-box">
-        <div class="backup-box-title">👥 Liste des élèves (autocomplétion)</div>
-        <p class="backup-hint">Importez le fichier Excel / CSV des élèves (colonnes : <strong>Nom, Prénom, Né(e) le, Sexe, Classe</strong> et, si besoin, <strong>Niveau</strong> : Primaire ou Lycée).
-          Les noms seront ensuite proposés automatiquement dans le formulaire de visite, et la <strong>classe</strong> + l'<strong>âge</strong>
-          (calculé à partir de la date de naissance) seront remplis automatiquement dès qu'un élève est sélectionné.</p>
-        <div id="studentsStatus" class="backup-status off" aria-live="polite">Aucun élève enregistré.</div>
-        <div class="backup-actions">
-          <button type="button" class="btn btn-secondary" id="btnStudentsImport">📥 Importer la liste…</button>
-          <button type="button" class="btn btn-secondary" id="btnStudentsClear" hidden>🗑️ Vider la liste</button>
+
+    <nav class="admin-nav" aria-label="Navigation d'administration">
+      <button type="button" class="admin-nav-btn active" data-admin-view="settings">Paramètres</button>
+      <button type="button" class="admin-nav-btn" data-admin-view="students">Élèves</button>
+      <button type="button" class="admin-nav-btn" data-admin-view="users">Utilisateurs</button>
+    </nav>
+
+    <div class="admin-data-toolbar">
+      <div class="btn-group">
+        <button class="btn btn-secondary" id="btnSettingsImport" type="button">📥 Importer ▾</button>
+        <div class="dropdown-menu" id="settingsImportMenu">
+          <button type="button" data-action="import-excel">Fichier Excel (.xlsx)…</button>
+          <button type="button" data-action="import-csv">Fichier CSV…</button>
+          <button type="button" data-action="import-students">👥 Liste des élèves (Excel / CSV)…</button>
+          <button type="button" data-action="import-json">Restauration de sauvegarde (JSON)…</button>
         </div>
       </div>
 
+      <div class="btn-group">
+        <button class="btn btn-secondary" id="btnSettingsExport" type="button">📤 Exporter ▾</button>
+        <div class="dropdown-menu" id="settingsExportMenu">
+          <button type="button" data-action="export-xlsx">Excel (.xlsx)</button>
+          <button type="button" data-action="export-csv">CSV (compatible Excel)</button>
+          <button type="button" data-action="export-json">Sauvegarde complète (JSON)</button>
+        </div>
+      </div>
+    </div>
+
+    <section id="settingsSection" class="admin-view" data-view="settings">
+      <form id="settingsForm">
+        <section class="settings-card">
+          <div class="settings-card-heading"><h3>Paramètres du registre</h3><p>Personnalisez l'en-tête et l'année scolaire.</p></div>
+        <div class="form-grid plain">
+          <div class="field">
+            <label for="sSchool">Nom de l'école</label>
+            <input type="text" id="sSchool" maxlength="80">
+          </div>
+          <div class="field">
+            <label for="sTitle">Titre du registre</label>
+            <input type="text" id="sTitle" maxlength="80">
+          </div>
+          <div class="field">
+            <label for="sYearStart">Début de l'année scolaire</label>
+            <input type="date" id="sYearStart" lang="fr">
+          </div>
+          <div class="field">
+            <label for="sYearEnd">Fin de l'année scolaire</label>
+            <input type="date" id="sYearEnd" lang="fr">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Enregistrer les paramètres</button>
+        </div>
+        </section>
+      </form>
+    </section>
+
+    <section id="studentsSection" class="admin-view" data-view="students" hidden>
       <div class="settings-card admin-students-panel">
         <div class="settings-card-heading"><h3>Élèves importés</h3><p>Consultez, modifiez et supprimez les élèves présents dans la base d’autocomplétion.</p></div>
-        <form id="adminStudentForm" class="create-user-form" autocomplete="off">
+        <div class="backup-box">
+          <div class="backup-box-title">👥 Liste des élèves (autocomplétion)</div>
+          <p class="backup-hint">Importez le fichier Excel / CSV des élèves (colonnes : <strong>Nom, Prénom, Né(e) le, Sexe, Classe</strong> et, si besoin, <strong>Niveau</strong> : Primaire ou Lycée).
+            Les noms seront ensuite proposés automatiquement dans le formulaire de visite, et la <strong>classe</strong> + l'<strong>âge</strong>
+            (calculé à partir de la date de naissance) seront remplis automatiquement dès qu'un élève est sélectionné.</p>
+          <div id="studentsStatus" class="backup-status off" aria-live="polite">Aucun élève enregistré.</div>
+          <div class="backup-actions">
+            <button type="button" class="btn btn-secondary" id="btnStudentsImport">📥 Importer la liste…</button>
+            <button type="button" class="btn btn-secondary" id="btnStudentsClear" hidden>🗑️ Vider la liste</button>
+          </div>
+        </div>
+
+        <div class="students-toolbar">
+          <div class="students-summary">
+            <span id="studentsCountBadge" class="students-count-badge">0 élève(s)</span>
+          </div>
+          <div class="students-search-wrap">
+            <label for="studentsSearch" class="visually-hidden">Rechercher un élève</label>
+            <input type="search" id="studentsSearch" placeholder="Rechercher un élève, une classe…" autocomplete="off">
+          </div>
+        </div>
+
+        <form id="adminStudentForm" class="create-user-form admin-student-form" autocomplete="off">
           <input type="hidden" id="adminStudentId">
-          <div class="field"><label for="adminStudentNom">Nom</label><input type="text" id="adminStudentNom" maxlength="80" required></div>
-          <div class="field"><label for="adminStudentPrenom">Prénom</label><input type="text" id="adminStudentPrenom" maxlength="80" required></div>
-          <div class="field"><label for="adminStudentClasse">Classe</label><input type="text" id="adminStudentClasse" maxlength="40"></div>
-          <div class="field"><label for="adminStudentNiveau">Niveau</label><select id="adminStudentNiveau"><option value="primaire">Primaire</option><option value="lycee">Lycée</option></select></div>
-          <div class="field"><label for="adminStudentNaissance">Né(e) le</label><input type="date" id="adminStudentNaissance" lang="fr"></div>
-          <div class="field"><label for="adminStudentSexe">Sexe</label><select id="adminStudentSexe"><option value="">Non renseigné</option><option value="Masculin">Masculin</option><option value="Féminin">Féminin</option></select></div>
-          <div class="btn-row">
-            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-            <button type="button" class="btn btn-secondary" id="btnResetAdminStudent">Réinitialiser</button>
+          <div class="student-form-row student-form-row-top">
+            <div class="field"><label for="adminStudentNom">Nom</label><input type="text" id="adminStudentNom" maxlength="80" required></div>
+            <div class="field"><label for="adminStudentPrenom">Prénom</label><input type="text" id="adminStudentPrenom" maxlength="80" required></div>
+            <div class="field"><label for="adminStudentClasse">Classe</label><input type="text" id="adminStudentClasse" maxlength="40"></div>
+            <div class="field"><label for="adminStudentNiveau">Niveau</label><select id="adminStudentNiveau"><option value="primaire">Primaire</option><option value="lycee">Lycée</option></select></div>
+          </div>
+          <div class="student-form-row student-form-row-bottom">
+            <div class="field"><label for="adminStudentNaissance">Né(e) le</label><input type="date" id="adminStudentNaissance" lang="fr"></div>
+            <div class="field"><label for="adminStudentSexe">Sexe</label><select id="adminStudentSexe"><option value="">Non renseigné</option><option value="Masculin">Masculin</option><option value="Féminin">Féminin</option></select></div>
+            <div class="btn-row student-action-row">
+              <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+              <button type="button" class="btn btn-secondary" id="btnResetAdminStudent">Réinitialiser</button>
+            </div>
           </div>
         </form>
-        <div class="users-table-wrap"><table class="users-table"><thead><tr><th>Nom</th><th>Prénom</th><th>Classe</th><th>Niveau</th><th>Né(e) le</th><th>Sexe</th><th>Action</th></tr></thead><tbody id="adminStudentsBody"></tbody></table></div>
+        <div class="users-table-wrap students-table-wrap"><table class="users-table students-table"><thead><tr><th>Nom</th><th>Prénom</th><th>Classe</th><th>Niveau</th><th>Né(e) le</th><th>Sexe</th><th>Action</th></tr></thead><tbody id="adminStudentsBody"></tbody></table></div>
+        <div class="students-page-controls" aria-label="Pagination des élèves">
+          <button id="btnStudentsPrevPage" class="btn btn-mini" type="button" aria-label="Page précédente des élèves">◀</button>
+          <span id="studentsPageInfo">Page 1/1</span>
+          <button id="btnStudentsNextPage" class="btn btn-mini" type="button" aria-label="Page suivante des élèves">▶</button>
+        </div>
       </div>
+    </section>
 
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Enregistrer les paramètres</button>
-      </div>
-      </section>
-    </form>
-    <section id="usersPanel" class="settings-card users-panel">
+    <section id="usersPanel" class="settings-card users-panel admin-view" data-view="users" hidden>
       <div class="settings-card-heading"><h3>Gestion des utilisateurs</h3><p>Chaque compte infirmier est limité aux données du niveau attribué (élèves, visites et statistiques). L’administrateur conserve la vue d’ensemble.</p></div>
       <form id="createUserForm" class="create-user-form" autocomplete="off">
         <div class="field"><label for="newUsername">Nom d'utilisateur</label><input type="text" id="newUsername" maxlength="40" autocomplete="off" required></div>

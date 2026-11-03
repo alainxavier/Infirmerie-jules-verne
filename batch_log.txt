@@ -1,0 +1,6 @@
+Version de Node.js :
+v24.22.0
+Version de npm :
+11.19.1
+
+... ‚tait inattendu.

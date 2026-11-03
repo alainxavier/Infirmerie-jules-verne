@@ -20,7 +20,8 @@ var JSON_PATH = process.env.JSON_PATH || path.join(__dirname, 'data.json');
 /* Utilisateurs par défaut créés au premier démarrage */
 var DEFAULT_USERS = [
   { username: 'admin', role: 'admin', niveau: 'all', password: 'admin123' },
-  { username: 'medecin', role: 'user', niveau: 'primaire', password: 'medecin123' }
+  { username: 'medecin', role: 'user', niveau: 'primaire', password: 'medecin123' },
+  { username: 'lycee', role: 'user', niveau: 'lycee', password: 'lycee123' }
 ];
 
 function stripHash(u) {

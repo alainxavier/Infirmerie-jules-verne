@@ -70,7 +70,9 @@ var settings = Object.assign({}, DEFAULT_SETTINGS);
 var pendingImportAction = '';  // 'excel' | 'csv' | 'json'
 var editingId = null;
 var PAGE_SIZE = 20;
+var STUDENTS_PAGE_SIZE = 30;
 var currentPage = 1;
+var studentsCurrentPage = 1;
 
 /* ---------- Mode serveur / API / Authentification ---------- */
 var SERVER_MODE = false;
@@ -239,6 +241,10 @@ function stopPolling() {
 
 /* Interface d'authentification */
 function showLogin() {
+  var lock = $('serverAuthLock');
+  if (lock) lock.hidden = true;
+  var app = $('appContent');
+  if (app) app.hidden = false;
   var ov = $('loginOverlay');
   if (ov) { ov.hidden = false; }
   var nameInput = $('loginUsername');
@@ -1339,8 +1345,9 @@ function normalizeSexe(raw) {
 
 function inferNiveau(niveau, classe) {
   var classKey = String(classe || '').replace(/\s+/g, '').toUpperCase();
-  if (LYCEE_CLASSES.indexOf(classKey) !== -1) return 'lycee';
-  if (PRIMARY_CLASSES.indexOf(classKey) !== -1) return 'primaire';
+  var lyceeClasses = ['2A', '1A', 'TA', 'TB', 'TC', 'TD', 'TE', 'STMG', 'TSTMG'];
+  if (LYCEE_CLASSES.indexOf(classKey) !== -1 || lyceeClasses.indexOf(classKey) !== -1 || /^([1-6][A-Z]|T[A-Z])/.test(classKey)) return 'lycee';
+  if (PRIMARY_CLASSES.indexOf(classKey) !== -1 || /^(CP|CE1|CE2|CM1|CM2|GS|MS|PS|TPS)/.test(classKey)) return 'primaire';
   var levelKey = normalizeKey(niveau || '');
   if (levelKey.indexOf('lyc') === 0 || levelKey === 'secondaire') return 'lycee';
   if (levelKey) return 'primaire';
@@ -1491,7 +1498,37 @@ function ensureStudentId(student, fallbackIndex) {
 
 function renderAdminStudentsTable() {
   var body = $('adminStudentsBody');
+  var countBadge = $('studentsCountBadge');
+  var searchInput = $('studentsSearch');
+  var prevBtn = $('btnStudentsPrevPage');
+  var nextBtn = $('btnStudentsNextPage');
+  var pageInfo = $('studentsPageInfo');
   if (!body) return;
+
+  var query = '';
+  if (searchInput) query = String(searchInput.value || '').trim().toLowerCase();
+
+  var filteredStudents = studentsData.filter(function (student) {
+    if (!query) return true;
+    var haystack = [student.nom, student.prenom, student.classe, student.niveau, student.sexe, student.naissance].join(' ').toLowerCase();
+    return haystack.indexOf(query) !== -1;
+  });
+
+  var totalPages = Math.max(1, Math.ceil(filteredStudents.length / STUDENTS_PAGE_SIZE));
+  if (studentsCurrentPage < 1) studentsCurrentPage = 1;
+  if (studentsCurrentPage > totalPages) studentsCurrentPage = totalPages;
+  var startIndex = (studentsCurrentPage - 1) * STUDENTS_PAGE_SIZE;
+  var pageStudents = filteredStudents.slice(startIndex, startIndex + STUDENTS_PAGE_SIZE);
+
+  if (countBadge) {
+    countBadge.textContent = filteredStudents.length + ' élève(s)';
+  }
+  if (pageInfo) {
+    pageInfo.textContent = 'Page ' + studentsCurrentPage + '/' + totalPages;
+  }
+  if (prevBtn) prevBtn.disabled = studentsCurrentPage <= 1;
+  if (nextBtn) nextBtn.disabled = studentsCurrentPage >= totalPages;
+
   body.innerHTML = '';
   if (!studentsData.length) {
     var emptyRow = document.createElement('tr');
@@ -1499,9 +1536,15 @@ function renderAdminStudentsTable() {
     body.appendChild(emptyRow);
     return;
   }
+  if (!filteredStudents.length) {
+    var noMatchRow = document.createElement('tr');
+    noMatchRow.innerHTML = '<td colspan="7">Aucun élève ne correspond à la recherche.</td>';
+    body.appendChild(noMatchRow);
+    return;
+  }
 
-  studentsData.forEach(function (student, index) {
-    ensureStudentId(student, index);
+  pageStudents.forEach(function (student, index) {
+    ensureStudentId(student, index + startIndex);
     var tr = document.createElement('tr');
     var nom = document.createElement('td'); nom.textContent = student.nom || '—';
     var prenom = document.createElement('td'); prenom.textContent = student.prenom || '—';
@@ -1510,6 +1553,7 @@ function renderAdminStudentsTable() {
     var naissance = document.createElement('td'); naissance.textContent = student.naissance ? fmtDateFR(student.naissance) : '—';
     var sexe = document.createElement('td'); sexe.textContent = student.sexe || '—';
     var actions = document.createElement('td');
+    actions.className = 'student-actions-cell';
     var editBtn = document.createElement('button');
     editBtn.type = 'button'; editBtn.className = 'btn btn-secondary';
     editBtn.textContent = 'Modifier';
@@ -2010,11 +2054,13 @@ function bindEvents() {
     if (action === 'edit') openModal(id);
   });
 
-  $('btnImport').addEventListener('click', function (e) { e.stopPropagation(); toggleMenu('importMenu'); });
-  $('btnExport').addEventListener('click', function (e) { e.stopPropagation(); toggleMenu('exportMenu'); });
+  if ($('btnImport')) $('btnImport').addEventListener('click', function (e) { e.stopPropagation(); toggleMenu('importMenu'); });
+  if ($('btnExport')) $('btnExport').addEventListener('click', function (e) { e.stopPropagation(); toggleMenu('exportMenu'); });
+  if ($('btnSettingsImport')) $('btnSettingsImport').addEventListener('click', function (e) { e.stopPropagation(); toggleMenu('settingsImportMenu'); });
+  if ($('btnSettingsExport')) $('btnSettingsExport').addEventListener('click', function (e) { e.stopPropagation(); toggleMenu('settingsExportMenu'); });
   document.addEventListener('click', closeDropdowns);
 
-  $('importMenu').addEventListener('click', function (e) {
+  if ($('importMenu')) $('importMenu').addEventListener('click', function (e) {
     var btn = e.target.closest ? e.target.closest('button[data-action]') : null;
     if (!btn) return;
     e.stopPropagation();
@@ -2026,7 +2072,26 @@ function bindEvents() {
     else if (action === 'import-json') openFilePicker('json');
   });
 
-  $('exportMenu').addEventListener('click', function (e) {
+  if ($('settingsImportMenu')) $('settingsImportMenu').addEventListener('click', function (e) {
+    var btn = e.target.closest ? e.target.closest('button[data-action]') : null;
+    if (!btn) return;
+    e.stopPropagation();
+    closeDropdowns();
+    var action = btn.getAttribute('data-action');
+    if (action === 'import-excel') openFilePicker('excel');
+    else if (action === 'import-csv') openFilePicker('csv');
+    else if (action === 'import-students') openFilePicker('students');
+    else if (action === 'import-json') openFilePicker('json');
+  });
+
+  if ($('exportMenu')) $('exportMenu').addEventListener('click', function (e) {
+    var btn = e.target.closest ? e.target.closest('button[data-action]') : null;
+    if (!btn) return;
+    e.stopPropagation();
+    handleExport(btn.getAttribute('data-action'));
+  });
+
+  if ($('settingsExportMenu')) $('settingsExportMenu').addEventListener('click', function (e) {
     var btn = e.target.closest ? e.target.closest('button[data-action]') : null;
     if (!btn) return;
     e.stopPropagation();
@@ -2049,6 +2114,37 @@ function bindEvents() {
       renderTable();
     });
   });
+
+  var studentsSearch = $('studentsSearch');
+  if (studentsSearch) {
+    studentsSearch.addEventListener('input', function () {
+      studentsCurrentPage = 1;
+      renderAdminStudentsTable();
+    });
+  }
+  if ($('btnStudentsPrevPage')) {
+    $('btnStudentsPrevPage').addEventListener('click', function () {
+      if (studentsCurrentPage > 1) {
+        studentsCurrentPage -= 1;
+        renderAdminStudentsTable();
+      }
+    });
+  }
+  if ($('btnStudentsNextPage')) {
+    $('btnStudentsNextPage').addEventListener('click', function () {
+      var total = studentsData.filter(function (student) {
+        var q = String($('studentsSearch') && $('studentsSearch').value || '').trim().toLowerCase();
+        if (!q) return true;
+        var haystack = [student.nom, student.prenom, student.classe, student.niveau, student.sexe, student.naissance].join(' ').toLowerCase();
+        return haystack.indexOf(q) !== -1;
+      }).length;
+      var pageCount = Math.max(1, Math.ceil(total / STUDENTS_PAGE_SIZE));
+      if (studentsCurrentPage < pageCount) {
+        studentsCurrentPage += 1;
+        renderAdminStudentsTable();
+      }
+    });
+  }
 
   if ($('btnPrevPage')) {
     $('btnPrevPage').addEventListener('click', function () {
@@ -2075,18 +2171,30 @@ function bindEvents() {
   });
 
   /* Paramètres */
-  $('btnSettings').addEventListener('click', function () {
-    if ($('settingsPage').hidden) openSettingsModal();
-    else closeSettingsModal();
-  });
-  $('btnSettingsBack').addEventListener('click', closeSettingsModal);
-  $('settingsForm').addEventListener('submit', onSettingsSubmit);
-  $('createUserForm').addEventListener('submit', onCreateUserSubmit);
-  $('usersBody').addEventListener('click', onUsersTableClick);
-  $('newUserRole').addEventListener('change', updateNewUserLevelControl);
-  $('adminStudentForm').addEventListener('submit', onAdminStudentSubmit);
-  $('adminStudentsBody').addEventListener('click', onAdminStudentsTableClick);
-  $('btnResetAdminStudent').addEventListener('click', resetAdminStudentForm);
+  var btnSettings = $('btnSettings');
+  if (btnSettings) {
+    btnSettings.addEventListener('click', function () {
+      var settingsPage = $('settingsPage');
+      if (settingsPage && settingsPage.hidden) openSettingsModal();
+      else closeSettingsModal();
+    });
+  }
+  var btnSettingsBack = $('btnSettingsBack');
+  if (btnSettingsBack) btnSettingsBack.addEventListener('click', closeSettingsModal);
+  var settingsForm = $('settingsForm');
+  if (settingsForm) settingsForm.addEventListener('submit', onSettingsSubmit);
+  var createUserForm = $('createUserForm');
+  if (createUserForm) createUserForm.addEventListener('submit', onCreateUserSubmit);
+  var usersBody = $('usersBody');
+  if (usersBody) usersBody.addEventListener('click', onUsersTableClick);
+  var newUserRole = $('newUserRole');
+  if (newUserRole) newUserRole.addEventListener('change', updateNewUserLevelControl);
+  var adminStudentForm = $('adminStudentForm');
+  if (adminStudentForm) adminStudentForm.addEventListener('submit', onAdminStudentSubmit);
+  var adminStudentsBody = $('adminStudentsBody');
+  if (adminStudentsBody) adminStudentsBody.addEventListener('click', onAdminStudentsTableClick);
+  var btnResetAdminStudent = $('btnResetAdminStudent');
+  if (btnResetAdminStudent) btnResetAdminStudent.addEventListener('click', resetAdminStudentForm);
   updateNewUserLevelControl();
   renderAdminStudentsTable();
 
@@ -2097,6 +2205,12 @@ function bindEvents() {
 
   var btnOpenLogin = $('btnOpenLogin');
   if (btnOpenLogin) btnOpenLogin.addEventListener('click', retryServerConnection);
+
+  document.querySelectorAll('.admin-nav-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      showAdminView(btn.getAttribute('data-admin-view'));
+    });
+  });
 
   var btnLogout = $('btnLogout');
   if (btnLogout) btnLogout.addEventListener('click', function () {
@@ -2167,6 +2281,26 @@ function bindEvents() {
   });
 }
 
+function showAdminView(viewName) {
+  var target = viewName || 'settings';
+  document.querySelectorAll('.admin-nav-btn').forEach(function (btn) {
+    btn.classList.toggle('active', btn.getAttribute('data-admin-view') === target);
+  });
+  document.querySelectorAll('.admin-view').forEach(function (panel) {
+    var isVisible = panel.getAttribute('data-view') === target;
+    panel.hidden = !isVisible;
+  });
+  var title = $('settingsTitle');
+  if (title) {
+    var labels = {
+      settings: 'Paramètres',
+      students: 'Élèves',
+      users: 'Utilisateurs'
+    };
+    title.textContent = labels[target] || 'Administration';
+  }
+}
+
 function openSettingsModal() {
   if (SERVER_MODE && (!currentUser || currentUser.role !== 'admin')) {
     toast('Accès réservé à l’administrateur.');
@@ -2180,8 +2314,8 @@ function openSettingsModal() {
   $('mainContent').hidden = true;
   $('appFooter').hidden = true;
   $('settingsPage').hidden = false;
-  $('usersPanel').hidden = !SERVER_MODE;
   $('btnSettings').textContent = '← Retour au registre';
+  showAdminView('settings');
   if (SERVER_MODE) loadUsers();
 }
 
@@ -2190,6 +2324,7 @@ function closeSettingsModal() {
   $('mainContent').hidden = false;
   $('appFooter').hidden = false;
   $('btnSettings').textContent = '⚙️ Paramètres';
+  showAdminView('settings');
 }
 
 function onSettingsSubmit(e) {
